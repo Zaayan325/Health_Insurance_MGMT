@@ -15,5 +15,7 @@ namespace App.Models.Models
 
         [MaxLength(50)]
         public string Password { get; set; }
+
+        public DateTime AdminAdded { get; set; } = DateTime.Now;
     }
 }

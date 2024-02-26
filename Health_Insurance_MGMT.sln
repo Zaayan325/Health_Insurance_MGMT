@@ -5,9 +5,9 @@ VisualStudioVersion = 17.9.34607.119
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Health_Insurance_MGMT", "Health_Insurance_MGMT\Health_Insurance_MGMT.csproj", "{3AB270B0-564A-4276-AAE8-427895A06DBA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.Models", "App.Models\App.Models.csproj", "{2BE401F7-A76C-477B-B6E0-A33A4AB6AD01}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App.Models", "App.Models\App.Models.csproj", "{2BE401F7-A76C-477B-B6E0-A33A4AB6AD01}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.DataAccessLibrary", "App.DataAccessLibrary\App.DataAccessLibrary.csproj", "{CD7EAAE4-9614-4AEE-8133-CA34200220DF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App.DataAccessLibrary", "App.DataAccessLibrary\App.DataAccessLibrary.csproj", "{CD7EAAE4-9614-4AEE-8133-CA34200220DF}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C71DDC5E-B367-4BC9-AE78-A75165F15AC9}"
 	ProjectSection(SolutionItems) = preProject

@@ -27,5 +27,64 @@ namespace App.Models.Models
         [AllowNull]
 
         public SqlMoney salary { get; set; }
+
+        [Required]
+        [AllowNull]
+        [StringLength (50)]
+        public string firstname { get; set; }
+
+        [Required]
+        [AllowNull]
+        [StringLength (50)]
+        public string lastname { get; set; }
+
+        [Required]
+        [AllowNull]
+        [StringLength (50)]
+        public string username { get; set; }
+
+        [Required]
+        [AllowNull]
+        [StringLength (50)]
+        public string password { get; set; }
+
+        [Required]
+        [AllowNull]
+        [StringLength (150)]
+        public string address {  get; set; }
+
+        [Required]
+        [AllowNull]
+        [StringLength (50)]
+        public string contactno { get; set; }
+
+        [Required]
+        [AllowNull]
+        [StringLength (50)]
+        public string state {  get; set; }
+
+
+        [Required]
+        [AllowNull]
+        [StringLength (50)]
+        public string country { get; set; }
+
+        [Required]
+        [AllowNull]
+        [StringLength (50)]
+        public string city { get; set; }
+
+        [Required]
+        [AllowNull]
+        [StringLength (30)]
+        public string policystatus { get; set; }
+
+        [Required]
+        [AllowNull]
+        public int Policyid { get; set; }
+
+        public DateTime EmployeeAdded { get; set; } = DateTime.Now;
+
+
     }
 }

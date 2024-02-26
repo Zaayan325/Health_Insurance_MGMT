@@ -32,5 +32,8 @@ namespace App.Models.Models
         [MaxLength(50)]
         [AllowNull]
         public string CompanyURL { get; set;}
+
+        public DateTime CompanyDetailsAdded { get; set; } = DateTime.Now;
+
     }
 }
