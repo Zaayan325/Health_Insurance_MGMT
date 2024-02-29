@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace App.Models.Models
 {
-    internal class CompanyDetails
+    public class CompanyDetails
     {
         [Key]
         public int CompanyId { get; set; }
@@ -26,7 +26,7 @@ namespace App.Models.Models
         [MaxLength(20)]
         [AllowNull]
 
-        public string Phone {  get; set;}
+        public string Phone { get; set; }
 
         [Required]
         [MaxLength(50)]

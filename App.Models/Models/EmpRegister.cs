@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.SqlTypes;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace App.Models.Models
 {
-    internal class EmpRegister
+    public class EmpRegister
     {
         [Key]
         public int empno { get; set; }
@@ -25,8 +26,7 @@ namespace App.Models.Models
 
         [Required]
         [AllowNull]
-
-        public SqlMoney salary { get; set; }
+        public decimal Salary { get; set; }
 
         [Required]
         [AllowNull]

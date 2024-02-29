@@ -20,4 +20,13 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\App.Models\App.Models.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Infrastructure\IRepository\" />
+    <Folder Include="Infrastructure\Repository\" />
+  </ItemGroup>
+
 </Project>

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace App.Models.Models
 {
-    internal class AdminLogin
+    public class AdminLogin
     {
         [Key]
         [MaxLength(50)]
