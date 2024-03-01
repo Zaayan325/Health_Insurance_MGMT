@@ -22,7 +22,7 @@ namespace App.Models.Models
         public SqlMoney policyamount { get; set; }
 
         
-        public decimal Policyduration { get; set; };
+        public decimal Policyduration { get; set; }
 
     }
 }
