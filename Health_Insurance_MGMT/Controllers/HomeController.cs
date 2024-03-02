@@ -23,12 +23,12 @@ namespace App.Controllers
             return View();
         }
 
-        public IActionResult Doctors()
+        public IActionResult Contact()
         {
             return View();
         }
 
-        public IActionResult Contact()
+        public IActionResult Feedback()
         {
             return View();
         }
