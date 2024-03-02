@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace App.Models.Models
 {
-    internal class HospitalInfo
+    public class HospitalInfo
     {
         [Key]
         public int HospitalId { get; set; }

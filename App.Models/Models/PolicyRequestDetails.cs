@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Data.SqlTypes;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace App.Models.Models
 {
-    internal class PolicyRequestDetails
+    public class PolicyRequestDetails
     {
         [Key]
         public int RequestId { get; set; }
@@ -21,19 +22,23 @@ namespace App.Models.Models
 
         [AllowNull]
         public int PolicyId { get; set; }
+        [ValidateNever]
+        public Policies Policies { get; set; }
 
         [AllowNull]
         [StringLength(50)]
         public string PolicyName { get; set; }
 
         [AllowNull]
-        public SqlMoney PolicyAmount { get; set; }
+        public decimal PolicyAmount { get; set; }
 
         [AllowNull]
-        public SqlMoney Emi { get; set;}
+        public decimal Emi { get; set;}
 
         [AllowNull]
         public int CompanyId { get; set; }
+        [ValidateNever]
+        public CompanyDetails CompanyDetails { get; set; }
 
 
         [AllowNull]
