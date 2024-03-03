@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -28,6 +29,7 @@ namespace App.Models.Models
         public DateTime Date { get; set; }
 
         [AllowNull]
+        [Precision(7, 2)]
         public decimal Amount { get; set; }
 
         [AllowNull]

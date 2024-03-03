@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -27,9 +28,11 @@ namespace App.Models.Models
         public string PolicyDescription { get; set; }
 
         [Required,AllowNull]
+        [Precision(7, 2)]
         public decimal Amount { get; set; }
 
         [Required,AllowNull]
+        [Precision(7, 2)]
         public decimal Emi { get; set; }
 
         [Required,AllowNull]
