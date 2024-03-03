@@ -12,23 +12,24 @@ namespace App.Controllers
         {
             _logger = logger;
         }
-
+        [Route("/")]
+        [Route("Home")]
         public IActionResult Index()
         {
             return View();
         }
-
-        public IActionResult About()
+		[Route("Aboutus")]
+		public IActionResult About()
         {
             return View();
         }
-
-        public IActionResult Contact()
+		[Route("Contact")]
+		public IActionResult Contact()
         {
             return View();
         }
-
-        public IActionResult Feedback()
+		[Route("FeedBack")]
+		public IActionResult Feedback()
         {
             return View();
         }
