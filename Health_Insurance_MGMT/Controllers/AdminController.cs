@@ -1,5 +1,6 @@
 ﻿using App.DataAccessLibrary.Infrastructure.IRepository;
 using App.Models.Models;
+using DocumentFormat.OpenXml.Bibliography;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Health_Insurance_MGMT.Controllers
@@ -70,6 +71,32 @@ namespace Health_Insurance_MGMT.Controllers
             }
             _unitofWork.EmpRegisterRepository.Delete(empreg);
             _unitofWork.save();
+            return RedirectToAction();
+        }
+
+        public IActionResult Edit(int? empno)
+        {
+            if(empno == null || empno == 0)
+            {
+                return NotFound();
+            }
+            var empreg = _unitofWork.EmpRegisterRepository.GetT(er => er.empno == empno);
+            if(empreg == null)
+            {
+                return NotFound();
+            }
+            return View(empreg);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(EmpRegister empreg)
+        {
+            if (ModelState.IsValid)
+            {
+                _unitofWork.EmpRegisterRepository.Update(empreg);
+                _unitofWork.save();
+                return RedirectToAction();
+            }
             return RedirectToAction();
         }
     }
