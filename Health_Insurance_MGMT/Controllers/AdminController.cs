@@ -1,6 +1,4 @@
-<<<<<<< HEAD
 ﻿using Microsoft.AspNetCore.Http;
-=======
 ﻿using App.DataAccessLibrary.Infrastructure.IRepository;
 using App.Models.Models;
 using DocumentFormat.OpenXml.Bibliography;
@@ -8,88 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Health_Insurance_MGMT.Controllers
 {
-<<<<<<< HEAD
+    
 	public class AdminController : Controller
 	{
-		// GET: AdminController
-		[Route("/dashboard")]
-		public ActionResult Dashboard()
-		{
-			return View();
-		}
-
-		// GET: AdminController/Details/5
-		public ActionResult Details(int id)
-		{
-			return View();
-		}
-
-		// GET: AdminController/Create
-		public ActionResult Create()
-		{
-			return View();
-		}
-
-		// POST: AdminController/Create
-		[HttpPost]
-		[ValidateAntiForgeryToken]
-		public ActionResult Create(IFormCollection collection)
-		{
-			try
-			{
-				return RedirectToAction(nameof(Index));
-			}
-			catch
-			{
-				return View();
-			}
-		}
-
-		// GET: AdminController/Edit/5
-		public ActionResult Edit(int id)
-		{
-			return View();
-		}
-
-		// POST: AdminController/Edit/5
-		[HttpPost]
-		[ValidateAntiForgeryToken]
-		public ActionResult Edit(int id, IFormCollection collection)
-		{
-			try
-			{
-				return RedirectToAction(nameof(Index));
-			}
-			catch
-			{
-				return View();
-			}
-		}
-
-		// GET: AdminController/Delete/5
-		public ActionResult Delete(int id)
-		{
-			return View();
-		}
-
-		// POST: AdminController/Delete/5
-		[HttpPost]
-		[ValidateAntiForgeryToken]
-		public ActionResult Delete(int id, IFormCollection collection)
-		{
-			try
-			{
-				return RedirectToAction(nameof(Index));
-			}
-			catch
-			{
-				return View();
-			}
-		}
-	}
-=======
-    public class AdminController : Controller
-    {
         private IUnitofWork _unitofWork;
         private IWebHostEnvironment _webHostEnvironment;
 
@@ -99,11 +18,12 @@ namespace Health_Insurance_MGMT.Controllers
             _webHostEnvironment = webHostEnvironment;
         }
 
-        public IActionResult Index()
-        {
-            return View();
+        // GET: AdminController
+        [Route("/dashboard")]
+		public ActionResult Dashboard()
+		{
+			return View();
         }
-
         //This Method will Only return view
         public IActionResult EmpRegister()
         {
@@ -183,5 +103,4 @@ namespace Health_Insurance_MGMT.Controllers
             return RedirectToAction();
         }
     }
->>>>>>> 677ac013035c8a5af3955961ab568527c8581c0d
 }
