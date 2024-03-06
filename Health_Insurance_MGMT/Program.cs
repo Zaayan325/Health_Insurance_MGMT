@@ -1,10 +1,13 @@
 using App.DataAccessLibrary;
+using App.DataAccessLibrary.Infrastructure.IRepository;
+using App.DataAccessLibrary.Infrastructure.Repository;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddScoped<IUnitofWork, UnitofWork>();
 builder.Services.AddDbContext<HealthInsuranceMGMT>(options => {
     options.UseSqlServer(builder.Configuration.GetConnectionString("MyCon"));
 });

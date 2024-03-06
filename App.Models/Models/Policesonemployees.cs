@@ -15,6 +15,7 @@ namespace App.Models.Models
 {
     public class Policesonemployees
     {
+        [Key]
         [StringLength(10)]
         public string empno { get; set; }
 
@@ -29,20 +30,6 @@ namespace App.Models.Models
 
         
         public decimal Policyduration { get; set; }
-        public string? Empno { get; set; }
-
-        public int Policyid { get; set; }
-        [ValidateNever]
-        public Policies? Policies { get; set; }
-
-        [StringLength(50)]
-        public string Policyname { get; set; }
-        
-        [Precision(7, 2)]
-        public decimal Policyamount { get; set; }
-
-        [Precision(7, 2)]
-        public decimal Policyuration { get; set; }
 
         [Precision(7, 2)]
         public decimal Emi { get; set; }

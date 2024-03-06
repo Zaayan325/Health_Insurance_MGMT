@@ -6,6 +6,25 @@ namespace App.DataAccessLibrary
 {
     public class HealthInsuranceMGMT : DbContext
     {
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<PolicyRequestDetails>()
+                .HasOne(p => p.Policies)
+                .WithMany()
+                .HasForeignKey(p => p.PolicyId)
+                .OnDelete(DeleteBehavior.NoAction); // You can use OnUpdate(DeleteBehavior.NoAction) as well if needed
+
+            // Add other configurations as needed
+
+            modelBuilder.Entity<PolicyApprovalDetails>()
+        .HasOne(p => p.RequestDetails)
+        .WithMany()
+        .HasForeignKey(p => p.RequestId)
+        .OnDelete(DeleteBehavior.NoAction);
+
+            base.OnModelCreating(modelBuilder);
+        }
+
         public HealthInsuranceMGMT(DbContextOptions<HealthInsuranceMGMT> options) : base(options)
         {
 

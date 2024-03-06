@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace App.DataAccessLibrary.Migrations
 {
     [DbContext(typeof(HealthInsuranceMGMT))]
-    [Migration("20240303164230_Initial")]
+    [Migration("20240306141045_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -199,11 +199,9 @@ namespace App.DataAccessLibrary.Migrations
 
             modelBuilder.Entity("App.Models.Models.Policesonemployees", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    b.Property<string>("empno")
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<int>("CompanyDetailsCompanyId")
                         .HasColumnType("int");
@@ -222,10 +220,6 @@ namespace App.DataAccessLibrary.Migrations
                         .HasPrecision(7, 2)
                         .HasColumnType("decimal(7,2)");
 
-                    b.Property<string>("Empno")
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
-
                     b.Property<string>("Medical")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -234,33 +228,27 @@ namespace App.DataAccessLibrary.Migrations
                     b.Property<DateTime>("Penddate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("PoliciesId")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("Policyamount")
-                        .HasPrecision(7, 2)
-                        .HasColumnType("decimal(7,2)");
-
                     b.Property<decimal>("Policyduration")
-                        .HasPrecision(7, 2)
-                        .HasColumnType("decimal(7,2)");
-
-                    b.Property<int>("Policyid")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Policyname")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<DateTime>("Pstartdate")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("Id");
+                    b.Property<decimal>("policyamount")
+                        .HasPrecision(7, 2)
+                        .HasColumnType("decimal(7,2)");
+
+                    b.Property<int>("policyid")
+                        .HasColumnType("int");
+
+                    b.Property<string>("policyname")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("empno");
 
                     b.HasIndex("CompanyDetailsCompanyId");
-
-                    b.HasIndex("PoliciesId");
 
                     b.ToTable("Policesonemployees");
                 });
@@ -332,9 +320,6 @@ namespace App.DataAccessLibrary.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<int>("RequestDetailsRequestId")
-                        .HasColumnType("int");
-
                     b.Property<int>("RequestId")
                         .HasColumnType("int");
 
@@ -347,7 +332,7 @@ namespace App.DataAccessLibrary.Migrations
 
                     b.HasIndex("PoliciesId");
 
-                    b.HasIndex("RequestDetailsRequestId");
+                    b.HasIndex("RequestId");
 
                     b.ToTable("PolicyApprovalDetails");
                 });
@@ -378,9 +363,6 @@ namespace App.DataAccessLibrary.Migrations
                     b.Property<int>("EmpNo")
                         .HasColumnType("int");
 
-                    b.Property<int>("PoliciesId")
-                        .HasColumnType("int");
-
                     b.Property<decimal>("PolicyAmount")
                         .HasPrecision(7, 2)
                         .HasColumnType("decimal(7,2)");
@@ -405,7 +387,7 @@ namespace App.DataAccessLibrary.Migrations
 
                     b.HasIndex("CompanyDetailsCompanyId");
 
-                    b.HasIndex("PoliciesId");
+                    b.HasIndex("PolicyId");
 
                     b.ToTable("PolicyRequestDetails");
                 });
@@ -470,13 +452,7 @@ namespace App.DataAccessLibrary.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("App.Models.Models.Policies", "Policies")
-                        .WithMany()
-                        .HasForeignKey("PoliciesId");
-
                     b.Navigation("CompanyDetails");
-
-                    b.Navigation("Policies");
                 });
 
             modelBuilder.Entity("App.Models.Models.Policies", b =>
@@ -500,8 +476,8 @@ namespace App.DataAccessLibrary.Migrations
 
                     b.HasOne("App.Models.Models.PolicyRequestDetails", "RequestDetails")
                         .WithMany()
-                        .HasForeignKey("RequestDetailsRequestId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("RequestId")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Policies");
@@ -519,8 +495,8 @@ namespace App.DataAccessLibrary.Migrations
 
                     b.HasOne("App.Models.Models.Policies", "Policies")
                         .WithMany()
-                        .HasForeignKey("PoliciesId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("PolicyId")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("CompanyDetails");

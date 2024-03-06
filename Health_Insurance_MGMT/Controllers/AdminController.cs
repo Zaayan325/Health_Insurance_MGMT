@@ -25,13 +25,13 @@ namespace Health_Insurance_MGMT.Controllers
 			return View();
         }
         //This Method will Only return view
-        public IActionResult EmpRegister()
+        public IActionResult AddEmp()
         {
             return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult EmpRegister(EmpRegister empRegister)
+        public IActionResult AddEmp(EmpRegister empRegister)
         {
             if (ModelState.IsValid)
             {
