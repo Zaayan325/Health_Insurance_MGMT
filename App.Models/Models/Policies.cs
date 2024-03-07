@@ -28,12 +28,10 @@ namespace App.Models.Models
         public string PolicyDescription { get; set; }
 
         [Required,AllowNull]
-        [Precision(7, 2)]
-        public decimal Amount { get; set; }
+        public int Amount { get; set; }
 
         [Required,AllowNull]
-        [Precision(7, 2)]
-        public decimal Emi { get; set; }
+        public int Emi { get; set; }
 
         [Required,AllowNull]
         public int CompanyId { get; set; }

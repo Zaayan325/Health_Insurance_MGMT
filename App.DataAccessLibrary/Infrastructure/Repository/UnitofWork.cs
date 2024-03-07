@@ -22,6 +22,7 @@ namespace App.DataAccessLibrary.Infrastructure.Repository
         {
 
             _context.SaveChanges();
+            Console.WriteLine("Changes Saved To The Database");
         }
     }
 }

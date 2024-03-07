@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace App.DataAccessLibrary.Migrations
 {
     [DbContext(typeof(HealthInsuranceMGMT))]
-    [Migration("20240306141045_Initial")]
+    [Migration("20240307130822_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -91,12 +91,12 @@ namespace App.DataAccessLibrary.Migrations
                     b.Property<DateTime>("EmployeeAdded")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Policyid")
+                    b.Property<int?>("Policyid")
+                        .IsRequired()
                         .HasColumnType("int");
 
-                    b.Property<decimal>("Salary")
-                        .HasPrecision(7, 2)
-                        .HasColumnType("decimal(7,2)");
+                    b.Property<int>("Salary")
+                        .HasColumnType("int");
 
                     b.Property<string>("address")
                         .IsRequired()
@@ -216,9 +216,8 @@ namespace App.DataAccessLibrary.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<decimal>("Emi")
-                        .HasPrecision(7, 2)
-                        .HasColumnType("decimal(7,2)");
+                    b.Property<int>("Emi")
+                        .HasColumnType("int");
 
                     b.Property<string>("Medical")
                         .IsRequired()
@@ -228,15 +227,14 @@ namespace App.DataAccessLibrary.Migrations
                     b.Property<DateTime>("Penddate")
                         .HasColumnType("datetime2");
 
-                    b.Property<decimal>("Policyduration")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<int>("Policyduration")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("Pstartdate")
                         .HasColumnType("datetime2");
 
-                    b.Property<decimal>("policyamount")
-                        .HasPrecision(7, 2)
-                        .HasColumnType("decimal(7,2)");
+                    b.Property<int>("policyamount")
+                        .HasColumnType("int");
 
                     b.Property<int>("policyid")
                         .HasColumnType("int");
@@ -261,9 +259,8 @@ namespace App.DataAccessLibrary.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<decimal>("Amount")
-                        .HasPrecision(7, 2)
-                        .HasColumnType("decimal(7,2)");
+                    b.Property<int>("Amount")
+                        .HasColumnType("int");
 
                     b.Property<int>("CompanyDetailsCompanyId")
                         .HasColumnType("int");
@@ -271,9 +268,8 @@ namespace App.DataAccessLibrary.Migrations
                     b.Property<int>("CompanyId")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("Emi")
-                        .HasPrecision(7, 2)
-                        .HasColumnType("decimal(7,2)");
+                    b.Property<int>("Emi")
+                        .HasColumnType("int");
 
                     b.Property<string>("MedicalId")
                         .IsRequired()
@@ -305,9 +301,8 @@ namespace App.DataAccessLibrary.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PolicyId"));
 
-                    b.Property<decimal>("Amount")
-                        .HasPrecision(7, 2)
-                        .HasColumnType("decimal(7,2)");
+                    b.Property<int>("Amount")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
@@ -356,16 +351,14 @@ namespace App.DataAccessLibrary.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<decimal>("Emi")
-                        .HasPrecision(7, 2)
-                        .HasColumnType("decimal(7,2)");
+                    b.Property<int>("Emi")
+                        .HasColumnType("int");
 
                     b.Property<int>("EmpNo")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("PolicyAmount")
-                        .HasPrecision(7, 2)
-                        .HasColumnType("decimal(7,2)");
+                    b.Property<int>("PolicyAmount")
+                        .HasColumnType("int");
 
                     b.Property<int>("PolicyId")
                         .HasColumnType("int");
@@ -405,9 +398,8 @@ namespace App.DataAccessLibrary.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<decimal>("EMI")
-                        .HasPrecision(7, 2)
-                        .HasColumnType("decimal(7,2)");
+                    b.Property<int>("EMI")
+                        .HasColumnType("int");
 
                     b.Property<string>("MedicalId")
                         .IsRequired()
@@ -433,9 +425,8 @@ namespace App.DataAccessLibrary.Migrations
                     b.Property<int>("policyId")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("policyamount")
-                        .HasPrecision(7, 2)
-                        .HasColumnType("decimal(7,2)");
+                    b.Property<int>("policyamount")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 

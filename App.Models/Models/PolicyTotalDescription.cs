@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.SqlTypes;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
@@ -29,12 +30,10 @@ namespace App.Models.Models
         public string Policydes { get; set; }
 
         [AllowNull]
-        [Precision(7, 2)]
-        public decimal policyamount { get; set; }
+        public int policyamount { get; set; }
 
         [AllowNull]
-        [Precision(7, 2)]
-        public decimal EMI {  get; set; }
+        public int EMI {  get; set; }
 
         [AllowNull]
         public int PolicyDurationMonths { get; set; }

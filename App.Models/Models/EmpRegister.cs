@@ -27,8 +27,7 @@ namespace App.Models.Models
 
         [Required]
         [AllowNull]
-        [Precision(7,2)]
-        public decimal Salary { get; set; }
+        public int Salary { get; set; }
 
         [Required]
         [AllowNull]
@@ -79,11 +78,11 @@ namespace App.Models.Models
         [Required]
         [AllowNull]
         [StringLength (30)]
-        public string policystatus { get; set; }
+        public string? policystatus { get; set; }
 
         [Required]
         [AllowNull]
-        public int Policyid { get; set; }
+        public int? Policyid { get; set; }
 
         public DateTime EmployeeAdded { get; set; } = DateTime.Now;
 

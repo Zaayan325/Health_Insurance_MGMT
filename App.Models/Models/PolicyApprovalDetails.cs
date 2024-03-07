@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.SqlTypes;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
@@ -29,8 +30,7 @@ namespace App.Models.Models
         public DateTime Date { get; set; }
 
         [AllowNull]
-        [Precision(7, 2)]
-        public decimal Amount { get; set; }
+        public int Amount { get; set; }
 
         [AllowNull]
         [MaxLength(3)]

@@ -10,6 +10,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using NHibernate.Engine;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace App.Models.Models
 {
@@ -24,15 +25,13 @@ namespace App.Models.Models
         [StringLength(50)]
         public string policyname { get; set; }
 
-        [Precision(7,2)]
 
-        public decimal policyamount { get; set; }
+        public int policyamount { get; set; }
 
         
-        public decimal Policyduration { get; set; }
+        public int Policyduration { get; set; }
 
-        [Precision(7, 2)]
-        public decimal Emi { get; set; }
+        public int Emi { get; set; }
 
         public DateTime Pstartdate { get; set; }
 

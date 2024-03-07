@@ -29,18 +29,25 @@ namespace Health_Insurance_MGMT.Controllers
         {
             return View();
         }
+
+        public Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary GetModelState()
+        {
+            return ModelState;
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult AddEmp(EmpRegister empRegister)
+        public IActionResult AddEmp(EmpRegister empRegister, Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary modelState)
         {
-            if (ModelState.IsValid)
+            if (modelState.IsValid)
             {
                 _unitofWork.EmpRegisterRepository.Add(empRegister);
                 _unitofWork.save();
-                return RedirectToAction();
+                return RedirectToAction("Dashboard");
             }
-            return View();
+            return View(empRegister);
         }
+
 
         public IActionResult ViewEmp()
         {
