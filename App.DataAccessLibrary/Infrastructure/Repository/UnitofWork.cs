@@ -13,10 +13,13 @@ namespace App.DataAccessLibrary.Infrastructure.Repository
         private HealthInsuranceMGMT _context;
         public IEmpRegisterRepository EmpRegisterRepository { get; private set; }
 
+        public ICompanyDetailsRepository CompanyDetailsRepository { get; private set; }
+
         public UnitofWork(HealthInsuranceMGMT context)
         {
             _context = context;
             EmpRegisterRepository = new EmpRegisterRepository(context);
+            CompanyDetailsRepository = new CompanyDetailsRepository(context);
         }
         public void save()
         {

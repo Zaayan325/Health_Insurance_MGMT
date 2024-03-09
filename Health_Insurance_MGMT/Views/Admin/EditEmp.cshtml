@@ -1,0 +1,66 @@
+﻿@{
+    ViewData["Title"] = "EditEmp";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+@using App.Models.Models
+@model EmpRegister
+
+<form method="post">
+
+    <label asp-for="firstname">First Name</label>
+    <input asp-for="firstname" type="text" class="form-control" />
+
+    <label asp-for="lastname">Last Name</label>
+    <input asp-for="lastname" type="text" class="form-control" />
+
+
+    <label asp-for="address">Address</label>
+    <input asp-for="address" type="text" class="form-control" />
+
+
+    <label asp-for="country">Country</label>
+    <input asp-for="country" type="text" class="form-control" />
+
+
+    <label asp-for="state">State</label>
+    <input asp-for="state" type="text" class="form-control" />
+
+
+    <label asp-for="city">City</label>
+    <input asp-for="city" type="text" class="form-control" />
+
+
+    <label asp-for="joindate">Join Date</label>
+    <input asp-for="joindate" type="date" class="form-control" />
+
+
+    <label asp-for="designation">Designation</label>
+    <input asp-for="designation" type="text" class="form-control" />
+
+
+    <label asp-for="Salary">Salary</label>
+    <input asp-for="Salary" type="number" class="form-control" />
+
+    <label asp-for="username">Username</label>
+    <input asp-for="username" type="text" class="form-control" />
+
+    <label asp-for="password">Password</label>
+    <input asp-for="password" type="password" class="form-control" />
+
+    <label asp-for="contactno">Contact Number</label>
+    <input asp-for="contactno" type="text" class="form-control" />
+
+
+
+    <label asp-for="policystatus">Policy Status</label>
+    <input asp-for="policystatus" type="text" class="form-control" />
+
+
+    <label asp-for="Policyid">Policy Id</label>
+    <input asp-for="Policyid" type="text" class="form-control" />
+
+    <button class="btn btn-primary" type="submit">Update</button>
+
+</form>
+
+

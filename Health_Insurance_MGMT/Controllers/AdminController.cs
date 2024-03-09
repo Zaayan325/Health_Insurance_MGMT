@@ -81,33 +81,48 @@ namespace Health_Insurance_MGMT.Controllers
             }
             _unitofWork.EmpRegisterRepository.Delete(empreg);
             _unitofWork.save();
-            return RedirectToAction();
+            return RedirectToAction("ViewEmp");
         }
-
-        public IActionResult Edit(int? empno)
+        //Error
+        public IActionResult EditEmp(int? empno)
         {
-            if(empno == null || empno == 0)
+            if (empno == null || empno == 0)
             {
                 return NotFound();
             }
-            var empreg = _unitofWork.EmpRegisterRepository.GetT(er => er.empno == empno);
-            if(empreg == null)
+            var empRegister = _unitofWork.EmpRegisterRepository.GetT(er => er.empno == empno);
+            if(empRegister == null)
             {
                 return NotFound();
             }
-            return View(empreg);
+            return View(empRegister);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(EmpRegister empreg)
+        public IActionResult EditEmp(EmpRegister empRegister)
         {
             if (ModelState.IsValid)
             {
-                _unitofWork.EmpRegisterRepository.Update(empreg);
+                _unitofWork.EmpRegisterRepository.Update(empRegister);
                 _unitofWork.save();
-                return RedirectToAction();
+                return RedirectToAction("ViewEmp");
             }
-            return RedirectToAction();
+            return RedirectToAction("ViewEmp");
+        }
+
+        //Company Details CRUD
+
+        public IActionResult AddCompany() => View();
+
+        public IActionResult AddCompany(CompanyDetails companyDetails, Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary modelState)
+        {
+            if (!ModelState.IsValid)
+            {
+                _unitofWork.CompanyDetailsRepository.Add(companyDetails);
+                _unitofWork.save();
+                return RedirectToAction("Dashboard");
+            }
+            return View(companyDetails);
         }
     }
 }

@@ -9,6 +9,7 @@ namespace App.DataAccessLibrary.Infrastructure.IRepository
     public interface IUnitofWork
     {
         IEmpRegisterRepository EmpRegisterRepository { get; }
+        ICompanyDetailsRepository CompanyDetailsRepository { get; }
 
         void save();
     }
