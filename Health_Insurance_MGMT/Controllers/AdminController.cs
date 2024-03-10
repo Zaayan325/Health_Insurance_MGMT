@@ -1,14 +1,14 @@
 ﻿using Microsoft.AspNetCore.Http;
 ﻿using App.DataAccessLibrary.Infrastructure.IRepository;
 using App.Models.Models;
-using DocumentFormat.OpenXml.Bibliography;
+
 using Microsoft.AspNetCore.Mvc;
 
 namespace Health_Insurance_MGMT.Controllers
 {
-    
-	public class AdminController : Controller
-	{
+
+    public class AdminController : Controller
+    {
         private IUnitofWork _unitofWork;
         private IWebHostEnvironment _webHostEnvironment;
 
@@ -20,11 +20,12 @@ namespace Health_Insurance_MGMT.Controllers
 
         // GET: AdminController
         [Route("/dashboard")]
-		public ActionResult Dashboard()
-		{
-			return View();
+        public ActionResult Dashboard()
+        {
+            return View();
         }
         //This Method will Only return view
+   
         public IActionResult AddEmp()
         {
             return View();
@@ -71,7 +72,6 @@ namespace Health_Insurance_MGMT.Controllers
         }
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-
         public IActionResult DeleteData(int? empno) 
         {
             var empreg = _unitofWork.EmpRegisterRepository.GetT(er => er.empno == empno);
@@ -84,19 +84,40 @@ namespace Health_Insurance_MGMT.Controllers
             return RedirectToAction("ViewEmp");
         }
         //Error
-        public IActionResult EditEmp(int? empno)
+        public IActionResult EditEmp(int? id)
         {
-            if (empno == null || empno == 0)
+            if (id == null || id == 0)
             {
                 return NotFound();
             }
-            var empRegister = _unitofWork.EmpRegisterRepository.GetT(er => er.empno == empno);
-            if(empRegister == null)
+
+            var emp = _unitofWork.EmpRegisterRepository.GetT(e => e.empno == id);
+
+            
+
+            if (emp == null)
             {
                 return NotFound();
             }
-            return View(empRegister);
+            return View(emp);
         }
+
+        //public ActionResult EditCategory(int? id)
+        //{
+        //    if (id == null || id == 0)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    var category = _unitofWork.Category.GetT(x => x.ID == id);
+        //    if (category == null)
+        //    {
+        //        return NotFound();
+
+        //    }
+        //    return View(category);
+
+        //}
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult EditEmp(EmpRegister empRegister)
