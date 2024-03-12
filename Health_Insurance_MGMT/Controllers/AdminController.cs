@@ -57,13 +57,13 @@ namespace Health_Insurance_MGMT.Controllers
             return View(empRegisters);
         }
         // This Method will only return view with selected EmpRegister
-        public IActionResult Delete(int? empno)
+        public IActionResult Delete(int? id)
         {
-            if (empno == null || empno == 0)
+            if (id == null || id == 0)
             {
                 return NotFound();
             }
-            var empreg = _unitofWork.EmpRegisterRepository.GetT(er => er.empno == empno);
+            var empreg = _unitofWork.EmpRegisterRepository.GetT(er => er.empno == id);
             if (empreg == null)
             {
                 return NotFound();
@@ -72,9 +72,9 @@ namespace Health_Insurance_MGMT.Controllers
         }
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public IActionResult DeleteData(int? empno) 
+        public IActionResult DeleteData(int? id) 
         {
-            var empreg = _unitofWork.EmpRegisterRepository.GetT(er => er.empno == empno);
+            var empreg = _unitofWork.EmpRegisterRepository.GetT(er => er.empno == id);
             if (empreg == null) 
             {
                 return NotFound();
@@ -144,6 +144,40 @@ namespace Health_Insurance_MGMT.Controllers
                 return RedirectToAction("Dashboard");
             }
             return View(companyDetails);
+        }
+
+        public IActionResult viewcompany()
+        {
+            IEnumerable<CompanyDetails> companyDetails  = _unitofWork.CompanyDetailsRepository.GetAll();
+            return View(companyDetails);
+        }
+
+        public IActionResult deletecompany(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+            var companyd = _unitofWork.CompanyDetailsRepository.GetT(cd => cd.CompanyId == id);
+            if (companyd == null)
+            {
+                return NotFound();
+            }
+            return View(companyd);
+        }
+
+        [HttpPost, ActionName("deletecompany")]
+        [ValidateAntiForgeryToken]
+        public IActionResult Deletec(int? id)
+        {
+            var companyd = _unitofWork.CompanyDetailsRepository.GetT(cd => cd.CompanyId == id);
+            if (companyd == null)
+            {
+                return NotFound();
+            }
+            _unitofWork.CompanyDetailsRepository.Delete(companyd);
+            _unitofWork.save();
+            return RedirectToAction();
         }
     }
 }
