@@ -1,0 +1,27 @@
+﻿@{
+    ViewData["Title"] = "AddEmp";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@using App.Models.Models
+@model CompanyDetails
+
+<form method="post">
+
+    <label asp-for="CompanyName">Company Name</label>
+    <input asp-for="CompanyName" type="text" class="form-control" />
+
+    <label asp-for="Address">Address</label>
+    <input asp-for="Address" type="text" class="form-control" />
+
+
+    <label asp-for="Phone">Phone</label>
+    <input asp-for="Phone" type="text" class="form-control" />
+
+
+    <label asp-for="CompanyURL">WEBSITE</label>
+    <input asp-for="CompanyURL" type="url" class="form-control" />
+
+    <button class="btn btn-primary" type="submit">Add Company</button>
+
+</form>

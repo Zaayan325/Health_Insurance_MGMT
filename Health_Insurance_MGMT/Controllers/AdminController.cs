@@ -83,7 +83,6 @@ namespace Health_Insurance_MGMT.Controllers
             _unitofWork.save();
             return RedirectToAction("ViewEmp");
         }
-        //Error
         public IActionResult EditEmp(int? id)
         {
             if (id == null || id == 0)
@@ -101,23 +100,6 @@ namespace Health_Insurance_MGMT.Controllers
             }
             return View(emp);
         }
-
-        //public ActionResult EditCategory(int? id)
-        //{
-        //    if (id == null || id == 0)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    var category = _unitofWork.Category.GetT(x => x.ID == id);
-        //    if (category == null)
-        //    {
-        //        return NotFound();
-
-        //    }
-        //    return View(category);
-
-        //}
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult EditEmp(EmpRegister empRegister)
@@ -131,17 +113,22 @@ namespace Health_Insurance_MGMT.Controllers
             return RedirectToAction("ViewEmp");
         }
 
-        //Company Details CRUD
+		//Company Details CRUD
 
-        public IActionResult AddCompany() => View();
-
-        public IActionResult AddCompany(CompanyDetails companyDetails, Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary modelState)
+		public IActionResult AddCompany()
         {
-            if (!ModelState.IsValid)
+           return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+		public IActionResult AddCompany(CompanyDetails companyDetails)
+        {
+            if (ModelState.IsValid)
             {
                 _unitofWork.CompanyDetailsRepository.Add(companyDetails);
                 _unitofWork.save();
-                return RedirectToAction("Dashboard");
+                return RedirectToAction("AddCompany");
             }
             return View(companyDetails);
         }
@@ -178,6 +165,33 @@ namespace Health_Insurance_MGMT.Controllers
             _unitofWork.CompanyDetailsRepository.Delete(companyd);
             _unitofWork.save();
             return RedirectToAction();
+        }
+
+        public IActionResult EditCompany(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+            var company = _unitofWork.CompanyDetailsRepository.GetT(cd => cd.CompanyId == id);
+            if (company == null)
+            {
+                return NotFound();
+            }
+            return View(company);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult EditCompany(CompanyDetails companyDetails)
+        {
+            if (ModelState.IsValid)
+            {
+                _unitofWork.CompanyDetailsRepository.Update(companyDetails);
+                _unitofWork.save();
+                return RedirectToAction("ViewCompany");
+            }
+            return RedirectToAction("ViewCompany");
         }
     }
 }
