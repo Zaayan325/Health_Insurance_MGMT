@@ -35,9 +35,9 @@ namespace App.DataAccessLibrary.Infrastructure.Repository
             _dbSet.RemoveRange(entity);
         }
 
-        public IEnumerable<T> GetAll()
+        public IEnumerable<T> GetAll()  
         {
-            return _dbSet.ToList(); 
+            return _dbSet.ToList();
         }
 
         public T GetT(Expression<Func<T, bool>> predicate)

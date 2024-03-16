@@ -18,21 +18,13 @@ namespace App.Controllers
         {
             return View();
         }
-		[Route("Aboutus")]
-		public IActionResult About()
-        {
-            return View();
-        }
+		
 		[Route("Contact")]
 		public IActionResult Contact()
         {
             return View();
         }
-		[Route("FeedBack")]
-		public IActionResult Feedback()
-        {
-            return View();
-        }
+		
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
