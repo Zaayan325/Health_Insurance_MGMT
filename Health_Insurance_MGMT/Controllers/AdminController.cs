@@ -100,6 +100,7 @@ namespace Health_Insurance_MGMT.Controllers
             }
             return View(emp);
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult EditEmp(EmpRegister empRegister)
@@ -128,7 +129,7 @@ namespace Health_Insurance_MGMT.Controllers
             {
                 _unitofWork.CompanyDetailsRepository.Add(companyDetails);
                 _unitofWork.save();
-                return RedirectToAction("AddCompany");
+                return RedirectToAction("Dashboard");
             }
             return View(companyDetails);
         }
@@ -173,7 +174,7 @@ namespace Health_Insurance_MGMT.Controllers
             {
                 return NotFound();
             }
-            var company = _unitofWork.CompanyDetailsRepository.GetT(cd => cd.CompanyId == id);
+            var company = _unitofWork.CompanyDetailsRepository.GetT(x => x.CompanyId == id);
             if (company == null)
             {
                 return NotFound();
@@ -191,7 +192,7 @@ namespace Health_Insurance_MGMT.Controllers
                 _unitofWork.save();
                 return RedirectToAction("ViewCompany");
             }
-            return RedirectToAction("ViewCompany");
+            return View(companyDetails);
         }
     }
 }
