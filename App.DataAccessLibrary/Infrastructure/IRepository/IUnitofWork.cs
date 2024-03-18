@@ -10,6 +10,7 @@ namespace App.DataAccessLibrary.Infrastructure.IRepository
     {
         IEmpRegisterRepository EmpRegisterRepository { get; }
         ICompanyDetailsRepository CompanyDetailsRepository { get; }
+        IPoliciesRepository PoliciesRepository { get; }
 
         void save();
     }

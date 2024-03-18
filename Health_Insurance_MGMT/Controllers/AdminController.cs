@@ -140,7 +140,7 @@ namespace Health_Insurance_MGMT.Controllers
             return View(companyDetails);
         }
 
-        public IActionResult deletecompany(int? id)
+        public IActionResult Deletecompany(int? id)
         {
             if (id == null || id == 0)
             {
@@ -154,9 +154,9 @@ namespace Health_Insurance_MGMT.Controllers
             return View(companyd);
         }
 
-        [HttpPost, ActionName("deletecompany")]
+        [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public IActionResult Deletec(int? id)
+        public IActionResult deletecompany(int? id)
         {
             var companyd = _unitofWork.CompanyDetailsRepository.GetT(cd => cd.CompanyId == id);
             if (companyd == null)
@@ -174,7 +174,7 @@ namespace Health_Insurance_MGMT.Controllers
             {
                 return NotFound();
             }
-            var company = _unitofWork.CompanyDetailsRepository.GetT(x => x.CompanyId == id);
+            var company = _unitofWork.CompanyDetailsRepository.GetT(cd => cd.CompanyId == id);
             if (company == null)
             {
                 return NotFound();
@@ -193,6 +193,98 @@ namespace Health_Insurance_MGMT.Controllers
                 return RedirectToAction("ViewCompany");
             }
             return View(companyDetails);
+        }
+
+
+        //Policies CRUD
+        public IActionResult AddPolicy(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+            
+            var policy = _unitofWork.PoliciesRepository.GetT(p => p.Id == id);
+
+            if (policy == null)
+            {
+                return NotFound();
+            }
+            return View(policy);    
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult AddPolicy(Policies policy)
+        {
+            if (ModelState.IsValid)
+            {
+                _unitofWork.PoliciesRepository.Add(policy);
+                _unitofWork.save();
+                return RedirectToAction();
+            }
+            return View(policy);
+        }
+        
+        public IActionResult ViewPolicy()
+        {
+            IEnumerable<Policies> policies = _unitofWork.PoliciesRepository.GetAll();
+            return View(policies);
+        }
+
+        public IActionResult deletePolicy(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+            var policy = _unitofWork.PoliciesRepository.GetT(p => p.Id == id);
+            if (policy == null)
+            {
+                return NotFound();
+            }
+            return View(policy);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeletePolicy(int? id)
+        {
+            var policy = _unitofWork.PoliciesRepository.GetT(p => p.Id ==id);
+            if (policy == null)
+            {
+                return NotFound();
+            }
+            _unitofWork.PoliciesRepository.Delete(policy);
+            _unitofWork.save();
+            return RedirectToAction();
+        }
+
+        public IActionResult EditPolicy(int id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+            var p = _unitofWork.PoliciesRepository.GetT(p => p.Id == id);
+            if(p == null)
+            {
+                return NotFound();
+            }
+            return View(p);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult EditPolicy(Policies policy)
+        {
+            if (ModelState.IsValid)
+            {
+                _unitofWork.PoliciesRepository.update(policy);
+                _unitofWork.save();
+                return RedirectToAction();
+            }
+            return RedirectToAction();
         }
     }
 }

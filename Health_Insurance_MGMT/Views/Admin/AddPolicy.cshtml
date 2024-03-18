@@ -1,0 +1,32 @@
+﻿@using App.Models.Models
+@model Policies 
+@{
+    ViewData["Title"] = "AddPolicy";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<form method="post">
+
+    <label asp-for="PolicyName">Company Name</label>
+    <input asp-for="PolicyName" type="text" class="form-control" />
+
+    <label asp-for="PolicyDescription">Address</label>
+    <input asp-for="PolicyDescription" type="text" class="form-control" />
+
+
+    <label asp-for="Amount">Phone</label>
+    <input asp-for="Amount" type="text" class="form-control" />
+
+
+    <label asp-for="Emi">WEBSITE</label>
+    <input asp-for="Emi" type="url" class="form-control" />
+
+    <label asp-for="CompanyId">Company</label>
+    <select asp-for="CompanyId" asp-items="Model.CompanyDetails" class="form-control">
+        <option selected disabled>Select Company</option>
+    </select>
+
+    <button class="btn btn-primary" type="submit">Add Company</button>
+
+</form>
+

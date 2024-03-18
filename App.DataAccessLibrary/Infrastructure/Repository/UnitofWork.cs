@@ -15,11 +15,14 @@ namespace App.DataAccessLibrary.Infrastructure.Repository
 
         public ICompanyDetailsRepository CompanyDetailsRepository { get; private set; }
 
+        public IPoliciesRepository PoliciesRepository { get; private set; }
+
         public UnitofWork(HealthInsuranceMGMT context)
         {
             _context = context;
             EmpRegisterRepository = new EmpRegisterRepository(context);
             CompanyDetailsRepository = new CompanyDetailsRepository(context);
+            PoliciesRepository = new PolicesRepository(context);
         }
         public void save()
         {
