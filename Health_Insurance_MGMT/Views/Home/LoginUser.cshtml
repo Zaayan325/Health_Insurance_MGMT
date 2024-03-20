@@ -1,0 +1,44 @@
+﻿@using App.Models.Models
+@model EmpRegister
+@{
+	ViewData["Title"] = "Login";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- [ auth-signin ] start -->
+<div class="auth-wrapper">
+	@{
+		if (ViewBag.ErrorMessage != null)
+		{
+			<div class="alert alert-danger alert-dismissible fade show" role="alert">
+				<strong>@ViewBag.ErrorMessage</strong>
+				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+			</div>
+		}
+	}
+	<div class="auth-content text-center">
+		<div class="card borderless">
+			<div class="row align-items-center ">
+				<div class="col-md-12">
+					<div class="card-body">
+						<form method="post">
+						<h4 class="mb-3 f-w-400"> Employee Signin</h4>
+						<hr>
+						<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+						<div class="form-group mb-3">
+							<input required asp-for="username" type="text" class="form-control" placeholder=" Employee User Name">
+						</div>
+						<div class="form-group mb-4">
+								<input required asp-for="password" type="password" class="form-control" id="Password" placeholder="Enter Password">
+						</div>
+						
+						<input value="Signin" type="submit" class="btn btn-block btn-primary mb-4" />
+						<hr>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+

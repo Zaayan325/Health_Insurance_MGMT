@@ -10,5 +10,7 @@ namespace App.DataAccessLibrary.Infrastructure.IRepository
     public interface IEmpRegisterRepository : IRepository<EmpRegister>
     {
         void Update(EmpRegister empRegister);
-    }
+
+		bool ValidateUser(string username, string password);
+	}
 }

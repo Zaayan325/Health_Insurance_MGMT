@@ -1,5 +1,6 @@
 ﻿using App.DataAccessLibrary.Infrastructure.IRepository;
 using App.Models.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,5 +40,11 @@ namespace App.DataAccessLibrary.Infrastructure.Repository
             }
 
         }
-    }
+
+		public bool ValidateUser(string username, string password)
+		{
+			var user = _context.EmpRegister.FirstOrDefault(u => u.username == username && u.password == password);
+			return user != null;
+		}
+	}
 }

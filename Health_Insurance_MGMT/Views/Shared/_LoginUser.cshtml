@@ -1,0 +1,22 @@
+﻿@{
+    var isLoggedIn = Context.Session.GetString("UserEmail") != null;
+}
+
+<li class="nav-item">
+    @if (isLoggedIn)
+    {
+        <form asp-action="LogoutUser" asp-controller="Home" method="post">
+            <button type="submit" class="btn btn-warning ml-lg-3">Logout</button>
+        </form>
+    }
+    else
+    {
+    <li class="nav-item">
+        <a class="btn btn-primary ml-lg-3" asp-action="LoginUser" asp-controller="Home">Login</a>
+
+    </li>
+    }
+</li>
+
+
+

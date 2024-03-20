@@ -12,6 +12,12 @@ builder.Services.AddDbContext<HealthInsuranceMGMT>(options => {
     options.UseSqlServer(builder.Configuration.GetConnectionString("MyCon"));
 });
 
+builder.Services.AddSession(options =>
+{
+	options.IdleTimeout = TimeSpan.FromMinutes(30); // Set session timeout.
+	options.Cookie.HttpOnly = true;
+	options.Cookie.IsEssential = true;
+});
 
 var app = builder.Build();
 
@@ -21,7 +27,7 @@ if (!app.Environment.IsDevelopment())
     app.UseExceptionHandler("/Home/Error");
 }
 app.UseStaticFiles();
-
+app.UseSession();
 app.UseRouting();
 
 app.UseAuthorization();
