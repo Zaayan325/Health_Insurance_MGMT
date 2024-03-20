@@ -12,16 +12,24 @@ namespace App.DataAccessLibrary
                 .HasOne(p => p.Policies)
                 .WithMany()
                 .HasForeignKey(p => p.PolicyId)
-                .OnDelete(DeleteBehavior.NoAction); // You can use OnUpdate(DeleteBehavior.NoAction) as well if needed
+                .OnDelete(DeleteBehavior.NoAction);
 
-            // Add other configurations as needed
+            modelBuilder.Entity<Policesonemployees>()
+                .HasOne(p => p.Policies)
+                .WithMany()
+                .HasForeignKey(p => p.policyid)
+                .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<PolicyApprovalDetails>()
-        .HasOne(p => p.RequestDetails)
-        .WithMany()
-        .HasForeignKey(p => p.RequestId)
-        .OnDelete(DeleteBehavior.NoAction);
-
+                .HasOne(p => p.RequestDetails)
+                .WithMany()
+                .HasForeignKey(p => p.RequestId)
+                .OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.Entity<PolicyTotalDescription>()
+                .HasOne(p => p.PolicyRequestDetails)
+                .WithMany()
+                .HasForeignKey(p => p.policyId)
+                .OnDelete(DeleteBehavior.NoAction);
             base.OnModelCreating(modelBuilder);
         }
 

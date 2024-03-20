@@ -39,7 +39,8 @@ namespace App.Models.Models
         public int PolicyDurationMonths { get; set; }
 
         [StringLength(50)]
-        public string CompanyName { get; set; }
+        public string CompanyId { get; set; }
+        public CompanyDetails CompanyDetails { get; set; }
 
         [StringLength(50)]
         public string MedicalId { get; set; }

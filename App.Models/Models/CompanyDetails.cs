@@ -35,5 +35,10 @@ namespace App.Models.Models
 
         public DateTime CompanyDetailsAdded { get; set; } = DateTime.Now;
 
+        public ICollection<Policesonemployees> Policesonemployees { get; set; }
+        public ICollection<Policies> Policies { get; set; }
+        public ICollection<PolicyTotalDescription> PolicyTotalDescriptions { get; set; }
+        public ICollection<PolicyRequestDetails> PolicyRequestDetails { get; set; }
+
     }
 }

@@ -42,12 +42,10 @@ namespace App.Models.Models
         [ValidateNever]
         public CompanyDetails CompanyDetails { get; set; }
 
-
-        [AllowNull]
-        [StringLength(50)]
-        public string CompanyName { get; set;}
-
         [StringLength(50)]
         public string Status { get; set;}
+
+        public ICollection<PolicyTotalDescription> PolicyTotalDescriptions { get; set; }
+        public ICollection<PolicyApprovalDetails> PolicyApprovalDetails { get; set; }
     }
 }

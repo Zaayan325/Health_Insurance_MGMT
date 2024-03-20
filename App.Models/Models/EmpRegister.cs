@@ -83,9 +83,9 @@ namespace App.Models.Models
         [Required]
         [AllowNull]
         public int? Policyid { get; set; }
+        public Policies Policies { get; set; }
 
         public DateTime EmployeeAdded { get; set; } = DateTime.Now;
-
 
     }
 }

@@ -22,9 +22,7 @@ namespace App.Models.Models
 
         public int policyid { get; set; }
 
-        [StringLength(50)]
-        public string policyname { get; set; }
-
+        public Policies Policies { get; set; }
 
         public int policyamount { get; set; }
 
@@ -42,9 +40,6 @@ namespace App.Models.Models
         public string CompanyId { get; set; }
         [ValidateNever]
         public CompanyDetails CompanyDetails { get; set; }
-
-        [StringLength(50)]
-        public string CompanyName { get; set;}
 
         [StringLength(50)]
         public string Medical { get; set;}

@@ -43,5 +43,10 @@ namespace App.Models.Models
         [AllowNull]
         [StringLength(50)]
         public string MedicalId { get; set; }
+
+        public ICollection<EmpRegister> EmpRegister { get; set; }
+        public ICollection<PolicyApprovalDetails> PolicyApprovalDetails { get; set; }
+        public ICollection<PolicyRequestDetails> PolicyRequestDetails { get; set; }
+        public ICollection<Policesonemployees> Policesonemployees { get; set; }
     }
 }
