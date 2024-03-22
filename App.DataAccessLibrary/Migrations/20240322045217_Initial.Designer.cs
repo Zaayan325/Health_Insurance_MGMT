@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace App.DataAccessLibrary.Migrations
 {
     [DbContext(typeof(HealthInsuranceMGMT))]
-    [Migration("20240320115442_Initial")]
+    [Migration("20240322045217_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -91,7 +91,7 @@ namespace App.DataAccessLibrary.Migrations
                     b.Property<DateTime>("EmployeeAdded")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("PoliciesId")
+                    b.Property<int?>("PoliciesId")
                         .HasColumnType("int");
 
                     b.Property<int?>("Policyid")
@@ -453,9 +453,7 @@ namespace App.DataAccessLibrary.Migrations
                 {
                     b.HasOne("App.Models.Models.Policies", "Policies")
                         .WithMany("EmpRegister")
-                        .HasForeignKey("PoliciesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("PoliciesId");
 
                     b.Navigation("Policies");
                 });

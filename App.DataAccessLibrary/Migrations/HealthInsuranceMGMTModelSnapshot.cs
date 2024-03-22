@@ -88,7 +88,7 @@ namespace App.DataAccessLibrary.Migrations
                     b.Property<DateTime>("EmployeeAdded")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("PoliciesId")
+                    b.Property<int?>("PoliciesId")
                         .HasColumnType("int");
 
                     b.Property<int?>("Policyid")
@@ -450,9 +450,7 @@ namespace App.DataAccessLibrary.Migrations
                 {
                     b.HasOne("App.Models.Models.Policies", "Policies")
                         .WithMany("EmpRegister")
-                        .HasForeignKey("PoliciesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("PoliciesId");
 
                     b.Navigation("Policies");
                 });

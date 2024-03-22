@@ -101,9 +101,9 @@ namespace App.DataAccessLibrary.Migrations
                     state = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     country = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     city = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    policystatus = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
-                    Policyid = table.Column<int>(type: "int", nullable: false),
-                    PoliciesId = table.Column<int>(type: "int", nullable: false),
+                    policystatus = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true),
+                    Policyid = table.Column<int>(type: "int", nullable: true),
+                    PoliciesId = table.Column<int>(type: "int", nullable: true),
                     EmployeeAdded = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
@@ -113,8 +113,7 @@ namespace App.DataAccessLibrary.Migrations
                         name: "FK_EmpRegister_Policies_PoliciesId",
                         column: x => x.PoliciesId,
                         principalTable: "Policies",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(

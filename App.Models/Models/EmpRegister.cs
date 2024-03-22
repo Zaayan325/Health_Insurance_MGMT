@@ -76,14 +76,14 @@ namespace App.Models.Models
         public string city { get; set; }
 
         [Required]
-        [AllowNull]
+        [NotNull]
         [StringLength (30)]
         public string? policystatus { get; set; }
 
         [Required]
-        [AllowNull]
+        [NotNull]
         public int? Policyid { get; set; }
-        public Policies Policies { get; set; }
+        public Policies? Policies { get; set; }
 
         public DateTime EmployeeAdded { get; set; } = DateTime.Now;
 
