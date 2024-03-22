@@ -3,6 +3,9 @@
 using App.Models.Models;
 
 using Microsoft.AspNetCore.Mvc;
+using DocumentFormat.OpenXml.Office2013.PowerPoint.Roaming;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using App.Models.ViewModels;
 
 namespace Health_Insurance_MGMT.Controllers
 {
@@ -199,18 +202,31 @@ namespace Health_Insurance_MGMT.Controllers
         //Policies CRUD
         public IActionResult AddPolicy(int? id)
         {
+            PoliciesVM vm = new PoliciesVM()
+            {
+                Policies = new(),
+                CompanyDetails = (IEnumerable<System.Web.Mvc.SelectListItem>)_unitofWork.CompanyDetailsRepository.GetAll().Select(x => new SelectListItem()
+                {
+                    Text = x.CompanyName,
+                    Value = x.CompanyId.ToString()
+                })
+            };
             if (id == null || id == 0)
             {
-                return NotFound();
+                return View(vm);
             }
-            
-            var policy = _unitofWork.PoliciesRepository.GetT(p => p.Id == id);
-
-            if (policy == null)
+            else
             {
-                return NotFound();
-            }
-            return View(policy);    
+                vm.Policies = _unitofWork.PoliciesRepository.GetT(x => x.Id == id);
+                if (vm.Policies == null)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    return View(vm);
+                }
+            } 
         }
 
         [HttpPost]
