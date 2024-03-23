@@ -28,7 +28,7 @@ namespace App.Controllers
         [Route("Login")]
         public IActionResult LoginUser()
         {
-			if (HttpContext.Session.GetString("UserSession") != null)
+			if (HttpContext.Session.GetString("UserEmail") != null)
 			{
 				return RedirectToAction("Index");
 
@@ -77,11 +77,50 @@ namespace App.Controllers
         [Route("Contact")]
 		public IActionResult Contact()
         {
-            return View();
-        }
-		
+            if (HttpContext.Session.GetString("UserEmail") == null)
+            {
+                return RedirectToAction("LoginUser");
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+			}
+			else
+			{
+                return View();
+
+            }
+            
+        }
+
+		// POST: ContactController/Create
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		[Route("Contact")]
+		public IActionResult Contact(Contact contacts)
+		{
+            
+			
+			
+				if (ModelState.IsValid)
+				{
+					_unitofWork.ContactRepository.Add(contacts);
+					_unitofWork.save();
+					TempData["Message_Success"] = "Your Message Has Beeen Send";
+					return RedirectToAction("Index");
+
+				}
+				else
+				{
+                    return View(contacts);
+                }
+            
+
+            
+		}
+
+
+
+		//For Viewing It 
+
+		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });

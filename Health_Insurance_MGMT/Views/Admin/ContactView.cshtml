@@ -1,0 +1,62 @@
+﻿
+@model IEnumerable<Contact>
+
+@{
+    ViewData["Title"] = "ViewEmp";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<div class="row">
+    <div class="col-md-6">
+        <h1 class="text-success">Contacts List</h1>
+    </div>
+    
+</div>
+<table class="table table-bordered" style="width:100%">
+
+    <thead>
+        <tr>
+            <th>Contact Id</th>
+            <th>Contact Name</th>
+            <th>Contact Email</th>
+            <th>Contact Message</th>
+            <th>Contact Subject</th>
+            <th>Added At</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var i in Model)
+        {
+            <tr>
+                <td>
+                    @i.Contact_Id
+                </td>
+                <td>
+                    @i.Name
+                </td>
+                <td>
+                    @i.Email
+                </td>
+                <td>
+                    @i.Subject
+                </td>
+                <td>
+                    @i.Message
+                </td>
+                <td>
+                    @i.Contact_Added
+                </td>
+               
+                
+
+                <td>
+                    <a asp-action="DeleteContact" asp-controller="Admin" asp-route-id="@i.Contact_Id" class="btn btn-outline-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+
+
+

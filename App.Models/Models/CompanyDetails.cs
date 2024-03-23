@@ -25,7 +25,6 @@ namespace App.Models.Models
         [Required]
         [MaxLength(20)]
         [AllowNull]
-
         public string Phone { get; set; }
 
         [Required]

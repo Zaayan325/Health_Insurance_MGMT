@@ -1,14 +1,16 @@
 ﻿@{
-    ViewData["Contact"] = "Contact";
+    ViewData["Contact"] = "Contact | HEALTH INSURRANCE";
 }
 
+
+@model Contact
 
 <div class="page-banner overlay-dark bg-image" style="background-image: url(/img/bg_image_1.jpg);">
     <div class="banner-section">
         <div class="container text-center wow fadeInUp">
             <nav aria-label="Breadcrumb">
                 <ol class="breadcrumb breadcrumb-dark bg-transparent justify-content-center py-0 mb-2">
-                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item"><a asp-action="Index" asp-controller="Home" >Home</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Contact</li>
                 </ol>
             </nav>
@@ -21,24 +23,29 @@
     <div class="container">
         <h1 class="text-center wow fadeInUp">Get in Touch</h1>
 
-        <form class="contact-form mt-5">
+        <form method="post" class="contact-form mt-5">
             <div class="row mb-3">
                 <div class="col-sm-6 py-2 wow fadeInLeft">
-                    <label for="fullName">Name</label>
-                    <input type="text" id="fullName" class="form-control" placeholder="Full name..">
+                    <label asp-for="Name" >Name</label>
+                    <input asp-for="Name"  type="text" id="fullName" class="form-control" placeholder="Full name..">
+                    <span asp-validation-for="Name" class=" text-danger text-sm"></span>
                 </div>
                 <div class="col-sm-6 py-2 wow fadeInRight">
-                    <label for="emailAddress">Email</label>
-                    <input type="text" id="emailAddress" class="form-control" placeholder="Email address..">
+                    <label asp-for="Email">Email</label>
+                    <input asp-for="Email" type="text" id="emailAddress" class="form-control" placeholder="Email address..">
+                    <span asp-validation-for="Email" class=" text-danger text-sm"></span>
                 </div>
                 <div class="col-12 py-2 wow fadeInUp">
-                    <label for="subject">Subject</label>
-                    <input type="text" id="subject" class="form-control" placeholder="Enter subject..">
+                    <label asp-for="Subject" for="subject">Subject</label>
+                    <input asp-for="Subject" type="text" id="subject" class="form-control" placeholder="Enter subject..">
+                    <span asp-validation-for="Subject" class=" text-danger text-sm"></span>
                 </div>
                 <div class="col-12 py-2 wow fadeInUp">
-                    <label for="message">Message</label>
-                    <textarea id="message" class="form-control" rows="8" placeholder="Enter Message.."></textarea>
+                    <label asp-for="Message" for="message">Message</label>
+                    <textarea asp-for="Message" id="message" class="form-control" rows="8" placeholder="Enter Message.."></textarea>
+                    <span asp-validation-for="Message" class=" text-danger text-sm"></span>
                 </div>
+
             </div>
             <button type="submit" class="btn btn-primary wow zoomIn">Send Message</button>
         </form>
@@ -59,8 +66,8 @@
             </div>
             <div class="col-lg-8 wow fadeInRight">
                 <h1 class="font-weight-normal mb-3">Get easy access of all features using One Health Application</h1>
-                <a href="#"><img src="~/img/google_play.svg" alt=""></a>
-                <a href="#" class="ml-2"><img src="~/img/app_store.svg" alt=""></a>
+                <a href="#"><img src="~/img/google_play.svg" alt="Googl Play"></a>
+                <a href="#" class="ml-2"><img src="~/img/app_store.svg" alt="App Store"></a>
             </div>
         </div>
     </div>

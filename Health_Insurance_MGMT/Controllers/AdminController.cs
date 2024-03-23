@@ -22,25 +22,31 @@ namespace Health_Insurance_MGMT.Controllers
         [Route("/dashboard")]
         public ActionResult Dashboard()
         {
+            int employeeCount = _unitofWork.EmpRegisterRepository.GetAll().Count();
+
+            // Storing the count in TempData
+            TempData["EmployeeCount"] = employeeCount;
+
             return View();
         }
         //This Method will Only return view
-   
+
+
         public IActionResult AddEmp()
         {
             return View();
         }
 
-        public Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary GetModelState()
-        {
-            return ModelState;
-        }
+        //public Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary GetModelState()
+        //{
+        //    return ModelState;
+        //}
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult AddEmp(EmpRegister empRegister, Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary modelState)
+        public IActionResult AddEmp(EmpRegister empRegister)
         {
-            if (modelState.IsValid)
+            if (ModelState.IsValid)
             {
                 _unitofWork.EmpRegisterRepository.Add(empRegister);
                 _unitofWork.save();
@@ -57,234 +63,60 @@ namespace Health_Insurance_MGMT.Controllers
             return View(empRegisters);
         }
         // This Method will only return view with selected EmpRegister
-        public IActionResult Delete(int? id)
+       
+
+      
+
+     
+
+       
+
+
+        //For Accesing The Contacts 
+        public IActionResult ViewContacts()
+        {
+            IEnumerable<Contact> contacts = _unitofWork.ContactRepository.GetAll();
+            return View(contacts);
+        }
+        //For deleting the category
+        // DeleteContact
+
+        public IActionResult DeleteContact(int? id)
         {
             if (id == null || id == 0)
             {
                 return NotFound();
             }
-            var empreg = _unitofWork.EmpRegisterRepository.GetT(er => er.empno == id);
-            if (empreg == null)
+
+            var contactss = _unitofWork.ContactRepository.GetT(x => x.Contact_Id == id);
+            if (contactss == null)
             {
                 return NotFound();
+
             }
-            return View(empreg);
+            return View(contactss);
         }
-        [HttpPost, ActionName("Delete")]
+
+        // POST: CategoryController/Delete/5
+
+        [HttpPost, ActionName("DeleteContact")]
         [ValidateAntiForgeryToken]
-        public IActionResult DeleteData(int? id) 
+        public IActionResult DeleteContact(int id)
         {
-            var empreg = _unitofWork.EmpRegisterRepository.GetT(er => er.empno == id);
-            if (empreg == null) 
+            var category = _unitofWork.ContactRepository.GetT(x => x.Contact_Id == id);
+            if (category == null)
             {
-                return NotFound();
+                return BadRequest();
             }
-            _unitofWork.EmpRegisterRepository.Delete(empreg);
+            _unitofWork.ContactRepository.Delete(category);
             _unitofWork.save();
-            return RedirectToAction("ViewEmp");
-        }
-        public IActionResult EditEmp(int? id)
-        {
-            if (id == null || id == 0)
-            {
-                return NotFound();
-            }
 
-            var emp = _unitofWork.EmpRegisterRepository.GetT(e => e.empno == id);
+            return RedirectToAction("Dashboard");
 
-            
+            //We can also do that  return RedirectToAction("Action Name","Controller NAme");
 
-            if (emp == null)
-            {
-                return NotFound();
-            }
-            return View(emp);
+
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult EditEmp(EmpRegister empRegister)
-        {
-            if (ModelState.IsValid)
-            {
-                _unitofWork.EmpRegisterRepository.Update(empRegister);
-                _unitofWork.save();
-                return RedirectToAction("ViewEmp");
-            }
-            return RedirectToAction("ViewEmp");
-        }
-
-		//Company Details CRUD
-
-		public IActionResult AddCompany()
-        {
-           return View();
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-		public IActionResult AddCompany(CompanyDetails companyDetails)
-        {
-            if (ModelState.IsValid)
-            {
-                _unitofWork.CompanyDetailsRepository.Add(companyDetails);
-                _unitofWork.save();
-                return RedirectToAction("Dashboard");
-            }
-            return View(companyDetails);
-        }
-
-        public IActionResult viewcompany()
-        {
-            IEnumerable<CompanyDetails> companyDetails  = _unitofWork.CompanyDetailsRepository.GetAll();
-            return View(companyDetails);
-        }
-
-        public IActionResult Deletecompany(int? id)
-        {
-            if (id == null || id == 0)
-            {
-                return NotFound();
-            }
-            var companyd = _unitofWork.CompanyDetailsRepository.GetT(cd => cd.CompanyId == id);
-            if (companyd == null)
-            {
-                return NotFound();
-            }
-            return View(companyd);
-        }
-
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public IActionResult deletecompany(int? id)
-        {
-            var companyd = _unitofWork.CompanyDetailsRepository.GetT(cd => cd.CompanyId == id);
-            if (companyd == null)
-            {
-                return NotFound();
-            }
-            _unitofWork.CompanyDetailsRepository.Delete(companyd);
-            _unitofWork.save();
-            return RedirectToAction();
-        }
-
-        public IActionResult EditCompany(int? id)
-        {
-            if (id == null || id == 0)
-            {
-                return NotFound();
-            }
-            var company = _unitofWork.CompanyDetailsRepository.GetT(cd => cd.CompanyId == id);
-            if (company == null)
-            {
-                return NotFound();
-            }
-            return View(company);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult EditCompany(CompanyDetails companyDetails)
-        {
-            if (ModelState.IsValid)
-            {
-                _unitofWork.CompanyDetailsRepository.Update(companyDetails);
-                _unitofWork.save();
-                return RedirectToAction("ViewCompany");
-            }
-            return View(companyDetails);
-        }
-
-
-        //Policies CRUD
-        public IActionResult AddPolicy(int? id)
-        {
-            if (id == null || id == 0)
-            {
-                return NotFound();
-            }
-            
-            var policy = _unitofWork.PoliciesRepository.GetT(p => p.Id == id);
-
-            if (policy == null)
-            {
-                return NotFound();
-            }
-            return View(policy);    
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult AddPolicy(Policies policy)
-        {
-            if (ModelState.IsValid)
-            {
-                _unitofWork.PoliciesRepository.Add(policy);
-                _unitofWork.save();
-                return RedirectToAction();
-            }
-            return View(policy);
-        }
-        
-        public IActionResult ViewPolicy()
-        {
-            IEnumerable<Policies> policies = _unitofWork.PoliciesRepository.GetAll();
-            return View(policies);
-        }
-
-        public IActionResult deletePolicy(int? id)
-        {
-            if (id == null || id == 0)
-            {
-                return NotFound();
-            }
-            var policy = _unitofWork.PoliciesRepository.GetT(p => p.Id == id);
-            if (policy == null)
-            {
-                return NotFound();
-            }
-            return View(policy);
-        }
-
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public IActionResult DeletePolicy(int? id)
-        {
-            var policy = _unitofWork.PoliciesRepository.GetT(p => p.Id ==id);
-            if (policy == null)
-            {
-                return NotFound();
-            }
-            _unitofWork.PoliciesRepository.Delete(policy);
-            _unitofWork.save();
-            return RedirectToAction();
-        }
-
-        public IActionResult EditPolicy(int id)
-        {
-            if (id == null || id == 0)
-            {
-                return NotFound();
-            }
-            var p = _unitofWork.PoliciesRepository.GetT(p => p.Id == id);
-            if(p == null)
-            {
-                return NotFound();
-            }
-            return View(p);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult EditPolicy(Policies policy)
-        {
-            if (ModelState.IsValid)
-            {
-                _unitofWork.PoliciesRepository.update(policy);
-                _unitofWork.save();
-                return RedirectToAction();
-            }
-            return RedirectToAction();
-        }
     }
 }

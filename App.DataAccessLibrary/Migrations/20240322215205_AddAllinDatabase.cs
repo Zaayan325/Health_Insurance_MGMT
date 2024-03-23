@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace App.DataAccessLibrary.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class AddAllinDatabase : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -39,6 +39,23 @@ namespace App.DataAccessLibrary.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_CompanyDetails", x => x.CompanyId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Contact",
+                columns: table => new
+                {
+                    Contact_Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Subject = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Message = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
+                    Contact_Added = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Contact", x => x.Contact_Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -101,8 +118,8 @@ namespace App.DataAccessLibrary.Migrations
                     state = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     country = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     city = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    policystatus = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true),
-                    Policyid = table.Column<int>(type: "int", nullable: true),
+                    policystatus = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
+                    Policyid = table.Column<int>(type: "int", nullable: false),
                     PoliciesId = table.Column<int>(type: "int", nullable: true),
                     EmployeeAdded = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
@@ -340,6 +357,9 @@ namespace App.DataAccessLibrary.Migrations
         {
             migrationBuilder.DropTable(
                 name: "AdminLogins");
+
+            migrationBuilder.DropTable(
+                name: "Contact");
 
             migrationBuilder.DropTable(
                 name: "EmpRegister");

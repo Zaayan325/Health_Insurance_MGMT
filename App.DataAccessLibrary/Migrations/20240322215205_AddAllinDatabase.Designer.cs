@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace App.DataAccessLibrary.Migrations
 {
     [DbContext(typeof(HealthInsuranceMGMT))]
-    [Migration("20240322045217_Initial")]
-    partial class Initial
+    [Migration("20240322215205_AddAllinDatabase")]
+    partial class AddAllinDatabase
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -78,6 +78,40 @@ namespace App.DataAccessLibrary.Migrations
                     b.HasKey("CompanyId");
 
                     b.ToTable("CompanyDetails");
+                });
+
+            modelBuilder.Entity("App.Models.Models.Contact", b =>
+                {
+                    b.Property<int>("Contact_Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Contact_Id"));
+
+                    b.Property<DateTime>("Contact_Added")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Message")
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Subject")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("Contact_Id");
+
+                    b.ToTable("Contact");
                 });
 
             modelBuilder.Entity("App.Models.Models.EmpRegister", b =>

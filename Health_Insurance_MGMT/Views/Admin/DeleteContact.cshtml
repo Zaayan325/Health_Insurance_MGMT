@@ -1,0 +1,46 @@
+﻿
+@model Contact
+
+
+@{
+    ViewData["Title"] = "Contacts Delete";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title fw-semibold mb-4">Do You Wnat To Delete This Data Permenantly !!</h5>
+            <a asp-controller="Admin" asp-action="Dashboard" class="btn btn-info my-2">No</a>
+            <div class="card">
+                <div class="card-body">
+                    <form method="post">
+                        <div class="mb-3">
+
+                            <input hidden disabled asp-for="Contact_Id" />
+
+                            <label asp-for="Name" class="form-label">Contact Name</label>
+                            <input disabled asp-for="Name" type="text" class="form-control" />
+
+
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="Subject" for="exampleInputEmail1" class="form-label">Contact Subject</label>
+                            <input disabled asp-for="Subject" type="text" class="form-control">
+
+
+                        </div>
+
+
+                        <button type="submit" class="btn btn-danger">Yes ! Delete Category</button>
+
+
+                    </form>
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
