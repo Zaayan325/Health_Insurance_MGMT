@@ -12,89 +12,52 @@
         <h1 class="text-success">Employees List</h1>
     </div>
     <div class="col-md-6">
-        <a asp-action="AddEmp" asp-controller="Admin" class="btn btn-info">Register Employee</a>
+        <a asp-action="AddEmp" asp-controller="Admin" class="btn btn-sm btn-info">Register Employee</a>
     </div>
 </div>
-<table class="table table-bordered" style="width:100%">
 
-    <thead>
-        <tr>
-            <th>Employee No</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Country</th>
-            <th>State</th>
-            <th>City</th>
-            <th>Contact Number</th>
-            <th>Address</th>
-            <th>Designation</th>
-            <th>Salary</th>
-            <th>Join Date</th>
-            <th>User Name</th>
-            <th>Password</th>
-            <th>Policy Status</th>
-            <th>Policy Id</th>
-            <th>Added At</th>
-            <th>Action</th>
-        </tr>
-    </thead>
-    <tbody>
-         @foreach (var i in Model)
-        {
-        <tr>
-        <td>
-        @i.empno
-        </td>
-        <td>
-        @i.firstname
-        </td>
-        <td>
-        @i.lastname
-        </td>
-        <td>
-        @i.country
-        </td>
-        <td>
-        @i.state
-        </td>
-        <td>
-        @i.city
-        </td>
-        <td>
-        @i.contactno
-        </td>
-        <td>
-        @i.address
-        </td>
-        <td>
-        @i.designation
-        </td>
-        <td>
-        @i.Salary
-        </td>
-        <td>
-        @i.joindate
-        </td>
-        <td>
-        @i.username
-        </td>
-        <td>
-        @i.password
-        </td>
-        <td>
-        @i.policystatus
-        </td>
-        <td>
-        @i.Policyid
-        </td>
-        <td>
-        @i.EmployeeAdded
-        </td>
-        <td>
-        <a asp-action="EditEmp" asp-controller="Admin" asp-route-id="@i.empno" class="btn btn-outline-success">Update</a>
-         <a asp-action="Delete" asp-controller="Admin" asp-route-id="@i.empno" class="btn btn-outline-danger">Delete</a>
-          </td>
-        </tr>
-        }
-    </tbody>
-<
+    
+
+        <div class="card-body table-border-style">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        
+                            <tr>
+                                <th>E_No</th>
+                                <th>E_Name</th>
+                                <th>Salary</th>
+                                <th>Username</th>
+                                <th>Password</th>
+                                <th>Policy Id</th>
+                                <th>Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                        @foreach (var i in Model)
+                        {
+                                <tr>
+                                <td>@i.empno</td>
+                                    <td>@i.firstname  @i.lastname</td>
+                                    <td>@i.Salary</td>
+                                    <td>@i.username</td>
+                                    <td>@i.password</td>
+                                    <td>@i.Policyid</td>
+                                <td>
+                                    <a asp-action="EditEmp" asp-controller="Admin" asp-route-id="@i.empno" class="btn btn-group-sm btn-outline-success">Update</a>
+                            <a asp-action="DeleteEmployee" asp-controller="Employee" asp-route-id="@i.empno" class="btn btn-group-sm btn-outline-danger">Delete</a>
+                                    <a asp-action="Details" asp-controller="Admin" asp-route-id="@i.empno" class="btn btn-group-sm btn-outline-success">Details</a>
+                                </td>
+                                </tr>
+                               
+                                
+                            }
+                            </tbody>
+                        
+</div>
+</div>
+
+
+       
+
+
