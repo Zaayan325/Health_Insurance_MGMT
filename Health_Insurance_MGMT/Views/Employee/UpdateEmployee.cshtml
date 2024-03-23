@@ -1,54 +1,50 @@
-﻿
-@model EmpRegister
+﻿@model EmpRegister
 @{
-    ViewData["Title"] = "AddEmp";
+    ViewData["Title"] = "Update Employee";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<form method="post">
+<form asp-action="UpdateEmployee" asp-controller="Employee" method="post">
 
-<label asp-for="firstname">First Name</label>
-<input asp-for="firstname" type="text" class="form-control" />
+    <input type="hidden" asp-for="empno" />
+
+    <label asp-for="firstname">First Name</label>
+    <input asp-for="firstname" type="text" class="form-control" />
     <span class="text text-sm" asp-validation-for="firstname"></span>
 
-<label asp-for="lastname">Last Name</label>
-<input asp-for="lastname" type="text" class="form-control" />
+    <label asp-for="lastname">Last Name</label>
+    <input asp-for="lastname" type="text" class="form-control" />
     <span class="text text-sm" asp-validation-for="lastname"></span>
 
 
-<label asp-for="address">Address</label>
-<input asp-for="address" type="text" class="form-control" />
+    <label asp-for="address">Address</label>
+    <input asp-for="address" type="text" class="form-control" />
     <span class="text text-sm" asp-validation-for="address"></span>
 
 
-<label asp-for="country">Country</label>
-<input asp-for="country" type="text" class="form-control" />
+    <label asp-for="country">Country</label>
+    <input asp-for="country" type="text" class="form-control" />
     <span class="text text-sm" asp-validation-for="country"></span>
 
 
-<label asp-for="state">State</label>
-<input asp-for="state" type="text" class="form-control" />
+    <label asp-for="state">State</label>
+    <input asp-for="state" type="text" class="form-control" />
     <span class="text text-sm" asp-validation-for="state"></span>
 
-
-<label asp-for="city">City</label>
-<input asp-for="city" type="text" class="form-control" />
+    <label asp-for="city">City</label>
+    <input asp-for="city" type="text" class="form-control" />
     <span class="text text-sm" asp-validation-for="city"></span>
 
-
-<label asp-for="joindate">Join Date</label>
-<input asp-for="joindate" type="date" class="form-control" />
+    <label asp-for="joindate">Join Date</label>
+    <input asp-for="joindate" type="date" class="form-control" />
     <span class="text text-danger text-sm" asp-validation-for="joindate"></span>
 
-
-
-<label asp-for="designation">Designation</label>
-<input asp-for="designation" type="text" class="form-control" />
+    <label asp-for="designation">Designation</label>
+    <input asp-for="designation" type="text" class="form-control" />
     <span class="text text-danger text-sm" asp-validation-for="designation"></span>
 
-
-<label asp-for="Salary">Salary</label>
-<input asp-for="Salary" type="number" class="form-control" />
+    <label asp-for="Salary">Salary</label>
+    <input asp-for="Salary" type="number" class="form-control" />
     <span class="text text-danger text-sm" asp-validation-for="Salary"></span>
 
     <label asp-for="username">Username</label>
@@ -58,30 +54,28 @@
     <label asp-for="password">Password</label>
     <input asp-for="password" type="password" class="form-control" />
     <span class="text text-danger text-sm" asp-validation-for="password"></span>
-
+    <br />
     <label asp-for="contactno">Contact Number</label>
     <input asp-for="contactno" type="text" class="form-control" />
     <span class="text text-danger text-sm" asp-validation-for="contactno"></span>
 
 
-
-<label asp-for="policystatus">Policy Status</label>
-<input asp-for="policystatus" type="text" class="form-control" />
-    <span class="text text-sm" asp-validation-for="policystatus"></span>
+    <label asp-for="policystatus">Policy Status</label>
+    <input asp-for="policystatus" type="text" class="form-control" />
     <span class="text text-sm" asp-validation-for="policystatus"></span>
 
-
-<label asp-for="Policyid">Policy Id</label>
-<input asp-for="Policyid" type="text" class="form-control" />
+    <label asp-for="Policyid">Policy Id</label>
+    <input asp-for="Policyid" type="text" class="form-control" />
     <span class="text text-sm" asp-validation-for="Policyid"></span>
-  
-      
-  
+
+
+
+
     <div class="container h-100 my-4">
         <div class="row h-100 justify-content-center align-items-center">
             <div class="col-12 text-center">
                 <!-- Centered button -->
-                    <button class="submitBTN  " type="submit">Register Employee</button>
+                <button class="submitBTN  " type="submit">Update Employee</button>
             </div>
         </div>
     </div>

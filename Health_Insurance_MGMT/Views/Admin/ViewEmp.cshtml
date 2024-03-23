@@ -12,7 +12,7 @@
         <h1 class="text-success">Employees List</h1>
     </div>
     <div class="col-md-6">
-        <a asp-action="AddEmp" asp-controller="Admin" class="btn btn-sm btn-info">Register Employee</a>
+        <a asp-action="AddEmp" asp-controller="Admin" class="btn  btn-info">Register Employee</a>
     </div>
 </div>
 
@@ -44,15 +44,16 @@
                                     <td>@i.password</td>
                                     <td>@i.Policyid</td>
                                 <td>
-                                    <a asp-action="EditEmp" asp-controller="Admin" asp-route-id="@i.empno" class="btn btn-group-sm btn-outline-success">Update</a>
+                            <a asp-action="UpdateEmployee" asp-controller="Employee" asp-route-id="@i.empno" class="btn btn-group-sm btn-outline-success">Update</a>
                             <a asp-action="DeleteEmployee" asp-controller="Employee" asp-route-id="@i.empno" class="btn btn-group-sm btn-outline-danger">Delete</a>
-                                    <a asp-action="Details" asp-controller="Admin" asp-route-id="@i.empno" class="btn btn-group-sm btn-outline-success">Details</a>
+                                    <a asp-action="DetailsEmployee" asp-controller="Employee" asp-route-id="@i.empno" class="btn btn-group-sm btn-outline-success">Details</a>
                                 </td>
                                 </tr>
                                
                                 
                             }
                             </tbody>
+                        </table>
                         
 </div>
 </div>

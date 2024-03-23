@@ -23,12 +23,13 @@ namespace App.DataAccessLibrary.Infrastructure.Repository
             var EmpRegisterDb = _context.EmpRegister.FirstOrDefault(er => er.empno == empRegister.empno);
             if (EmpRegisterDb != null)
             {
+                EmpRegisterDb.username = empRegister.username;
                 EmpRegisterDb.designation = empRegister.designation;
                 EmpRegisterDb.joindate = empRegister.joindate;
                 EmpRegisterDb.Salary = empRegister.Salary;
                 EmpRegisterDb.firstname = empRegister.firstname;
                 EmpRegisterDb.lastname = empRegister.lastname;
-                EmpRegisterDb.username = empRegister.username;
+                
                 EmpRegisterDb.password = empRegister.password;
                 EmpRegisterDb.address = empRegister.address;
                 EmpRegisterDb.contactno = empRegister.contactno;

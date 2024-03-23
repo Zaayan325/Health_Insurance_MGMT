@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using DocumentFormat.OpenXml.Office2013.PowerPoint.Roaming;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using App.Models.ViewModels;
+using App.DataAccessLibrary.Infrastructure.Repository;
 
 namespace Health_Insurance_MGMT.Controllers
 {
@@ -21,37 +22,55 @@ namespace Health_Insurance_MGMT.Controllers
 
 
         // GET: EmployeeController/Details/5
-        public ActionResult Details(int id)
+        public ActionResult DetailsEmployee(int id)
         {
-            return View();
+            var employee = _unitofWork.EmpRegisterRepository.GetT(emp => emp.empno == id);
+            if (employee == null)
+            {
+                return NotFound();
+            }
+
+            // The view name here should exactly match the file name of the view
+            return View("DetailsEmployee", employee);
         }
+
 
         // GET: EmployeeController/Create
-       
+
 
         // POST: EmployeeController/Create
-        
+
 
         // GET: EmployeeController/Edit/5
-        public ActionResult Edit(int id)
+        [HttpGet]
+        public IActionResult UpdateEmployee(int id)
         {
-            return View();
+            var empRegister = _unitofWork.EmpRegisterRepository.GetT(emp => emp.empno == id);
+            if (empRegister == null)
+            {
+                return NotFound();
+            }
+
+            return View(empRegister);
         }
+
 
         // POST: EmployeeController/Edit/5
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        [ValidateAntiForgeryToken,ActionName("UpdateEmployee")] // Helps to prevent CSRF attacks
+        public IActionResult UpdateEmployee(EmpRegister empRegister)
         {
-            try
+            if (ModelState.IsValid) 
             {
-                return RedirectToAction(nameof(Index));
+                _unitofWork.EmpRegisterRepository.Update(empRegister);
+                _unitofWork.save();
+                return RedirectToAction("ViewEmp", "Admin");
+                //return RedirectToAction("DetailsEmployee", new { id = empRegister.empno });
             }
-            catch
-            {
-                return View();
-            }
+
+            return View(empRegister); 
         }
+
 
         // GET: EmployeeController/Delete/5
         public IActionResult DeleteEmployee(int? id)
