@@ -38,7 +38,10 @@
                         <td>@i.Ins_Id</td>
                         <td>@i.Ins_Name</td>
                         <td>
-                            <img src="@Url.Content("~/uploads/InsuranceCompaniesData/" + i.Ins_CompanyLogourl)" alt="Company Logo" style="height:50px;" />
+                            <div class="text-center">
+                                <img class="rounded" src="@Url.Content("~/uploads/InsuranceCompaniesData/" + i.Ins_CompanyLogourl)" alt="Company Logo" style="height:50px;" />
+                               
+                            </div>
                         </td>
                         <td>
                             <a target="_blank" rel="noreferrer" href="@i.CompantWebsiteUrl">@i.CompantWebsiteUrl</a>

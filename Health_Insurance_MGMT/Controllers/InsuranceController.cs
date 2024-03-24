@@ -109,24 +109,46 @@ namespace Health_Insurance_MGMT.Controllers
         }
 
         // GET: InsuranceController/Delete/5
-        public ActionResult Delete(int id)
+        public IActionResult DeleteInsurance(int? id)
         {
-            return View();
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            
+            
+            }
+            var insuranceCompany = _unitofWork.InsuranceCompanyRepository.GetT(x => x.Ins_Id == id);
+
+            
+            if (insuranceCompany == null)
+            {
+                return NotFound();
+            }
+
+            return View(insuranceCompany);
         }
 
-        // POST: InsuranceController/Delete/5
-        [HttpPost]
+
+        // POST: CategoryController/Delete/5
+        [HttpPost, ActionName("DeleteInsurance")]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public IActionResult DeleteInsurancePOST(int? id)
         {
-            try
+            if (id == null || id == 0)
             {
-                return RedirectToAction(nameof(Index));
+                return NotFound();
             }
-            catch
+
+            var insuranceCompany = _unitofWork.InsuranceCompanyRepository.GetT(x => x.Ins_Id == id);
+            if (insuranceCompany == null)
             {
-                return View();
+                return NotFound();
             }
+
+            _unitofWork.InsuranceCompanyRepository.Delete(insuranceCompany);
+            _unitofWork.save();
+
+            return RedirectToAction("Dashboard", "Admin");
         }
     }
 }

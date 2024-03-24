@@ -1,0 +1,49 @@
+﻿@model InsuranceCompany
+
+
+@{
+    ViewData["Title"] = "Contacts Delete";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title fw-semibold mb-4">Do You Want To Delete This Data Permenantly !!</h5>
+            <a asp-controller="Admin" asp-action="Dashboard" class="btn btn-info my-2">No</a>
+            <div class="card">
+                <div class="card-body">
+                    <img class="rounded mx-auto d-block" src="@Url.Content("~/uploads/InsuranceCompaniesData/" + Model.Ins_CompanyLogourl)" alt="Company Logo" style="height:50px;" />
+
+                    <form method="post">
+                        <div class="mb-3">
+
+                            <input hidden disabled asp-for="Ins_Id" />
+
+
+                           
+                            
+                            <label asp-for="Ins_Name" class="form-label">Insuranc Company Name</label>
+
+
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="Ins_Description" for="exampleInputEmail1" class="form-label">Company Description </label>
+                            <input disabled asp-for="Ins_Description" type="text" class="form-control">
+
+
+                        </div>
+
+
+                        <button onclick="return confirm('Are you sure you want to delete this Insurance Company?');" class="submitBTN" type="submit">Yes ! DeleteInsurance Company</button>
+
+
+                    </form>
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
