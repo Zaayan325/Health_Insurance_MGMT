@@ -1,0 +1,43 @@
+﻿@model InsuranceCompany
+
+@{
+    ViewData["Title"] = "Detailed | View";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="card">
+    <div class="card-header bg-primary ">
+
+        <img  class=" rounded mx-auto d-block" src="@Url.Content("~/uploads/InsuranceCompaniesData/" + Model.Ins_CompanyLogourl)" alt="Company Logo" style="height:50px;" />
+
+        <h3 class=" text text-white  text-center display-5">
+            Insurance Company Details
+        </h3>
+    </div>
+
+    <div class="container w-100 text-center my-2">
+
+        <a asp-action="InsuranceView" asp-controller="Insurance" class="btn btn-group-sm btn-outline-success">Go Back</a>
+    </div>
+    <div class="card-body">
+        <h5 class="card-title">@Model.Ins_Name</h5>
+        <p class="card-text">
+            <strong>Description:</strong> @Model.Ins_Description<br>
+            <strong>How To Contact:</strong> @Model.Phone<br>
+            <strong>Currently Office:</strong> @Model.Address<br>
+            
+            <strong>Website:</strong>
+            <a class="btn btn-success btn-sm" target="_blank" rel="noreferrer" href="  @Model.CompantWebsiteUrl">
+                 Website
+             </a>
+          <br>
+            
+
+
+
+        </p>
+    </div>
+    <div class="card-footer text-muted">
+        Company Join us @Model.InsuranceCompanyAdded.ToString("d")
+    </div>
+</div>

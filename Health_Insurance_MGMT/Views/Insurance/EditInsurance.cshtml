@@ -1,0 +1,75 @@
+﻿@model InsuranceCompanyViewModel
+@using App.Models.ViewModels
+
+
+@{
+    ViewData["Title"] = "Edit Insurance Company";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Edit Insurance Company</h2>
+
+<form asp-action="EditInsurance" method="post" enctype="multipart/form-data">
+    <input type="hidden" asp-for="Ins_Id" />
+    
+    <div class="form-group">
+        <label asp-for="Ins_Name">Insurance Company Name</label>
+        <input asp-for="Ins_Name" type="text" class="form-control" />
+        <span class="text text-sm" asp-validation-for="Ins_Name"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Phone">Insurance Phone</label>
+        <input asp-for="Phone" type="text" class="form-control" />
+        <span class="text text-sm" asp-validation-for="Phone"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="CompantWebsiteUrl">Insurance Website</label>
+        <input asp-for="CompantWebsiteUrl" type="text" class="form-control" />
+        <span class="text text-sm" asp-validation-for="CompantWebsiteUrl"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Address">Insurance Address</label>
+        <input asp-for="Address" type="text" class="form-control" />
+        <span class="text text-sm" asp-validation-for="Address"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Ins_Description">Insurance Company Description</label>
+        <textarea asp-for="Ins_Description" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+        <span class="text text-sm" asp-validation-for="Ins_Description"></span>
+
+    </div>
+
+
+    <div class="custom-file">
+        <input type="file" asp-for="Ins_CompanyLogo" class="custom-file-input" id="validatedCustomFile">
+        <label class="custom-file-label" for="validatedCustomFile">Choose Logo Of Company...</label>
+        <span class="text text-sm" asp-validation-for="Ins_CompanyLogo"></span>
+    </div>
+
+
+
+
+
+
+   
+
+    <div class="col-12 my-3 text-center">
+        <!-- Centered button -->
+        <button class="submitBTN" type="submit">Save changes</button>
+    </div>
+</form>
+
+
+
+
+<script>
+    document.querySelector("#validatedCustomFile").addEventListener('change', function (event) {
+        // When a file is selected, get the file name
+        var fileName = event.target.files[0].name;
+
+        // Find the label that corresponds to the input and set its content
+        var label = event.target.nextElementSibling;
+        label.innerText = fileName;
+    });
+</script>

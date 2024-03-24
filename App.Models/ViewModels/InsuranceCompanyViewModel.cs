@@ -11,7 +11,10 @@ namespace App.Models.ViewModels
 {
 	public class InsuranceCompanyViewModel
 	{
-		[Required(ErrorMessage = "Insurance Company Name is required!")]
+
+        public int Ins_Id { get; set; }
+
+        [Required(ErrorMessage = "Insurance Company Name is required!")]
 		[MaxLength(100, ErrorMessage = "It can be max 100 or min 3")]
 		[MinLength(3)]
 		public string Ins_Name { get; set; }

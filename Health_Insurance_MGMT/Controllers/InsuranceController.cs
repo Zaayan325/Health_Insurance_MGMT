@@ -27,9 +27,16 @@ namespace Health_Insurance_MGMT.Controllers
         }
 
         // GET: InsuranceController/Details/5
-        public ActionResult Details(int id)
+        public ActionResult DetailsInsurance(int id)
         {
-            return View();
+            var insuranceCompany = _unitofWork.InsuranceCompanyRepository.GetT(emp => emp.Ins_Id == id);
+            if (insuranceCompany == null)
+            {
+                return NotFound();
+            }
+
+            // The view name here should exactly match the file name of the view
+            return View("DetailsInsurance", insuranceCompany);
         }
 
         // GET: InsuranceController/Create
@@ -88,25 +95,70 @@ namespace Health_Insurance_MGMT.Controllers
 
 
         // GET: InsuranceController/Edit/5
-        public ActionResult Edit(int id)
+        // GET: InsuranceController/Edit/5
+        public ActionResult EditInsurance(int id)
         {
-            return View();
+            var insuranceCompany = _unitofWork.InsuranceCompanyRepository.GetT(i => i.Ins_Id == id);
+            if (insuranceCompany == null)
+            {
+                return NotFound();
+            }
+
+            var model = new InsuranceCompanyViewModel
+            {
+                Ins_Name = insuranceCompany.Ins_Name,
+                Ins_Description = insuranceCompany.Ins_Description,
+                Address = insuranceCompany.Address,
+                Phone = insuranceCompany.Phone,
+                CompantWebsiteUrl = insuranceCompany.CompantWebsiteUrl,
+                // Ins_CompanyLogo is not set because it's a file input, not a text input
+            };
+
+            return View(model);
         }
 
         // POST: InsuranceController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<IActionResult> EditInsurance(int id, InsuranceCompanyViewModel model)
         {
-            try
+            if (!ModelState.IsValid)
             {
-                return RedirectToAction(nameof(Index));
+                return View(model);
             }
-            catch
+
+            var insuranceCompany = _unitofWork.InsuranceCompanyRepository.GetT(i => i.Ins_Id == id);
+            if (insuranceCompany == null)
             {
-                return View();
+                return NotFound();
             }
+
+            if (model.Ins_CompanyLogo != null && model.Ins_CompanyLogo.Length > 0)
+            {
+                string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "uploads", "InsuranceCompaniesData");
+                string uniqueFileName = Guid.NewGuid().ToString() + "_" + model.Ins_CompanyLogo.FileName;
+                string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                Directory.CreateDirectory(uploadsFolder);
+
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    await model.Ins_CompanyLogo.CopyToAsync(fileStream);
+                }
+                insuranceCompany.Ins_CompanyLogourl = uniqueFileName; // Update the logo URL only if a new logo was uploaded
+            }
+
+            insuranceCompany.Ins_Name = model.Ins_Name;
+            insuranceCompany.Ins_Description = model.Ins_Description;
+            insuranceCompany.Address = model.Address;
+            insuranceCompany.Phone = model.Phone;
+            insuranceCompany.CompantWebsiteUrl = model.CompantWebsiteUrl;
+
+            _unitofWork.InsuranceCompanyRepository.Update(insuranceCompany);
+            await _unitofWork.save();
+
+            return RedirectToAction("InsuranceView");
         }
+
 
         // GET: InsuranceController/Delete/5
         public IActionResult DeleteInsurance(int? id)
@@ -148,7 +200,7 @@ namespace Health_Insurance_MGMT.Controllers
             _unitofWork.InsuranceCompanyRepository.Delete(insuranceCompany);
             _unitofWork.save();
 
-            return RedirectToAction("Dashboard", "Admin");
+            return RedirectToAction("InsuranceView");
         }
     }
 }
