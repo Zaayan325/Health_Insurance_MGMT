@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace App.DataAccessLibrary.Migrations
 {
     /// <inheritdoc />
-    public partial class AddAllinDatabase : Migration
+    public partial class AddAllToDatabase : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -73,6 +73,25 @@ namespace App.DataAccessLibrary.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_HospitalInfo", x => x.HospitalId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "InsuranceCompany",
+                columns: table => new
+                {
+                    Ins_Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Ins_Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Ins_Description = table.Column<string>(type: "nvarchar(350)", maxLength: 350, nullable: false),
+                    Address = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    Phone = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CompantWebsiteUrl = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Ins_CompanyLogourl = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    InsuranceCompanyAdded = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_InsuranceCompany", x => x.Ins_Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -366,6 +385,9 @@ namespace App.DataAccessLibrary.Migrations
 
             migrationBuilder.DropTable(
                 name: "HospitalInfo");
+
+            migrationBuilder.DropTable(
+                name: "InsuranceCompany");
 
             migrationBuilder.DropTable(
                 name: "Policesonemployees");

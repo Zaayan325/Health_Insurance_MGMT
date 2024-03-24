@@ -13,6 +13,9 @@ namespace App.DataAccessLibrary.Infrastructure.IRepository
        
         IContactRepository ContactRepository { get; }
 
-        void save();
+        IInsuranceCompanyRepository InsuranceCompanyRepository { get; }
+
+        Task save();
+        //void save();
     }
 }

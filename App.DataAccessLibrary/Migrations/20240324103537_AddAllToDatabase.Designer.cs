@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace App.DataAccessLibrary.Migrations
 {
     [DbContext(typeof(HealthInsuranceMGMT))]
-    [Migration("20240322215205_AddAllinDatabase")]
-    partial class AddAllinDatabase
+    [Migration("20240324103537_AddAllToDatabase")]
+    partial class AddAllToDatabase
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -234,6 +234,50 @@ namespace App.DataAccessLibrary.Migrations
                     b.HasKey("HospitalId");
 
                     b.ToTable("HospitalInfo");
+                });
+
+            modelBuilder.Entity("App.Models.Models.InsuranceCompany", b =>
+                {
+                    b.Property<int>("Ins_Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Ins_Id"));
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("CompantWebsiteUrl")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("Ins_CompanyLogourl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Ins_Description")
+                        .IsRequired()
+                        .HasMaxLength(350)
+                        .HasColumnType("nvarchar(350)");
+
+                    b.Property<string>("Ins_Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<DateTime>("InsuranceCompanyAdded")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Ins_Id");
+
+                    b.ToTable("InsuranceCompany");
                 });
 
             modelBuilder.Entity("App.Models.Models.Policesonemployees", b =>
@@ -495,7 +539,7 @@ namespace App.DataAccessLibrary.Migrations
             modelBuilder.Entity("App.Models.Models.Policesonemployees", b =>
                 {
                     b.HasOne("App.Models.Models.CompanyDetails", "CompanyDetails")
-                        .WithMany("Policesonemployees")
+                        .WithMany()
                         .HasForeignKey("CompanyDetailsCompanyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -518,7 +562,7 @@ namespace App.DataAccessLibrary.Migrations
             modelBuilder.Entity("App.Models.Models.Policies", b =>
                 {
                     b.HasOne("App.Models.Models.CompanyDetails", "CompanyDetails")
-                        .WithMany("Policies")
+                        .WithMany()
                         .HasForeignKey("CompanyDetailsCompanyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -552,7 +596,7 @@ namespace App.DataAccessLibrary.Migrations
             modelBuilder.Entity("App.Models.Models.PolicyRequestDetails", b =>
                 {
                     b.HasOne("App.Models.Models.CompanyDetails", "CompanyDetails")
-                        .WithMany("PolicyRequestDetails")
+                        .WithMany()
                         .HasForeignKey("CompanyDetailsCompanyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -575,7 +619,7 @@ namespace App.DataAccessLibrary.Migrations
             modelBuilder.Entity("App.Models.Models.PolicyTotalDescription", b =>
                 {
                     b.HasOne("App.Models.Models.CompanyDetails", "CompanyDetails")
-                        .WithMany("PolicyTotalDescriptions")
+                        .WithMany()
                         .HasForeignKey("CompanyDetailsCompanyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -593,17 +637,6 @@ namespace App.DataAccessLibrary.Migrations
                     b.Navigation("CompanyDetails");
 
                     b.Navigation("PolicyRequestDetails");
-                });
-
-            modelBuilder.Entity("App.Models.Models.CompanyDetails", b =>
-                {
-                    b.Navigation("Policesonemployees");
-
-                    b.Navigation("Policies");
-
-                    b.Navigation("PolicyRequestDetails");
-
-                    b.Navigation("PolicyTotalDescriptions");
                 });
 
             modelBuilder.Entity("App.Models.Models.Policies", b =>

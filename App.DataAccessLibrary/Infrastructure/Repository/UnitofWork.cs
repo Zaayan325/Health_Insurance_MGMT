@@ -14,23 +14,24 @@ namespace App.DataAccessLibrary.Infrastructure.Repository
         public IEmpRegisterRepository EmpRegisterRepository { get; private set; }
 
         public ICompanyDetailsRepository CompanyDetailsRepository { get; private set; }
+        
 
        
 
         public IContactRepository ContactRepository { get; private set; }
+        public IInsuranceCompanyRepository InsuranceCompanyRepository { get; private set; }
 
         public UnitofWork(HealthInsuranceMGMT context)
         {
             _context = context;
             EmpRegisterRepository = new EmpRegisterRepository(context);
             CompanyDetailsRepository = new CompanyDetailsRepository(context);
-            
+            InsuranceCompanyRepository = new InsuranceCompanyRepository(context);
             ContactRepository = new ContactRepository(context);
         }
-        public void save()
+        public async Task save() // Make this method async
         {
-
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
             Console.WriteLine("Changes Saved To The Database");
         }
     }

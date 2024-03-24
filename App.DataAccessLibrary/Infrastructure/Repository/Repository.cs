@@ -39,7 +39,10 @@ namespace App.DataAccessLibrary.Infrastructure.Repository
         {
             return _dbSet.ToList();
         }
-
+        public async Task save()
+        {
+            await _context.SaveChangesAsync();
+        }
         public T? GetT(Expression<Func<T, bool>> predicate)
         {
             return _dbSet.Where(predicate).FirstOrDefault();

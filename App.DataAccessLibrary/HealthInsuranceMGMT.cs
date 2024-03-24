@@ -56,5 +56,10 @@ namespace App.DataAccessLibrary
         public DbSet<PolicyTotalDescription> PolicyTotalDescription { get; set; }
  //Contacts in public
 		public DbSet<Contact> Contact { get; set; }
-	}
+
+        //Insurance Company 
+
+        public DbSet<InsuranceCompany> InsuranceCompany { get; set; }
+
+    }
 }
