@@ -6,32 +6,21 @@ namespace App.DataAccessLibrary
 {
     public class HealthInsuranceMGMT : DbContext
     {
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<PolicyRequestDetails>()
-                .HasOne(p => p.Policies)
-                .WithMany()
-                .HasForeignKey(p => p.PolicyId)
-                .OnDelete(DeleteBehavior.NoAction);
+       protected override void OnModelCreating(ModelBuilder modelBuilder)
+{
+    modelBuilder.Entity<Policies>()
+        .HasOne(p => p.InsuranceCompany)
+        .WithMany(b => b.Policies)
+        .HasForeignKey(p => p.Ins_Id)
+        .OnDelete(DeleteBehavior.Cascade); // Changed to Cascade to enable cascading deletes
 
-            modelBuilder.Entity<Policesonemployees>()
-                .HasOne(p => p.Policies)
-                .WithMany()
-                .HasForeignKey(p => p.policyid)
-                .OnDelete(DeleteBehavior.NoAction);
+    // Configure cascading deletes for other entities if necessary
+    // For example, if `Policies` has related entities that should also be deleted
+    // when a `Policies` record is deleted, configure those here as well.
 
-            modelBuilder.Entity<PolicyApprovalDetails>()
-                .HasOne(p => p.RequestDetails)
-                .WithMany()
-                .HasForeignKey(p => p.RequestId)
-                .OnDelete(DeleteBehavior.NoAction);
-            modelBuilder.Entity<PolicyTotalDescription>()
-                .HasOne(p => p.PolicyRequestDetails)
-                .WithMany()
-                .HasForeignKey(p => p.policyId)
-                .OnDelete(DeleteBehavior.NoAction);
-            base.OnModelCreating(modelBuilder);
-        }
+    base.OnModelCreating(modelBuilder);
+}
+
 
         public HealthInsuranceMGMT(DbContextOptions<HealthInsuranceMGMT> options) : base(options)
         {

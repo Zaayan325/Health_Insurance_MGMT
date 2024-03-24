@@ -122,7 +122,7 @@ namespace App.DataAccessLibrary.Migrations
                     b.Property<DateTime>("EmployeeAdded")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("PoliciesId")
+                    b.Property<int?>("PoliciesPolicyId")
                         .HasColumnType("int");
 
                     b.Property<int?>("Policyid")
@@ -192,7 +192,7 @@ namespace App.DataAccessLibrary.Migrations
 
                     b.HasKey("empno");
 
-                    b.HasIndex("PoliciesId");
+                    b.HasIndex("PoliciesPolicyId");
 
                     b.ToTable("EmpRegister");
                 });
@@ -302,7 +302,7 @@ namespace App.DataAccessLibrary.Migrations
                     b.Property<DateTime>("Penddate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("PoliciesId")
+                    b.Property<int>("PoliciesPolicyId")
                         .HasColumnType("int");
 
                     b.Property<int>("Policyduration")
@@ -321,31 +321,20 @@ namespace App.DataAccessLibrary.Migrations
 
                     b.HasIndex("CompanyDetailsCompanyId");
 
-                    b.HasIndex("PoliciesId");
-
-                    b.HasIndex("policyid");
+                    b.HasIndex("PoliciesPolicyId");
 
                     b.ToTable("Policesonemployees");
                 });
 
             modelBuilder.Entity("App.Models.Models.Policies", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("PolicyId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PolicyId"));
 
-                    b.Property<int>("Amount")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CompanyDetailsCompanyId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CompanyId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Emi")
+                    b.Property<int>("Ins_Id")
                         .HasColumnType("int");
 
                     b.Property<string>("MedicalId")
@@ -358,14 +347,27 @@ namespace App.DataAccessLibrary.Migrations
                         .HasMaxLength(150)
                         .HasColumnType("nvarchar(150)");
 
+                    b.Property<double>("PolicyFullAmount")
+                        .HasColumnType("float");
+
                     b.Property<string>("PolicyName")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.HasKey("Id");
+                    b.Property<string>("PolicyTermasandConditionsurl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-                    b.HasIndex("CompanyDetailsCompanyId");
+                    b.Property<double>("equatedmonthlyinstalment")
+                        .HasColumnType("float");
+
+                    b.Property<double>("policymonths")
+                        .HasColumnType("float");
+
+                    b.HasKey("PolicyId");
+
+                    b.HasIndex("Ins_Id");
 
                     b.ToTable("Policies");
                 });
@@ -384,19 +386,13 @@ namespace App.DataAccessLibrary.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("PoliciesId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("PolicyRequestDetailsRequestId")
+                    b.Property<int>("PoliciesPolicyId")
                         .HasColumnType("int");
 
                     b.Property<string>("Reason")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
-
-                    b.Property<int>("RequestId")
-                        .HasColumnType("int");
 
                     b.Property<string>("Status")
                         .IsRequired()
@@ -405,11 +401,7 @@ namespace App.DataAccessLibrary.Migrations
 
                     b.HasKey("PolicyId");
 
-                    b.HasIndex("PoliciesId");
-
-                    b.HasIndex("PolicyRequestDetailsRequestId");
-
-                    b.HasIndex("RequestId");
+                    b.HasIndex("PoliciesPolicyId");
 
                     b.ToTable("PolicyApprovalDetails");
                 });
@@ -434,7 +426,7 @@ namespace App.DataAccessLibrary.Migrations
                     b.Property<int>("EmpNo")
                         .HasColumnType("int");
 
-                    b.Property<int?>("PoliciesId")
+                    b.Property<int>("PoliciesPolicyId")
                         .HasColumnType("int");
 
                     b.Property<int>("PolicyAmount")
@@ -460,9 +452,7 @@ namespace App.DataAccessLibrary.Migrations
 
                     b.HasIndex("CompanyDetailsCompanyId");
 
-                    b.HasIndex("PoliciesId");
-
-                    b.HasIndex("PolicyId");
+                    b.HasIndex("PoliciesPolicyId");
 
                     b.ToTable("PolicyRequestDetails");
                 });
@@ -494,9 +484,6 @@ namespace App.DataAccessLibrary.Migrations
                     b.Property<int>("PolicyDurationMonths")
                         .HasColumnType("int");
 
-                    b.Property<int?>("PolicyRequestDetailsRequestId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Policydes")
                         .IsRequired()
                         .HasMaxLength(250)
@@ -507,9 +494,6 @@ namespace App.DataAccessLibrary.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<int>("policyId")
-                        .HasColumnType("int");
-
                     b.Property<int>("policyamount")
                         .HasColumnType("int");
 
@@ -517,18 +501,14 @@ namespace App.DataAccessLibrary.Migrations
 
                     b.HasIndex("CompanyDetailsCompanyId");
 
-                    b.HasIndex("PolicyRequestDetailsRequestId");
-
-                    b.HasIndex("policyId");
-
                     b.ToTable("PolicyTotalDescription");
                 });
 
             modelBuilder.Entity("App.Models.Models.EmpRegister", b =>
                 {
                     b.HasOne("App.Models.Models.Policies", "Policies")
-                        .WithMany("EmpRegister")
-                        .HasForeignKey("PoliciesId");
+                        .WithMany()
+                        .HasForeignKey("PoliciesPolicyId");
 
                     b.Navigation("Policies");
                 });
@@ -541,14 +521,10 @@ namespace App.DataAccessLibrary.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("App.Models.Models.Policies", null)
-                        .WithMany("Policesonemployees")
-                        .HasForeignKey("PoliciesId");
-
                     b.HasOne("App.Models.Models.Policies", "Policies")
                         .WithMany()
-                        .HasForeignKey("policyid")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .HasForeignKey("PoliciesPolicyId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("CompanyDetails");
@@ -558,36 +534,24 @@ namespace App.DataAccessLibrary.Migrations
 
             modelBuilder.Entity("App.Models.Models.Policies", b =>
                 {
-                    b.HasOne("App.Models.Models.CompanyDetails", "CompanyDetails")
-                        .WithMany()
-                        .HasForeignKey("CompanyDetailsCompanyId")
+                    b.HasOne("App.Models.Models.InsuranceCompany", "InsuranceCompany")
+                        .WithMany("Policies")
+                        .HasForeignKey("Ins_Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("CompanyDetails");
+                    b.Navigation("InsuranceCompany");
                 });
 
             modelBuilder.Entity("App.Models.Models.PolicyApprovalDetails", b =>
                 {
                     b.HasOne("App.Models.Models.Policies", "Policies")
-                        .WithMany("PolicyApprovalDetails")
-                        .HasForeignKey("PoliciesId")
+                        .WithMany()
+                        .HasForeignKey("PoliciesPolicyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("App.Models.Models.PolicyRequestDetails", null)
-                        .WithMany("PolicyApprovalDetails")
-                        .HasForeignKey("PolicyRequestDetailsRequestId");
-
-                    b.HasOne("App.Models.Models.PolicyRequestDetails", "RequestDetails")
-                        .WithMany()
-                        .HasForeignKey("RequestId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
                     b.Navigation("Policies");
-
-                    b.Navigation("RequestDetails");
                 });
 
             modelBuilder.Entity("App.Models.Models.PolicyRequestDetails", b =>
@@ -598,14 +562,10 @@ namespace App.DataAccessLibrary.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("App.Models.Models.Policies", null)
-                        .WithMany("PolicyRequestDetails")
-                        .HasForeignKey("PoliciesId");
-
                     b.HasOne("App.Models.Models.Policies", "Policies")
                         .WithMany()
-                        .HasForeignKey("PolicyId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .HasForeignKey("PoliciesPolicyId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("CompanyDetails");
@@ -621,37 +581,12 @@ namespace App.DataAccessLibrary.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("App.Models.Models.PolicyRequestDetails", null)
-                        .WithMany("PolicyTotalDescriptions")
-                        .HasForeignKey("PolicyRequestDetailsRequestId");
-
-                    b.HasOne("App.Models.Models.PolicyRequestDetails", "PolicyRequestDetails")
-                        .WithMany()
-                        .HasForeignKey("policyId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
                     b.Navigation("CompanyDetails");
-
-                    b.Navigation("PolicyRequestDetails");
                 });
 
-            modelBuilder.Entity("App.Models.Models.Policies", b =>
+            modelBuilder.Entity("App.Models.Models.InsuranceCompany", b =>
                 {
-                    b.Navigation("EmpRegister");
-
-                    b.Navigation("Policesonemployees");
-
-                    b.Navigation("PolicyApprovalDetails");
-
-                    b.Navigation("PolicyRequestDetails");
-                });
-
-            modelBuilder.Entity("App.Models.Models.PolicyRequestDetails", b =>
-                {
-                    b.Navigation("PolicyApprovalDetails");
-
-                    b.Navigation("PolicyTotalDescriptions");
+                    b.Navigation("Policies");
                 });
 #pragma warning restore 612, 618
         }

@@ -47,6 +47,11 @@ namespace App.DataAccessLibrary.Infrastructure.Repository
         {
             return _dbSet.Where(predicate).FirstOrDefault();
         }
+        public async Task<T?> GetTAsync(Expression<Func<T, bool>> predicate)
+        {
+            return await _dbSet.Where(predicate).FirstOrDefaultAsync();
+        }
+
 
     }
 }

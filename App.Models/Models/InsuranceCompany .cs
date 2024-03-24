@@ -46,6 +46,6 @@ namespace App.Models.Models
         public DateTime InsuranceCompanyAdded { get; set; } = DateTime.Now;
 
 
-
+        public virtual ICollection<Policies> Policies { get; set; } // Collection navigation property
     }
 }

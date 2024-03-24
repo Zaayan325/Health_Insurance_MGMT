@@ -17,9 +17,9 @@ namespace App.Models.Models
         [Key]
         public int Id { get; set; }
         
-        public int policyId { get; set; }
-        [ValidateNever]
-        public PolicyRequestDetails PolicyRequestDetails { get; set; }
+        //public int policyId { get; set; }
+        //[ValidateNever]
+        //public PolicyRequestDetails PolicyRequestDetails { get; set; }
 
         [AllowNull]
         [StringLength(50)]

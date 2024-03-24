@@ -13,7 +13,7 @@ namespace App.DataAccessLibrary.Infrastructure.Repository
         private HealthInsuranceMGMT _context;
         public IEmpRegisterRepository EmpRegisterRepository { get; private set; }
 
-        public ICompanyDetailsRepository CompanyDetailsRepository { get; private set; }
+        public IPoliciesRepository PoliciesRepository { get; private set; }
         
 
        
@@ -25,7 +25,7 @@ namespace App.DataAccessLibrary.Infrastructure.Repository
         {
             _context = context;
             EmpRegisterRepository = new EmpRegisterRepository(context);
-            CompanyDetailsRepository = new CompanyDetailsRepository(context);
+            PoliciesRepository = new PoliciesRepository(context);
             InsuranceCompanyRepository = new InsuranceCompanyRepository(context);
             ContactRepository = new ContactRepository(context);
         }

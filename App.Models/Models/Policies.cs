@@ -15,38 +15,42 @@ namespace App.Models.Models
     public class Policies
     {
         [Key]
-        public int Id { get; set; }
+        public int PolicyId { get; set; }
 
         [Required]
-        [AllowNull]
         [StringLength(50)]
         public string PolicyName { get; set; }
 
         [Required]
-        [AllowNull]
         [StringLength(150)]
         public string PolicyDescription { get; set; }
 
-        [Required,AllowNull]
-        public int Amount { get; set; }
+        [Required]
+        public double PolicyFullAmount { get; set; }
 
-        [Required,AllowNull]
-        public int Emi { get; set; }
+        [Required]
+        public double equatedmonthlyinstalment { get; set; }
 
-        [Required,AllowNull]
-        public int CompanyId { get; set; }
-        [ValidateNever]
-        public CompanyDetails CompanyDetails { get; set; }
+        [Required]
+        public double policymonths { get; set; }
+
+
+        public int Ins_Id { get; set; } // Foreign key property
+
+        [ForeignKey("Ins_Id")]
+        public virtual InsuranceCompany InsuranceCompany { get; set; } // Navigation property
 
 
         [Required]
-        [AllowNull]
         [StringLength(50)]
         public string MedicalId { get; set; }
 
-        public ICollection<EmpRegister> EmpRegister { get; set; }
-        public ICollection<PolicyApprovalDetails> PolicyApprovalDetails { get; set; }
-        public ICollection<PolicyRequestDetails> PolicyRequestDetails { get; set; }
-        public ICollection<Policesonemployees> Policesonemployees { get; set; }
+        [Required]
+		[ValidateNever]
+		public string PolicyTermasandConditionsurl { get; set; }
+
+
+
+
     }
 }

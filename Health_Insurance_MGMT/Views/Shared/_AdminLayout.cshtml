@@ -25,6 +25,7 @@
 	<script src="https://kit.fontawesome.com/2aa5f9e49b.js" crossorigin="anonymous"></script>
 
 	<style>
+
 		.submitBTN {
 			padding: 1em 2em;
 			border: none;
@@ -125,7 +126,13 @@
 							<li><a asp-controller="Insurance" asp-action="InsuranceView">View Insurance Companies</a></li>
 						</ul>
 					</li>
-					
+					<li class="nav-item pcoded-hasmenu">
+						<a href="#!" class="nav-link "><span class="pcoded-micon"><i class="feather icon-layout"></i></span><span class="pcoded-mtext">Policies Section</span></a>
+						<ul class="pcoded-submenu">
+							<li><a asp-controller="Policies" asp-action="CreatePolicy">Add Policies</a></li>
+							<li><a asp-controller="Policies" asp-action="ViewPolicy">View Policies</a></li>
+						</ul>
+					</li>
 					
 					
 					<li class="nav-item"><a href="sample-page.html" class="nav-link "><span class="pcoded-micon"><i class="feather icon-sidebar"></i></span><span class="pcoded-mtext">Sample page</span></a></li>
@@ -333,6 +340,17 @@
 		</div>
 
     </div>
+
+	<script>
+		document.querySelector("#validatedCustomFile").addEventListener('change', function (event) {
+			// When a file is selected, get the file name
+			var fileName = event.target.files[0].name;
+
+			// Find the label that corresponds to the input and set its content
+			var label = event.target.nextElementSibling;
+			label.innerText = fileName;
+		});
+	</script>
 
 	<!-- Required Js -->
 	<script src="~/adminassets/js/vendor-all.min.js"></script>

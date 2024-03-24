@@ -45,7 +45,6 @@ namespace App.Models.Models
         [StringLength(50)]
         public string Status { get; set;}
 
-        public ICollection<PolicyTotalDescription> PolicyTotalDescriptions { get; set; }
-        public ICollection<PolicyApprovalDetails> PolicyApprovalDetails { get; set; }
+       
     }
 }

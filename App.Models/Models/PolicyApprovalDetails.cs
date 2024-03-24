@@ -19,11 +19,11 @@ namespace App.Models.Models
         [ValidateNever]
         public Policies Policies { get; set; }
 
-        [Required]
-        [AllowNull]
-        public int RequestId { get; set; }
-        [ValidateNever]
-        public PolicyRequestDetails RequestDetails { get; set; }
+        //[Required]
+        //[AllowNull]
+        //public int RequestId { get; set; }
+        //[ValidateNever]
+        //public PolicyRequestDetails RequestDetails { get; set; }
 
         [Required]
         [AllowNull]

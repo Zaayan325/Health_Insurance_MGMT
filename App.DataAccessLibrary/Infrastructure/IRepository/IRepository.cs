@@ -17,5 +17,7 @@ namespace App.DataAccessLibrary.Infrastructure.IRepository
         void Delete(T entity);
 
         void DeleteRange(IEnumerable<T> entity);
+
+        Task<T?> GetTAsync(Expression<Func<T, bool>> predicate);
     }
 }
