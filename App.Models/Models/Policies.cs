@@ -51,6 +51,6 @@ namespace App.Models.Models
 
 
 
-
+        public virtual ICollection<EmpRegister> EmpRegister { get; set; } // Collection navigation property
     }
 }

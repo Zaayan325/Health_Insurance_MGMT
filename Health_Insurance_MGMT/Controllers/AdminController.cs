@@ -37,26 +37,67 @@ namespace Health_Insurance_MGMT.Controllers
 
         public IActionResult AddEmp()
         {
-            return View();
+            var policies = _unitofWork.PoliciesRepository.GetAll()
+        .Select(p => new SelectListItem
+        {
+            Value = p.PolicyId.ToString(),
+            Text = p.PolicyName
+        }).ToList();
+
+            // Create and populate the ViewModel
+            var viewModel = new EmpRegisterViewModel
+            {
+                PolicyOptions = policies
+            };
+            return View(viewModel);
         }
 
-        //public Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary GetModelState()
-        //{
-        //    return ModelState;
-        //}
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult AddEmp(EmpRegister empRegister)
+        public IActionResult AddEmp(EmpRegisterViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
+                // Map ViewModel to Domain Model
+                var empRegister = new EmpRegister
+                {
+                    // Map each property from viewModel to empRegister
+                    empno = viewModel.empno,
+                    designation = viewModel.designation,
+                    joindate = viewModel.joindate,
+                    Salary = viewModel.Salary,
+                    firstname = viewModel.firstname,
+                    lastname = viewModel.lastname,
+                    username = viewModel.username,
+                    password = viewModel.password,
+                    address = viewModel.address,
+                    contactno = viewModel.contactno,
+                    state = viewModel.state,
+                    country = viewModel.country,
+                    city = viewModel.city,
+                    policystatus = viewModel.policystatus,
+                    PolicyId = viewModel.SelectedPolicyId, // Set PolicyId from the selected value
+                };
+
                 _unitofWork.EmpRegisterRepository.Add(empRegister);
                 _unitofWork.save();
                 return RedirectToAction("Dashboard");
             }
-            return View(empRegister);
+
+            // If we get here, something was wrong with the model,
+            // Repopulate PolicyOptions before returning the view.
+            viewModel.PolicyOptions = _unitofWork.PoliciesRepository.GetAll()
+                .Select(p => new SelectListItem
+                {
+                    Value = p.PolicyId.ToString(),
+                    Text = p.PolicyName
+                }).ToList();
+
+            return View(viewModel);
         }
+
 
 
         public IActionResult ViewEmp()

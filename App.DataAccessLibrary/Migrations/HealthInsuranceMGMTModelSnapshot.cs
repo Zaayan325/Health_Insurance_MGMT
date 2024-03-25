@@ -122,11 +122,7 @@ namespace App.DataAccessLibrary.Migrations
                     b.Property<DateTime>("EmployeeAdded")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("PoliciesPolicyId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("Policyid")
-                        .IsRequired()
+                    b.Property<int>("PolicyId")
                         .HasColumnType("int");
 
                     b.Property<int>("Salary")
@@ -192,7 +188,7 @@ namespace App.DataAccessLibrary.Migrations
 
                     b.HasKey("empno");
 
-                    b.HasIndex("PoliciesPolicyId");
+                    b.HasIndex("PolicyId");
 
                     b.ToTable("EmpRegister");
                 });
@@ -457,58 +453,13 @@ namespace App.DataAccessLibrary.Migrations
                     b.ToTable("PolicyRequestDetails");
                 });
 
-            modelBuilder.Entity("App.Models.Models.PolicyTotalDescription", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("CompanyDetailsCompanyId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("CompanyId")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<int>("EMI")
-                        .HasColumnType("int");
-
-                    b.Property<string>("MedicalId")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<int>("PolicyDurationMonths")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Policydes")
-                        .IsRequired()
-                        .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
-
-                    b.Property<string>("Policyname")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<int>("policyamount")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CompanyDetailsCompanyId");
-
-                    b.ToTable("PolicyTotalDescription");
-                });
-
             modelBuilder.Entity("App.Models.Models.EmpRegister", b =>
                 {
                     b.HasOne("App.Models.Models.Policies", "Policies")
-                        .WithMany()
-                        .HasForeignKey("PoliciesPolicyId");
+                        .WithMany("EmpRegister")
+                        .HasForeignKey("PolicyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Policies");
                 });
@@ -573,20 +524,14 @@ namespace App.DataAccessLibrary.Migrations
                     b.Navigation("Policies");
                 });
 
-            modelBuilder.Entity("App.Models.Models.PolicyTotalDescription", b =>
-                {
-                    b.HasOne("App.Models.Models.CompanyDetails", "CompanyDetails")
-                        .WithMany()
-                        .HasForeignKey("CompanyDetailsCompanyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("CompanyDetails");
-                });
-
             modelBuilder.Entity("App.Models.Models.InsuranceCompany", b =>
                 {
                     b.Navigation("Policies");
+                });
+
+            modelBuilder.Entity("App.Models.Models.Policies", b =>
+                {
+                    b.Navigation("EmpRegister");
                 });
 #pragma warning restore 612, 618
         }

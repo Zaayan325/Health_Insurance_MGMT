@@ -14,11 +14,17 @@ namespace App.DataAccessLibrary
         .HasForeignKey(p => p.Ins_Id)
         .OnDelete(DeleteBehavior.Cascade); // Changed to Cascade to enable cascading deletes
 
-    // Configure cascading deletes for other entities if necessary
-    // For example, if `Policies` has related entities that should also be deleted
-    // when a `Policies` record is deleted, configure those here as well.
+            // Configure cascading deletes for other entities if necessary
+            // For example, if `Policies` has related entities that should also be deleted
+            // when a `Policies` record is deleted, configure those here as well.
 
-    base.OnModelCreating(modelBuilder);
+            // Explicit configuration for the EmpRegister to Policies relationship
+            modelBuilder.Entity<EmpRegister>()
+                .HasOne<Policies>(e => e.Policies) // EmpRegister has one Policies
+                .WithMany(p => p.EmpRegister) // Policies has many EmpRegister
+                .HasForeignKey(e => e.PolicyId); // Foreign key in EmpRegister pointing to Policies
+
+            base.OnModelCreating(modelBuilder);
 }
 
 
@@ -42,7 +48,7 @@ namespace App.DataAccessLibrary
 
         public DbSet<PolicyRequestDetails> PolicyRequestDetails { get; set; }
 
-        public DbSet<PolicyTotalDescription> PolicyTotalDescription { get; set; }
+       
  //Contacts in public
 		public DbSet<Contact> Contact { get; set; }
 

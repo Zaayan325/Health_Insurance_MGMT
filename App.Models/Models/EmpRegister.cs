@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -18,15 +19,12 @@ namespace App.Models.Models
 
         [Required]
         [StringLength(50)]
-        [AllowNull]
         public string designation { get; set; }
 
         [Required]
-        [AllowNull]
         public DateTime joindate { get; set; }
 
         [Required]
-        [AllowNull]
         public int Salary { get; set; }
 
         [Required]
@@ -35,55 +33,49 @@ namespace App.Models.Models
         public string firstname { get; set; }
 
         [Required]
-        [AllowNull]
         [StringLength (50)]
         public string lastname { get; set; }
 
         [Required]
-        [AllowNull]
         [StringLength (50)]
         public string username { get; set; }
 
         [Required]
-        [AllowNull]
         [StringLength (50)]
         public string password { get; set; }
 
         [Required]
-        [AllowNull]
         [StringLength (150)]
         public string address {  get; set; }
 
         [Required]
-        [AllowNull]
         [StringLength (50)]
         public string contactno { get; set; }
 
         [Required]
-        [AllowNull]
         [StringLength (50)]
         public string state {  get; set; }
 
 
         [Required]
-        [AllowNull]
         [StringLength (50)]
         public string country { get; set; }
 
         [Required]
-        [AllowNull]
         [StringLength (50)]
         public string city { get; set; }
 
         [Required]
-        [NotNull]
         [StringLength (30)]
         public string? policystatus { get; set; }
 
-        [Required]
-        [NotNull]
-        public int? Policyid { get; set; }
-        public Policies? Policies { get; set; }
+      
+
+
+        public int PolicyId { get; set; } // Foreign key property
+
+        [ForeignKey("PolicyId")]
+        public virtual Policies Policies { get; set; } // Navigation property
 
         public DateTime EmployeeAdded { get; set; } = DateTime.Now;
 

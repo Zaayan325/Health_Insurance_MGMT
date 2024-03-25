@@ -11,41 +11,55 @@ namespace App.DataAccessLibrary.Infrastructure.Repository
 {
     public class EmpRegisterRepository : Repository<EmpRegister>, IEmpRegisterRepository
     {
-        private HealthInsuranceMGMT _context;
+        private readonly HealthInsuranceMGMT _context;
 
         public EmpRegisterRepository(HealthInsuranceMGMT context) : base(context)
         {
             _context = context;
         }
 
-        public void Update(EmpRegister empRegister)
+        public async Task UpdateAsync(EmpRegister empRegister)
         {
-            var EmpRegisterDb = _context.EmpRegister.FirstOrDefault(er => er.empno == empRegister.empno);
+            var EmpRegisterDb = await _context.EmpRegister.FirstOrDefaultAsync(er => er.empno == empRegister.empno);
             if (EmpRegisterDb != null)
             {
-                EmpRegisterDb.username = empRegister.username;
-                EmpRegisterDb.designation = empRegister.designation;
-                EmpRegisterDb.joindate = empRegister.joindate;
-                EmpRegisterDb.Salary = empRegister.Salary;
-                EmpRegisterDb.firstname = empRegister.firstname;
-                EmpRegisterDb.lastname = empRegister.lastname;
-                
-                EmpRegisterDb.password = empRegister.password;
-                EmpRegisterDb.address = empRegister.address;
-                EmpRegisterDb.contactno = empRegister.contactno;
-                EmpRegisterDb.state = empRegister.state;
-                EmpRegisterDb.country = empRegister.country;
-                EmpRegisterDb.city = empRegister.city;
-                EmpRegisterDb.policystatus = empRegister.policystatus;
-                EmpRegisterDb.Policyid = empRegister.Policyid;
-            }
+                // Here we update the entity using EF Core's Entry API
+                // This will mark the entity as 'Modified' and ensure all changes are tracked
+                _context.Entry(EmpRegisterDb).CurrentValues.SetValues(empRegister);
 
+                // Save the changes asynchronously
+                await _context.SaveChangesAsync();
+            }
         }
 
-		public bool ValidateUser(string username, string password)
-		{
-			var user = _context.EmpRegister.FirstOrDefault(u => u.username == username && u.password == password);
-			return user != null;
-		}
-	}
+        public bool ValidateUser(string username, string password)
+        {
+            var user = _context.EmpRegister.FirstOrDefault(u => u.username == username && u.password == password);
+            return user != null;
+        }
+    }
 }
+
+//public void Update(EmpRegister empRegister)
+//{
+//    var EmpRegisterDb = _context.EmpRegister.FirstOrDefault(er => er.empno == empRegister.empno);
+//    if (EmpRegisterDb != null)
+//    {
+//        EmpRegisterDb.username = empRegister.username;
+//        EmpRegisterDb.designation = empRegister.designation;
+//        EmpRegisterDb.joindate = empRegister.joindate;
+//        EmpRegisterDb.Salary = empRegister.Salary;
+//        EmpRegisterDb.firstname = empRegister.firstname;
+//        EmpRegisterDb.lastname = empRegister.lastname;
+
+//        EmpRegisterDb.password = empRegister.password;
+//        EmpRegisterDb.address = empRegister.address;
+//        EmpRegisterDb.contactno = empRegister.contactno;
+//        EmpRegisterDb.state = empRegister.state;
+//        EmpRegisterDb.country = empRegister.country;
+//        EmpRegisterDb.city = empRegister.city;
+//        EmpRegisterDb.policystatus = empRegister.policystatus;
+//        EmpRegisterDb.PolicyId = empRegister.PolicyId;
+//    }
+
+//}

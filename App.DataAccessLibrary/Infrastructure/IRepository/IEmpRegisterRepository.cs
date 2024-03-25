@@ -9,8 +9,8 @@ namespace App.DataAccessLibrary.Infrastructure.IRepository
 {
     public interface IEmpRegisterRepository : IRepository<EmpRegister>
     {
-        void Update(EmpRegister empRegister);
+        Task UpdateAsync(EmpRegister empRegister); // Updated to return Task
 
-		bool ValidateUser(string username, string password);
+        bool ValidateUser(string username, string password);
 	}
 }

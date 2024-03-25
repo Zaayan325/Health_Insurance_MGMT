@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace App.DataAccessLibrary.Migrations
 {
     /// <inheritdoc />
-    public partial class AddAllToDatabase : Migration
+    public partial class AddAllToDataBase : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -95,32 +95,6 @@ namespace App.DataAccessLibrary.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "PolicyTotalDescription",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Policyname = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Policydes = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
-                    policyamount = table.Column<int>(type: "int", nullable: false),
-                    EMI = table.Column<int>(type: "int", nullable: false),
-                    PolicyDurationMonths = table.Column<int>(type: "int", nullable: false),
-                    CompanyId = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    CompanyDetailsCompanyId = table.Column<int>(type: "int", nullable: false),
-                    MedicalId = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_PolicyTotalDescription", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_PolicyTotalDescription_CompanyDetails_CompanyDetailsCompanyId",
-                        column: x => x.CompanyDetailsCompanyId,
-                        principalTable: "CompanyDetails",
-                        principalColumn: "CompanyId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Policies",
                 columns: table => new
                 {
@@ -165,18 +139,18 @@ namespace App.DataAccessLibrary.Migrations
                     country = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     city = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     policystatus = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
-                    Policyid = table.Column<int>(type: "int", nullable: false),
-                    PoliciesPolicyId = table.Column<int>(type: "int", nullable: true),
+                    PolicyId = table.Column<int>(type: "int", nullable: false),
                     EmployeeAdded = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_EmpRegister", x => x.empno);
                     table.ForeignKey(
-                        name: "FK_EmpRegister_Policies_PoliciesPolicyId",
-                        column: x => x.PoliciesPolicyId,
+                        name: "FK_EmpRegister_Policies_PolicyId",
+                        column: x => x.PolicyId,
                         principalTable: "Policies",
-                        principalColumn: "PolicyId");
+                        principalColumn: "PolicyId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -270,9 +244,9 @@ namespace App.DataAccessLibrary.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_EmpRegister_PoliciesPolicyId",
+                name: "IX_EmpRegister_PolicyId",
                 table: "EmpRegister",
-                column: "PoliciesPolicyId");
+                column: "PolicyId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Policesonemployees_CompanyDetailsCompanyId",
@@ -303,11 +277,6 @@ namespace App.DataAccessLibrary.Migrations
                 name: "IX_PolicyRequestDetails_PoliciesPolicyId",
                 table: "PolicyRequestDetails",
                 column: "PoliciesPolicyId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_PolicyTotalDescription_CompanyDetailsCompanyId",
-                table: "PolicyTotalDescription",
-                column: "CompanyDetailsCompanyId");
         }
 
         /// <inheritdoc />
@@ -335,13 +304,10 @@ namespace App.DataAccessLibrary.Migrations
                 name: "PolicyRequestDetails");
 
             migrationBuilder.DropTable(
-                name: "PolicyTotalDescription");
+                name: "CompanyDetails");
 
             migrationBuilder.DropTable(
                 name: "Policies");
-
-            migrationBuilder.DropTable(
-                name: "CompanyDetails");
 
             migrationBuilder.DropTable(
                 name: "InsuranceCompany");

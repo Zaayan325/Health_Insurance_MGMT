@@ -1,4 +1,5 @@
-﻿@model EmpRegister
+﻿@using App.Models.ViewModels;
+@model EmpRegisterViewModel
 @{
     ViewData["Title"] = "Update Employee";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
@@ -64,11 +65,13 @@
     <input asp-for="policystatus" type="text" class="form-control" />
     <span class="text text-sm" asp-validation-for="policystatus"></span>
 
-    <label asp-for="Policyid">Policy Id</label>
-    <input asp-for="Policyid" type="text" class="form-control" />
-    <span class="text text-sm" asp-validation-for="Policyid"></span>
+    <div class="form-group">
+        <label asp-for="SelectedPolicyId" class="control-label"></label>
+        <select asp-for="SelectedPolicyId" asp-items="Model.PolicyOptions" class="form-control"></select>
+        <span asp-validation-for="SelectedPolicyId" class="text-danger"></span>
+    </div>
 
-
+ zxxz
 
 
     <div class="container h-100 my-4">
