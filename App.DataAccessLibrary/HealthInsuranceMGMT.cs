@@ -32,7 +32,7 @@ namespace App.DataAccessLibrary
         {
 
         }
-        public DbSet<AdminLogin> AdminLogins { get; set; }
+        public DbSet<AdminLogin> AdminLogin { get; set; }
 
         public DbSet<CompanyDetails> CompanyDetails { get; set; }
 
@@ -55,6 +55,8 @@ namespace App.DataAccessLibrary
         //Insurance Company 
 
         public DbSet<InsuranceCompany> InsuranceCompany { get; set; }
+
+
 
     }
 }

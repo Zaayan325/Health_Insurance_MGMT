@@ -6,22 +6,30 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace App.DataAccessLibrary.Migrations
 {
     /// <inheritdoc />
-    public partial class AddAllToDataBase : Migration
+    public partial class AddAllToDatabase : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "AdminLogins",
+                name: "AdminLogin",
                 columns: table => new
                 {
-                    UserName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Adm_ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    AdminName = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    AdminPassword = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ConfirmPassword = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    AdminPhotourl = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Role = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Phone = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     AdminAdded = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AdminLogins", x => x.UserName);
+                    table.PrimaryKey("PK_AdminLogin", x => x.Adm_ID);
                 });
 
             migrationBuilder.CreateTable(
@@ -139,6 +147,7 @@ namespace App.DataAccessLibrary.Migrations
                     country = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     city = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     policystatus = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
+                    Role = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PolicyId = table.Column<int>(type: "int", nullable: false),
                     EmployeeAdded = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
@@ -283,7 +292,7 @@ namespace App.DataAccessLibrary.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "AdminLogins");
+                name: "AdminLogin");
 
             migrationBuilder.DropTable(
                 name: "Contact");

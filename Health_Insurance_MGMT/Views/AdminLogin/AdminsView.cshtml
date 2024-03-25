@@ -1,0 +1,64 @@
+﻿@{
+    ViewData["Title"] = "ViewEmp";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@model IEnumerable<AdminLogin>
+
+<div class="row">
+    <div class="col-md-6">
+        <h1 class="text-success">Admins List</h1>
+    </div>
+    <div class="col-md-6">
+        <a asp-action="CreateAdmin" asp-controller="AdmiLogin" class="btn  btn-info">Add Admin</a>
+    </div>
+</div>
+
+
+
+<div class="card-body table-border-style">
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+
+                <tr>
+                    <th>A_Id</th>
+                    <th>A_Name</th>
+                    <th>A_Email</th>
+                    <th>A_Photo</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var i in Model)
+                {
+                    <tr>
+                        <td>@i.Adm_ID</td>
+                        <td>@i.AdminName</td>
+                        <td>@i.Email</td>
+
+                        <td>
+                            <div class="text-center">
+                                 <img class="rounded" src="@Url.Content("~/uploads/AdminData/" + i.AdminPhotourl)" asp-append-version="true" alt="Data Logo" style="height:50px;" /> 
+
+                            </div>
+                        </td>
+
+                        <td>
+                            <a asp-action="EditInsurance" asp-controller="Insurance" asp-route-id="@i.Adm_ID" class="btn btn-group-sm btn-outline-success">Edit</a>
+                            <a asp-action="DeleteInsurance" asp-controller="Insurance" asp-route-id="@i.Adm_ID" class="btn btn-group-sm btn-outline-danger">Delete</a>
+                            <a asp-action="DetailsInsurance" asp-controller="Insurance" asp-route-id="@i.Adm_ID" class="btn btn-group-sm btn-outline-success">Details</a>
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+
+
+
+

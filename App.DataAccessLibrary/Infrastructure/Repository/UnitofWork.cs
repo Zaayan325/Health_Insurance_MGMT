@@ -21,6 +21,7 @@ namespace App.DataAccessLibrary.Infrastructure.Repository
         public IContactRepository ContactRepository { get; private set; }
         public IInsuranceCompanyRepository InsuranceCompanyRepository { get; private set; }
 
+        public IAdminLoginRepository AdminLoginRepository { get; private set; }
         public UnitofWork(HealthInsuranceMGMT context)
         {
             _context = context;
@@ -28,6 +29,7 @@ namespace App.DataAccessLibrary.Infrastructure.Repository
             PoliciesRepository = new PoliciesRepository(context);
             InsuranceCompanyRepository = new InsuranceCompanyRepository(context);
             ContactRepository = new ContactRepository(context);
+            AdminLoginRepository = new AdminLoginRepository(context);
         }
         public async Task save() // Make this method async
         {

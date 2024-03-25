@@ -11,6 +11,8 @@ namespace App.DataAccessLibrary.Infrastructure.IRepository
     {
         Task UpdateAsync(EmpRegister empRegister); // Updated to return Task
 
-        bool ValidateUser(string username, string password);
-	}
+        bool ValidateUser(string username, string password,int empno);
+
+        Task<EmpRegister> FindEmployeeAndPolicyAsync(int employeeId);
+    }
 }

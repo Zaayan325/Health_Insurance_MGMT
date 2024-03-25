@@ -69,10 +69,11 @@ namespace App.Models.Models
         [StringLength (30)]
         public string? policystatus { get; set; }
 
-      
+		[Required]
+		public string Role { get; set; } = "Employee"; // Default to "Employee"
 
 
-        public int PolicyId { get; set; } // Foreign key property
+		public int PolicyId { get; set; } // Foreign key property
 
         [ForeignKey("PolicyId")]
         public virtual Policies Policies { get; set; } // Navigation property

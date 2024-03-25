@@ -25,9 +25,13 @@
 				<div class="col-md-12">
 					<div class="card-body">
 						<form method="post">
+							@Html.AntiForgeryToken()
 						<h4 class="mb-3 f-w-400"> Employee Signin</h4>
 						<hr>
 						<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+							<div class="form-group mb-3">
+								<input required asp-for="empno" type="number" class="form-control" placeholder=" Employee Id">
+							</div>
 						<div class="form-group mb-3">
 							<input required asp-for="username" type="text" class="form-control" placeholder=" Employee User Name">
 						</div>

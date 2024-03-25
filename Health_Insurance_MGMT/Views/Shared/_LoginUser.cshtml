@@ -1,22 +1,30 @@
 ﻿@{
-    var isLoggedIn = Context.Session.GetString("UserEmail") != null;
+    var isLoggedIn = Context.Session.GetInt32("User_Id") != null;
 }
 
 <li class="nav-item">
-    @if (isLoggedIn)
+    @{
+        @if (isLoggedIn)
     {
+        <li class="nav-item">
+            <a class="btn btn-primary ml-lg-3" asp-action="UserDashboard" asp-route-id="@Context.Session.GetInt32("User_Id")" asp-controller="Home">Dashboard</a>
+
+        </li>
         <form asp-action="LogoutUser" asp-controller="Home" method="post">
             <button type="submit" class="btn btn-warning ml-lg-3">Logout</button>
         </form>
     }
-    else
-    {
+    
+    else{
+    
     <li class="nav-item">
         <a class="btn btn-primary ml-lg-3" asp-action="LoginUser" asp-controller="Home">Login</a>
 
     </li>
     }
-</li>
+
+    }
+    
 
 
 

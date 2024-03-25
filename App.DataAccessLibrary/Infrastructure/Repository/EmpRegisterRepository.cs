@@ -17,8 +17,8 @@ namespace App.DataAccessLibrary.Infrastructure.Repository
         {
             _context = context;
         }
-
-        public async Task UpdateAsync(EmpRegister empRegister)
+	
+		public async Task UpdateAsync(EmpRegister empRegister)
         {
             var EmpRegisterDb = await _context.EmpRegister.FirstOrDefaultAsync(er => er.empno == empRegister.empno);
             if (EmpRegisterDb != null)
@@ -31,10 +31,17 @@ namespace App.DataAccessLibrary.Infrastructure.Repository
                 await _context.SaveChangesAsync();
             }
         }
-
-        public bool ValidateUser(string username, string password)
+        public async Task<EmpRegister> FindEmployeeAndPolicyAsync(int employeeId)
         {
-            var user = _context.EmpRegister.FirstOrDefault(u => u.username == username && u.password == password);
+            // Using EF Core's Include method to include related Policy data
+            return await _context.EmpRegister
+                                 .Include(e => e.Policies) // Adjust this line if your navigation property is named differently
+                                 .FirstOrDefaultAsync(e => e.empno == employeeId);
+        }
+
+        public bool ValidateUser(string username, string password, int empno)
+        {
+            var user = _context.EmpRegister.FirstOrDefault(u => u.username == username && u.password == password && u.empno ==empno);
             return user != null;
         }
     }

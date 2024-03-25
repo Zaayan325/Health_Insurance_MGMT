@@ -1,0 +1,52 @@
+﻿@model EmpRegister
+@{
+    ViewData["Title"] = "UserDashboard";
+    Layout = "~/Views/Shared/_EmployeeDashboard.cshtml";
+    
+}
+
+<div class="card">
+    <div class="card-header bg-primary ">
+        <h3 class=" text text-white  text-center display-5">
+            Employee Details
+        </h3>
+    </div>
+
+    <div class="container text-center">
+
+        <a asp-action="ViewEmp" asp-controller="Admin" class="btn btn-group-sm btn-outline-success">Go Back</a>
+    </div>
+    <div class="card-body">
+        <h5 class="card-title">@Model.firstname @Model.lastname</h5>
+        <p class="card-text">
+            <strong>Designation:</strong> @Model.designation<br>
+            <strong>Join Date:</strong> @Model.joindate.ToString("d")<br>
+            <strong>Salary:</strong> $@Model.Salary<br>
+            <strong>Username:</strong> @Model.username<br>
+            <strong>Password:</strong> @Model.password<br>
+            <strong>Country:</strong> @Model.country<br>
+            <strong>Residence:</strong> @Model.address<br>
+            <strong>City:</strong> @Model.city<br>
+            @if (Model.Policies != null)
+            {
+            <p>Policy Name: @Model.Policies.PolicyName</p> @* <!-- Accessing the Policy's Name property --> *@
+            }
+            else
+            {
+            <p>No policy information available.</p>
+            }
+            <br>
+           
+            <strong>Contact:</strong> @Model.contactno<br>
+            <strong>Designation:</strong> @Model.designation<br>
+            <strong>Police Status:</strong> @Model.policystatus<br>
+
+
+        </p>
+    </div>
+    <div class="card-footer text-muted">
+        Employee since @Model.EmployeeAdded.ToString("d")
+    </div>
+</div>
+
+

@@ -2,7 +2,9 @@
 using App.DataAccessLibrary.Infrastructure.Repository;
 using App.Models;
 using App.Models.Models;
+using DocumentFormat.OpenXml.Office2010.Excel;
 using DocumentFormat.OpenXml.Spreadsheet;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -28,8 +30,9 @@ namespace App.Controllers
         [Route("Login")]
         public IActionResult LoginUser()
         {
-			if (HttpContext.Session.GetString("UserEmail") != null)
+			if (HttpContext.Session.GetInt32("User_Id") != null)
 			{
+
 				return RedirectToAction("Index");
 
 			}
@@ -40,20 +43,21 @@ namespace App.Controllers
 		}
 
 
-		[ValidateAntiForgeryToken]
 		[HttpPost]
+		[ValidateAntiForgeryToken]
 		[Route("Login")]
-		public IActionResult LoginUser(string username, string password)
+		public IActionResult LoginUser(string username, string password, int empno)
 		{
 			// Directly validate the plaintext email and password with the database
-			if (_unitofWork.EmpRegisterRepository.ValidateUser(username, password))
+			if (_unitofWork.EmpRegisterRepository.ValidateUser(username, password, empno))
 			{
 				// Set user email in session after successful validation
-				HttpContext.Session.SetString("UserEmail", username);
-
-				// Redirect to a secured page
-				return RedirectToAction("Index");
+				HttpContext.Session.SetInt32("User_Id", empno);
+                
+                // Redirect to a secured page
+                return RedirectToAction("Index");
 			}
+
 			else
 			{
 				// Display an error message if credentials are invalid
@@ -66,18 +70,40 @@ namespace App.Controllers
         public IActionResult LogoutUser()
         {
             // Clear the user's session
-            HttpContext.Session.Remove("UserEmail");
+            
+            HttpContext.Session.Remove("User_Id");
 
             // Redirect to the homepage or login page
             return RedirectToAction("Index");
         }
 
+        [Route("UserDashboard")]
+        public async Task<IActionResult> UserDashboard(int id)
+        {
+            if (HttpContext.Session.GetInt32("User_Id") != null)
+            {
+                var employee = _unitofWork.EmpRegisterRepository.GetT(emp => emp.empno == id);
+                if (employee == null)
+                {
+                    return NotFound();
+                }
+                // Assuming _unitOfWork.EmpRegisterRepository has a method to asynchronously find an employee by ID including their policies
+                // This part will be different based on your actual implementation of the repository
+                employee = await _unitofWork.EmpRegisterRepository.FindEmployeeAndPolicyAsync(id); // Replace with actual async method
+
+                return View("UserDashboard", employee);
+            }
+            else
+            {
+                return RedirectToAction("LoginUser");
+            }
+        }
 
 
         [Route("Contact")]
 		public IActionResult Contact()
         {
-            if (HttpContext.Session.GetString("UserEmail") == null)
+            if (HttpContext.Session.GetInt32("User_Id") == null)
             {
                 return RedirectToAction("LoginUser");
 

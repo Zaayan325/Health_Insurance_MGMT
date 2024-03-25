@@ -16,6 +16,8 @@ namespace App.DataAccessLibrary.Infrastructure.IRepository
 
         IInsuranceCompanyRepository InsuranceCompanyRepository { get; }
 
+        IAdminLoginRepository AdminLoginRepository { get; }   
+
         Task save();
         //void save();
     }
