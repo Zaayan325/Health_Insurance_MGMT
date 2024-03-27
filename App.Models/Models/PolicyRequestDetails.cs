@@ -1,50 +1,33 @@
-﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.SqlTypes;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 namespace App.Models.Models
 {
     public class PolicyRequestDetails
     {
         [Key]
-        public int RequestId { get; set; }
+        public int RequestId { get; set; } // Primary key.
 
-        [AllowNull]
-        public DateTime RequestDate { get; set; }
-
-        public int EmpNo { get; set; }
-
-        [AllowNull]
-        public int PolicyId { get; set; }
+        [ForeignKey("EmpRegister")]
         [ValidateNever]
-        public Policies Policies { get; set; }
+        public int empno { get; set; } // Foreign key from the employees table.
 
-        [AllowNull]
-        [StringLength(50)]
-        public string PolicyName { get; set; }
-
-        [AllowNull]
-        public int PolicyAmount { get; set; }
-
-        [AllowNull]
-        public int Emi { get; set;}
-
-        [AllowNull]
-        public int CompanyId { get; set; }
+        [ForeignKey("Policies")]
         [ValidateNever]
-        public CompanyDetails CompanyDetails { get; set; }
+        public int PolicyId { get; set; } // Foreign key from the policies table.
+
+        [ValidateNever]
+        public virtual EmpRegister EmpRegister { get; set; } // Navigation property for the Employee.
+
+        [ValidateNever]
+        public virtual Policies Policies { get; set; } // Navigation property for the Policy.
 
         [StringLength(50)]
-        public string Status { get; set;}
+        [ValidateNever]
+        public string Status { get; set; } // Status of the request: "Requested", "Approved", "Disapproved".
 
-       
+        public DateTime RequestDate { get; set; } // Date when the request was made.
     }
 }

@@ -4,7 +4,49 @@
     ViewData["Title"] = "Add | Insurace Company";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
+<style>
 
+    .submitBTN {
+        padding: 1em 2em;
+        border: none;
+        border-radius: 5px;
+        font-weight: bold;
+        letter-spacing: 5px;
+        text-transform: uppercase;
+        cursor: pointer;
+        color: #2c9caf;
+        transition: all 1000ms;
+        font-size: 15px;
+        position: relative;
+        overflow: hidden;
+        outline: 2px solid #2c9caf;
+    }
+
+    button:hover {
+        color: #ffffff;
+        transform: scale(1.1);
+        outline: 2px solid #70bdca;
+        box-shadow: 4px 5px 17px -4px #268391;
+    }
+
+    button::before {
+        content: "";
+        position: absolute;
+        left: -50px;
+        top: 0;
+        width: 0;
+        height: 100%;
+        background-color: #2c9caf;
+        transform: skewX(45deg);
+        z-index: -1;
+        transition: width 1000ms;
+    }
+
+    button:hover::before {
+        width: 250%;
+    }
+
+</style>
 <form asp-action="CreatePolicy"  method="post" enctype="multipart/form-data">
 
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -62,11 +104,11 @@
         <span asp-validation-for="PolicyTermsAndConditions" class="text-danger"></span>
     </div> *@
 
-    <h3>Add You Documents</h3>
+    <h3>Add Your Documents</h3>
     <div class="custom-file">
       
-        <input type="file" asp-for="PolicyTermsAndConditions" class="custom-file-input" id="validatedCustomFile">
-        <label class="custom-file-label" for="validatedCustomFile">Policy Terms and Conditions Document</label>
+        <input type="file" asp-for="PolicyTermsAndConditions" class="custom-file-input" id="validatedCustomFile" required>
+        <label class="custom-file-label" for="validatedCustomFile">Policy Terms and Conditions Document </label>
         <span class="text text-sm" asp-validation-for="PolicyTermsAndConditions"></span>
     </div>
 

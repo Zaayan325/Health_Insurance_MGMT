@@ -27,11 +27,7 @@ namespace App.Models.ViewModels
 		[Required]
 		public double PolicyMonths { get; set; }
 
-        //[Required]
-        //public int SelectedInsuranceCompanyId { get; set; }
-
-        //[ValidateNever]
-        //public IEnumerable<> InsuranceCompanies { get; set; }
+        
 
         [Required]
 		[ValidateNever]

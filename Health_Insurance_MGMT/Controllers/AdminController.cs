@@ -53,17 +53,18 @@ namespace Health_Insurance_MGMT.Controllers
         }
 
 
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult AddEmp(EmpRegisterViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
+                string uniqueFileName = ProcessUploadedFile(viewModel); // Handle the file upload
+
                 // Map ViewModel to Domain Model
                 var empRegister = new EmpRegister
                 {
-                    // Map each property from viewModel to empRegister
+                    // Map other properties...
                     empno = viewModel.empno,
                     designation = viewModel.designation,
                     joindate = viewModel.joindate,
@@ -79,6 +80,9 @@ namespace Health_Insurance_MGMT.Controllers
                     city = viewModel.city,
                     policystatus = viewModel.policystatus,
                     PolicyId = viewModel.SelectedPolicyId, // Set PolicyId from the selected value
+                    Employee_Pictureurl = uniqueFileName, // Assuming you have a property for the picture URL/path
+
+                    // Map remaining properties from viewModel to empRegister
                 };
 
                 _unitofWork.EmpRegisterRepository.Add(empRegister);
@@ -86,8 +90,7 @@ namespace Health_Insurance_MGMT.Controllers
                 return RedirectToAction("Dashboard");
             }
 
-            // If we get here, something was wrong with the model,
-            // Repopulate PolicyOptions before returning the view.
+            // Repopulate PolicyOptions if model validation fails
             viewModel.PolicyOptions = _unitofWork.PoliciesRepository.GetAll()
                 .Select(p => new SelectListItem
                 {
@@ -96,6 +99,26 @@ namespace Health_Insurance_MGMT.Controllers
                 }).ToList();
 
             return View(viewModel);
+        }
+
+        private string ProcessUploadedFile(EmpRegisterViewModel viewModel)
+        {
+            string uniqueFileName = null;
+
+            // Ensure the property name here matches what's defined in your ViewModel
+            if (viewModel.Employee_Picture != null)
+            {
+                // Specify the correct folder path: "uploads/AdminData"
+                string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "uploads", "EmployeeData");
+                uniqueFileName = Guid.NewGuid().ToString() + "_" + Path.GetFileName(viewModel.Employee_Picture.FileName);
+                string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    viewModel.Employee_Picture.CopyTo(fileStream);
+                }
+            }
+
+            return uniqueFileName;
         }
 
 

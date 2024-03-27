@@ -37,59 +37,60 @@ namespace Health_Insurance_MGMT.Controllers
             return View();
         }
 
-        // POST: AdminLoginController/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateAdmin(AdminLoginViewModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                string uniqueFileName = null;
-                if (model.AdminPhoto != null && model.AdminPhoto.Length > 0)
-                {
-                    string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "uploads", "AdminData");
-                    uniqueFileName = Guid.NewGuid().ToString() + "_" + model.AdminPhoto.FileName;
-                    string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+		// POST: AdminLoginController/Create
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public IActionResult CreateAdmin(AdminLoginViewModel model)
+		{
+			if (ModelState.IsValid)
+			{
+				string uniqueFileName = null;
+				if (model.AdminPhoto != null && model.AdminPhoto.Length > 0)
+				{
+					string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "uploads", "AdminData");
+					uniqueFileName = Guid.NewGuid().ToString() + "_" + model.AdminPhoto.FileName;
+					string filePath = Path.Combine(uploadsFolder, uniqueFileName);
 
-                    Directory.CreateDirectory(uploadsFolder);
+					// Ensure the uploads directory exists
+					Directory.CreateDirectory(uploadsFolder);
 
-                    using (var fileStream = new FileStream(filePath, FileMode.Create))
-                    {
-                        await model.AdminPhoto.CopyToAsync(fileStream);
-                    }
-                }
-                else
-                {
-                    // Handle the case when the logo is not uploaded
-                    // You might want to set a default image or take some other action
-                    uniqueFileName = "default-logo.png"; // Placeholder for a default image if necessary
-                }
+					// Write the file to the server
+					using (var fileStream = new FileStream(filePath, FileMode.Create))
+					{
+						model.AdminPhoto.CopyTo(fileStream);
+					}
+				}
+				else
+				{
+					// Handle the case when the admin photo is not uploaded
+					// You can assign a default image or handle accordingly
+					uniqueFileName = "default-photo.png"; // Placeholder for a default image if necessary
+				}
 
-                AdminLogin adminLogins = new AdminLogin
-                {
-                    AdminName = model.AdminName,
-                    AdminPassword = model.AdminPassword,
-                    ConfirmPassword =model.ConfirmPassword,
-                    Address = model.Address,
-                    Phone = model.Phone,
-                    Email = model.Email,
+				AdminLogin adminLogins = new AdminLogin
+				{
+					AdminName = model.AdminName,
+					AdminPassword = model.AdminPassword,
+					ConfirmPassword = model.ConfirmPassword,
+					Address = model.Address,
+					Phone = model.Phone,
+					Email = model.Email,
+					AdminPhotourl = uniqueFileName
+				};
 
-                    
-                    AdminPhotourl = uniqueFileName
-                };
+				_unitofWork.AdminLoginRepository.Add(adminLogins);
+				// Synchronously save the changes to the database
+				_unitofWork.save();
 
-                _unitofWork.AdminLoginRepository.Add(adminLogins);
-                // Inside your controller action
-                await _unitofWork.save();
+				return RedirectToAction("Dashboard", "Admin"); // Adjust the redirection as needed
+			}
 
-                return RedirectToAction("Dashboard","Admin"); // Adjust the redirection as needed
-            }
+			// If the ModelState is not valid, the form is presented again with validation messages
+			return View(model);
+		}
 
-            return View(model);
-        }
-
-        // GET: AdminLoginController/Edit/5
-        public ActionResult Edit(int id)
+		// GET: AdminLoginController/Edit/5
+		public ActionResult Edit(int id)
         {
             return View();
         }

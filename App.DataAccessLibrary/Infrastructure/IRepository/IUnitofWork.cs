@@ -12,13 +12,14 @@ namespace App.DataAccessLibrary.Infrastructure.IRepository
         IEmpRegisterRepository EmpRegisterRepository { get; }
         IPoliciesRepository PoliciesRepository { get; }
        
+        IPolicyRequestRepository PolicyRequestRepository { get; }
         IContactRepository ContactRepository { get; }
 
         IInsuranceCompanyRepository InsuranceCompanyRepository { get; }
 
         IAdminLoginRepository AdminLoginRepository { get; }   
 
-        Task save();
-        //void save();
+        //Task save();
+        void save();
     }
 }

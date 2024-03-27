@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -72,11 +73,16 @@ namespace App.Models.Models
 		[Required]
 		public string Role { get; set; } = "Employee"; // Default to "Employee"
 
+        
+        [ValidateNever]
+        public string Employee_Pictureurl { get; set; }
 
-		public int PolicyId { get; set; } // Foreign key property
+        public int PolicyId { get; set; } // Foreign key property
 
         [ForeignKey("PolicyId")]
         public virtual Policies Policies { get; set; } // Navigation property
+
+        public virtual ICollection<PolicyRequestDetails> PolicyRequestDetails { get; set; } // Collection navigation property
 
         public DateTime EmployeeAdded { get; set; } = DateTime.Now;
 

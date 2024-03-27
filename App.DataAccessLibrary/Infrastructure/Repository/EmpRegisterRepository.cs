@@ -17,20 +17,19 @@ namespace App.DataAccessLibrary.Infrastructure.Repository
         {
             _context = context;
         }
-	
-		public async Task UpdateAsync(EmpRegister empRegister)
+
+        public async Task UpdateAsync(EmpRegister empRegister)
         {
             var EmpRegisterDb = await _context.EmpRegister.FirstOrDefaultAsync(er => er.empno == empRegister.empno);
             if (EmpRegisterDb != null)
             {
-                // Here we update the entity using EF Core's Entry API
-                // This will mark the entity as 'Modified' and ensure all changes are tracked
+                // This will update all properties, including EmployeePictureUrl, if it's changed
                 _context.Entry(EmpRegisterDb).CurrentValues.SetValues(empRegister);
 
-                // Save the changes asynchronously
                 await _context.SaveChangesAsync();
             }
         }
+
         public async Task<EmpRegister> FindEmployeeAndPolicyAsync(int employeeId)
         {
             // Using EF Core's Include method to include related Policy data

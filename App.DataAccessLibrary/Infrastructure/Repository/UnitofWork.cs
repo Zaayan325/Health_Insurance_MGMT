@@ -14,9 +14,9 @@ namespace App.DataAccessLibrary.Infrastructure.Repository
         public IEmpRegisterRepository EmpRegisterRepository { get; private set; }
 
         public IPoliciesRepository PoliciesRepository { get; private set; }
-        
 
-       
+        public IPolicyRequestRepository PolicyRequestRepository { get; private set; }
+
 
         public IContactRepository ContactRepository { get; private set; }
         public IInsuranceCompanyRepository InsuranceCompanyRepository { get; private set; }
@@ -30,10 +30,11 @@ namespace App.DataAccessLibrary.Infrastructure.Repository
             InsuranceCompanyRepository = new InsuranceCompanyRepository(context);
             ContactRepository = new ContactRepository(context);
             AdminLoginRepository = new AdminLoginRepository(context);
+            PolicyRequestRepository = new PolicyRequestRepository(context);
         }
-        public async Task save() // Make this method async
+        public void save() // Make this method async
         {
-            await _context.SaveChangesAsync();
+             _context.SaveChanges();
             Console.WriteLine("Changes Saved To The Database");
         }
     }

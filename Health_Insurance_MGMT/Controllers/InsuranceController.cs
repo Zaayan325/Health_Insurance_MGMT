@@ -45,58 +45,61 @@ namespace Health_Insurance_MGMT.Controllers
             return View();
         }
 
-        // POST: InsuranceController/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateInsurance(InsuranceCompanyViewModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                string uniqueFileName = null;
-                if (model.Ins_CompanyLogo != null && model.Ins_CompanyLogo.Length > 0)
-                {
-                    string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "uploads", "InsuranceCompaniesData");
-                    uniqueFileName = Guid.NewGuid().ToString() + "_" + model.Ins_CompanyLogo.FileName;
-                    string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+		// POST: InsuranceController/Create
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public IActionResult CreateInsurance(InsuranceCompanyViewModel model)
+		{
+			if (ModelState.IsValid)
+			{
+				string uniqueFileName = null;
+				if (model.Ins_CompanyLogo != null && model.Ins_CompanyLogo.Length > 0)
+				{
+					string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "uploads", "InsuranceCompaniesData");
+					uniqueFileName = Guid.NewGuid().ToString() + "_" + model.Ins_CompanyLogo.FileName;
+					string filePath = Path.Combine(uploadsFolder, uniqueFileName);
 
-                    Directory.CreateDirectory(uploadsFolder);
+					if (!Directory.Exists(uploadsFolder))
+					{
+						Directory.CreateDirectory(uploadsFolder);
+					}
 
-                    using (var fileStream = new FileStream(filePath, FileMode.Create))
-                    {
-                        await model.Ins_CompanyLogo.CopyToAsync(fileStream);
-                    }
-                }
-                else
-                {
-                    // Handle the case when the logo is not uploaded
-                    // You might want to set a default image or take some other action
-                    uniqueFileName = "default-logo.png"; // Placeholder for a default image if necessary
-                }
+					using (var fileStream = new FileStream(filePath, FileMode.Create))
+					{
+						model.Ins_CompanyLogo.CopyTo(fileStream);
+					}
+				}
+				else
+				{
+					// If a logo is not uploaded, you can handle it here
+					uniqueFileName = "default-logo.png"; // Example placeholder for a default logo
+				}
 
-                InsuranceCompany insuranceCompany = new InsuranceCompany
-                {
-                    Ins_Name = model.Ins_Name,
-                    Ins_Description = model.Ins_Description,
-                    Address = model.Address,
-                    Phone = model.Phone,
-                    CompantWebsiteUrl = model.CompantWebsiteUrl,
-                    Ins_CompanyLogourl = uniqueFileName
-                };
+				InsuranceCompany insuranceCompany = new InsuranceCompany
+				{
+					Ins_Name = model.Ins_Name,
+					Ins_Description = model.Ins_Description,
+					Address = model.Address,
+					Phone = model.Phone,
+					CompantWebsiteUrl = model.CompantWebsiteUrl,
+					Ins_CompanyLogourl = uniqueFileName
+				};
 
-                _unitofWork.InsuranceCompanyRepository.Add(insuranceCompany);
-                // Inside your controller action
-                await _unitofWork.save();
+				_unitofWork.InsuranceCompanyRepository.Add(insuranceCompany);
+				_unitofWork.save(); // Save the changes synchronously
 
-                return RedirectToAction("InsuranceView"); // Adjust the redirection as needed
-            }
+				return RedirectToAction("InsuranceView"); // Adjust the redirection as needed
+			}
 
-            return View(model);
-        }
+			// If the model state is not valid, render the form again with the provided data
+			return View(model);
+		}
 
 
-        // GET: InsuranceController/Edit/5
-        // GET: InsuranceController/Edit/5
-        public ActionResult EditInsurance(int id)
+
+		// GET: InsuranceController/Edit/5
+		// GET: InsuranceController/Edit/5
+		public ActionResult EditInsurance(int id)
         {
             var insuranceCompany = _unitofWork.InsuranceCompanyRepository.GetT(i => i.Ins_Id == id);
             if (insuranceCompany == null)
@@ -117,51 +120,50 @@ namespace Health_Insurance_MGMT.Controllers
             return View(model);
         }
 
-        // POST: InsuranceController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditInsurance(int id, InsuranceCompanyViewModel model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public IActionResult EditInsurance(int id, InsuranceCompanyViewModel model)
+		{
+			if (!ModelState.IsValid)
+			{
+				return View(model);
+			}
 
-            var insuranceCompany = _unitofWork.InsuranceCompanyRepository.GetT(i => i.Ins_Id == id);
-            if (insuranceCompany == null)
-            {
-                return NotFound();
-            }
+			var insuranceCompany = _unitofWork.InsuranceCompanyRepository.GetT(i => i.Ins_Id == id);
+			if (insuranceCompany == null)
+			{
+				return NotFound();
+			}
 
-            if (model.Ins_CompanyLogo != null && model.Ins_CompanyLogo.Length > 0)
-            {
-                string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "uploads", "InsuranceCompaniesData");
-                string uniqueFileName = Guid.NewGuid().ToString() + "_" + model.Ins_CompanyLogo.FileName;
-                string filePath = Path.Combine(uploadsFolder, uniqueFileName);
-                Directory.CreateDirectory(uploadsFolder);
+			if (model.Ins_CompanyLogo != null && model.Ins_CompanyLogo.Length > 0)
+			{
+				string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "uploads", "InsuranceCompaniesData");
+				string uniqueFileName = Guid.NewGuid().ToString() + "_" + model.Ins_CompanyLogo.FileName;
+				string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+				Directory.CreateDirectory(uploadsFolder);
 
-                using (var fileStream = new FileStream(filePath, FileMode.Create))
-                {
-                    await model.Ins_CompanyLogo.CopyToAsync(fileStream);
-                }
-                insuranceCompany.Ins_CompanyLogourl = uniqueFileName; // Update the logo URL only if a new logo was uploaded
-            }
+				using (var fileStream = new FileStream(filePath, FileMode.Create))
+				{
+					model.Ins_CompanyLogo.CopyTo(fileStream);
+				}
+				insuranceCompany.Ins_CompanyLogourl = uniqueFileName; // Update the logo URL only if a new logo was uploaded
+			}
 
-            insuranceCompany.Ins_Name = model.Ins_Name;
-            insuranceCompany.Ins_Description = model.Ins_Description;
-            insuranceCompany.Address = model.Address;
-            insuranceCompany.Phone = model.Phone;
-            insuranceCompany.CompantWebsiteUrl = model.CompantWebsiteUrl;
+			insuranceCompany.Ins_Name = model.Ins_Name;
+			insuranceCompany.Ins_Description = model.Ins_Description;
+			insuranceCompany.Address = model.Address;
+			insuranceCompany.Phone = model.Phone;
+			insuranceCompany.CompantWebsiteUrl = model.CompantWebsiteUrl;
 
-            _unitofWork.InsuranceCompanyRepository.Update(insuranceCompany);
-            await _unitofWork.save();
+			_unitofWork.InsuranceCompanyRepository.Update(insuranceCompany);
+			_unitofWork.save(); // Save the changes synchronously
 
-            return RedirectToAction("InsuranceView");
-        }
+			return RedirectToAction("InsuranceView");
+		}
 
 
-        // GET: InsuranceController/Delete/5
-        public IActionResult DeleteInsurance(int? id)
+		// GET: InsuranceController/Delete/5
+		public IActionResult DeleteInsurance(int? id)
         {
             if (id == null || id == 0)
             {

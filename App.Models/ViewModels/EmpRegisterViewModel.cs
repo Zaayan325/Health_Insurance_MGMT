@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
@@ -68,8 +69,13 @@ namespace App.Models.ViewModels
         [ValidateNever]
         public IEnumerable<SelectListItem> PolicyOptions { get; set; }
 
+
+        [ValidateNever]
+        public IFormFile Employee_Picture { get; set; }
+
+
         // Constructor to initialize the SelectList
-        
+
         public EmpRegisterViewModel()
         {
             PolicyOptions = new List<SelectListItem>();

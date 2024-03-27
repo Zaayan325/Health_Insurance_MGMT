@@ -152,6 +152,10 @@ namespace App.DataAccessLibrary.Migrations
                     b.Property<DateTime>("EmployeeAdded")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Employee_Pictureurl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("PolicyId")
                         .HasColumnType("int");
 
@@ -307,55 +311,6 @@ namespace App.DataAccessLibrary.Migrations
                     b.ToTable("InsuranceCompany");
                 });
 
-            modelBuilder.Entity("App.Models.Models.Policesonemployees", b =>
-                {
-                    b.Property<string>("empno")
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
-
-                    b.Property<int>("CompanyDetailsCompanyId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("CompanyId")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
-
-                    b.Property<int>("Emi")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Medical")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<DateTime>("Penddate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("PoliciesPolicyId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Policyduration")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("Pstartdate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("policyamount")
-                        .HasColumnType("int");
-
-                    b.Property<int>("policyid")
-                        .HasColumnType("int");
-
-                    b.HasKey("empno");
-
-                    b.HasIndex("CompanyDetailsCompanyId");
-
-                    b.HasIndex("PoliciesPolicyId");
-
-                    b.ToTable("Policesonemployees");
-                });
-
             modelBuilder.Entity("App.Models.Models.Policies", b =>
                 {
                     b.Property<int>("PolicyId")
@@ -402,40 +357,6 @@ namespace App.DataAccessLibrary.Migrations
                     b.ToTable("Policies");
                 });
 
-            modelBuilder.Entity("App.Models.Models.PolicyApprovalDetails", b =>
-                {
-                    b.Property<int>("PolicyId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PolicyId"));
-
-                    b.Property<int>("Amount")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("PoliciesPolicyId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Reason")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasMaxLength(3)
-                        .HasColumnType("nvarchar(3)");
-
-                    b.HasKey("PolicyId");
-
-                    b.HasIndex("PoliciesPolicyId");
-
-                    b.ToTable("PolicyApprovalDetails");
-                });
-
             modelBuilder.Entity("App.Models.Models.PolicyRequestDetails", b =>
                 {
                     b.Property<int>("RequestId")
@@ -444,31 +365,14 @@ namespace App.DataAccessLibrary.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RequestId"));
 
-                    b.Property<int>("CompanyDetailsCompanyId")
+                    b.Property<int?>("EmpRegisterempno")
                         .HasColumnType("int");
 
-                    b.Property<int>("CompanyId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Emi")
-                        .HasColumnType("int");
-
-                    b.Property<int>("EmpNo")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PoliciesPolicyId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PolicyAmount")
+                    b.Property<int?>("PoliciesPolicyId")
                         .HasColumnType("int");
 
                     b.Property<int>("PolicyId")
                         .HasColumnType("int");
-
-                    b.Property<string>("PolicyName")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
 
                     b.Property<DateTime>("RequestDate")
                         .HasColumnType("datetime2");
@@ -478,11 +382,18 @@ namespace App.DataAccessLibrary.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<int>("empno")
+                        .HasColumnType("int");
+
                     b.HasKey("RequestId");
 
-                    b.HasIndex("CompanyDetailsCompanyId");
+                    b.HasIndex("EmpRegisterempno");
 
                     b.HasIndex("PoliciesPolicyId");
+
+                    b.HasIndex("PolicyId");
+
+                    b.HasIndex("empno");
 
                     b.ToTable("PolicyRequestDetails");
                 });
@@ -498,25 +409,6 @@ namespace App.DataAccessLibrary.Migrations
                     b.Navigation("Policies");
                 });
 
-            modelBuilder.Entity("App.Models.Models.Policesonemployees", b =>
-                {
-                    b.HasOne("App.Models.Models.CompanyDetails", "CompanyDetails")
-                        .WithMany()
-                        .HasForeignKey("CompanyDetailsCompanyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("App.Models.Models.Policies", "Policies")
-                        .WithMany()
-                        .HasForeignKey("PoliciesPolicyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("CompanyDetails");
-
-                    b.Navigation("Policies");
-                });
-
             modelBuilder.Entity("App.Models.Models.Policies", b =>
                 {
                     b.HasOne("App.Models.Models.InsuranceCompany", "InsuranceCompany")
@@ -528,34 +420,36 @@ namespace App.DataAccessLibrary.Migrations
                     b.Navigation("InsuranceCompany");
                 });
 
-            modelBuilder.Entity("App.Models.Models.PolicyApprovalDetails", b =>
+            modelBuilder.Entity("App.Models.Models.PolicyRequestDetails", b =>
                 {
+                    b.HasOne("App.Models.Models.EmpRegister", null)
+                        .WithMany("PolicyRequestDetails")
+                        .HasForeignKey("EmpRegisterempno");
+
+                    b.HasOne("App.Models.Models.Policies", null)
+                        .WithMany("PolicyRequestDetails")
+                        .HasForeignKey("PoliciesPolicyId");
+
                     b.HasOne("App.Models.Models.Policies", "Policies")
                         .WithMany()
-                        .HasForeignKey("PoliciesPolicyId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("PolicyId")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
+
+                    b.HasOne("App.Models.Models.EmpRegister", "EmpRegister")
+                        .WithMany()
+                        .HasForeignKey("empno")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("EmpRegister");
 
                     b.Navigation("Policies");
                 });
 
-            modelBuilder.Entity("App.Models.Models.PolicyRequestDetails", b =>
+            modelBuilder.Entity("App.Models.Models.EmpRegister", b =>
                 {
-                    b.HasOne("App.Models.Models.CompanyDetails", "CompanyDetails")
-                        .WithMany()
-                        .HasForeignKey("CompanyDetailsCompanyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("App.Models.Models.Policies", "Policies")
-                        .WithMany()
-                        .HasForeignKey("PoliciesPolicyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("CompanyDetails");
-
-                    b.Navigation("Policies");
+                    b.Navigation("PolicyRequestDetails");
                 });
 
             modelBuilder.Entity("App.Models.Models.InsuranceCompany", b =>
@@ -566,6 +460,8 @@ namespace App.DataAccessLibrary.Migrations
             modelBuilder.Entity("App.Models.Models.Policies", b =>
                 {
                     b.Navigation("EmpRegister");
+
+                    b.Navigation("PolicyRequestDetails");
                 });
 #pragma warning restore 612, 618
         }

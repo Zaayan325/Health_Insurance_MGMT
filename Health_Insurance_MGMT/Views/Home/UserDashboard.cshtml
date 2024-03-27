@@ -16,37 +16,77 @@
 
         <a asp-action="ViewEmp" asp-controller="Admin" class="btn btn-group-sm btn-outline-success">Go Back</a>
     </div>
-    <div class="card-body">
-        <h5 class="card-title">@Model.firstname @Model.lastname</h5>
-        <p class="card-text">
-            <strong>Designation:</strong> @Model.designation<br>
-            <strong>Join Date:</strong> @Model.joindate.ToString("d")<br>
-            <strong>Salary:</strong> $@Model.Salary<br>
-            <strong>Username:</strong> @Model.username<br>
-            <strong>Password:</strong> @Model.password<br>
-            <strong>Country:</strong> @Model.country<br>
-            <strong>Residence:</strong> @Model.address<br>
-            <strong>City:</strong> @Model.city<br>
-            @if (Model.Policies != null)
-            {
-            <p>Policy Name: @Model.Policies.PolicyName</p> @* <!-- Accessing the Policy's Name property --> *@
-            }
-            else
-            {
-            <p>No policy information available.</p>
-            }
-            <br>
-           
-            <strong>Contact:</strong> @Model.contactno<br>
-            <strong>Designation:</strong> @Model.designation<br>
-            <strong>Police Status:</strong> @Model.policystatus<br>
-
-
-        </p>
-    </div>
+   
     <div class="card-footer text-muted">
         Employee since @Model.EmployeeAdded.ToString("d")
     </div>
 </div>
+<div class="untree_co-section pb-0" id="about-section">
+    <div class="container">
+        <div class="row justify-content-center mb-3">
+            <div class="col-lg-7 mx-auto text-center author-wrap">
+                @if (string.IsNullOrEmpty(Model.Employee_Pictureurl))
+                {
+                    <img src="@Url.Content("~/userdashboard/images/person_1.jpg")" alt="Default Image" class="img-fluid rounded-circle mb-3">
+                }
+                else
+                {
+                    <img src="@Url.Content("~/uploads/EmployeeData/" + Model.Employee_Pictureurl)" alt="Employee Image" class="img-fluid rounded-circle mb-3">
+                }
+
+                <h3 class="text-black h5 font-weight-bold mb-2 gsap-reveal-hero"><span class="reveal-wrap"><span class="cover" style="margin-left: 102%;"></span><span class="reveal-content" style="transform: matrix(1, 0, 0, 1, 0, 0);">@Model.firstname @Model.lastname</span></span></h3>
+                <p class="gsap-reveal-hero"><span class="reveal-wrap"><span class="cover" style="margin-left: 102%;"></span><span class="reveal-content" style="transform: matrix(1, 0, 0, 1, 0, 0);">@Model.designation</span></span></p>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-lg-7">
+
+                
+                <p class="gsap-reveal-hero"><span class="reveal-wrap"><span class="cover" style="margin-left: 102%;"></span><span class="reveal-content" style="transform: matrix(1, 0, 0, 1, 0, 0);"><strong>Contact:</strong> @Model.contactno</span></span></p>
+                <p class="gsap-reveal-hero"><span class="reveal-wrap"><span class="cover" style="margin-left: 102%;"></span><span class="reveal-content" style="transform: matrix(1, 0, 0, 1, 0, 0);"><strong>Username:</strong> @Model.username</span></span></p>
+                <p class="gsap-reveal-hero"><span class="reveal-wrap"><span class="cover" style="margin-left: 102%;"></span><span class="reveal-content" style="transform: matrix(1, 0, 0, 1, 0, 0);"><strong>Password:</strong> @Model.password</span></span></p>
+                <p class="gsap-reveal-hero">
+                    <span class="reveal-wrap">
+                        <span class="cover" style="margin-left: 102%;"></span><span class="reveal-content" style="transform: matrix(1, 0, 0, 1, 0, 0);">
+                            @if (Model.Policies != null)
+                            {
+                                <strong>Policy Name: @Model.Policies.PolicyName</strong> @* <!-- Accessing the Policy's Name property --> *@
+                            }
+                            else
+                            {
+                                <small class="text tex-sm">No policy information available.</small>
+                            }
+                        </span>
+                    </span>
 
 
+                </p>
+
+
+              
+                    <h3 class=" text text-white  text-center display-5">
+                        Employee Address All Information
+                    </h3>
+                
+                <p class="gsap-reveal-hero"><span class="reveal-wrap"><span class="cover" style="margin-left: 102%;"></span><span class="reveal-content" style="transform: matrix(1, 0, 0, 1, 0, 0);"><strong>Nationality:</strong> @Model.country</span></span></p>
+
+                <p class="gsap-reveal-hero mb-5"><span class="reveal-wrap"><span class="cover" style="margin-left: 102%;"></span><span class="reveal-content" style="transform: matrix(1, 0, 0, 1, 0, 0);"></span><strong>Residence:</strong> @Model.address</span></p>
+                <p class="gsap-reveal-hero mb-5">
+                    <span class="reveal-wrap">
+                        <span class="cover" style="margin-left: 102%;"></span><span class="reveal-content" style="transform: matrix(1, 0, 0, 1, 0, 0);"></span><strong>Current City:</strong> @Model.city
+                        <br>
+                    </span>
+                </p>
+
+                <p class="gsap-reveal-hero mb-5">
+                    <span class="reveal-wrap">
+                        <span class="cover" style="margin-left: 102%;"></span><span class="reveal-content" style="transform: matrix(1, 0, 0, 1, 0, 0);"></span>  
+                        <h3>To Download Your Policy Pdf </h3>
+                    </span>
+                </p>
+                <p class="gsap-reveal-hero text-center"><span class="reveal-wrap"><span class="cover" style="margin-left: 102%;"></span><span class="reveal-content" style="transform: matrix(1, 0, 0, 1, 0, 0);"><a asp-action="DownloadPolicyTerms" asp-controller="Policies" asp-route-policyId="@Model.PolicyId" class="btn btn-outline-black">Download Policy</a></span></span></p>
+            </div>
+        </div>
+    </div>
+</div>

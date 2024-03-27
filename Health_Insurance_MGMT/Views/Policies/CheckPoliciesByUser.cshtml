@@ -1,0 +1,62 @@
+﻿@{
+    ViewData["Title"] = "Check Policies";
+    Layout = "~/Views/Shared/_EmployeeDashboard.cshtml";
+}
+
+@model IEnumerable<Policies>
+
+<div class="untree_co-section pb-0" id="services-section">
+    <div class="container">
+        <div class="row mb-4">
+           
+            
+<div class="container-fluid mt-4">
+    <div class="row mb-2">
+        <div class="col-12 col-md-6">
+            <h2 class="text-success">Policies List</h2>
+        </div>
+        
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>PolicyName</th>
+                            <th>Company's Policy</th>
+                            <th>Total Amount</th>
+                            <th>EMI <small class="text-muted">(Equated Monthly Installment)</small></th>
+                            <th>Document</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.PolicyName</td>
+                                <td>@item.Ins_Id</td>
+                                <td>@item.PolicyFullAmount</td>
+                                <td>@item.equatedmonthlyinstalment</td>
+                                <td>
+                                    <a asp-action="DownloadPolicyTerms" asp-route-policyId="@item.PolicyId" class="btn btn-success">Download Terms</a>
+                                </td>
+                                <td>
+                                    <div class="btn-group" role="group" aria-label="Basic example">
+                                        <a asp-action="DetailPolicy" asp-controller="Policies" asp-route-id="@item.PolicyId" class="btn btn-outline-primary">Details</a>
+                                        <!-- Consider adding more actions here like edit or delete with appropriate asp-action and classes -->
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+        </div>
+    </div>
+</div>
