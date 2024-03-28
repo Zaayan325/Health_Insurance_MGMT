@@ -36,8 +36,6 @@ namespace Health_Insurance_MGMT.Controllers
             var statusOptions = new List<SelectListItem>
     {
         new SelectListItem("Requested", "Requested"),
-        new SelectListItem("Approved", "Approved"),
-        new SelectListItem("Disapproved", "Disapproved")
     };
 
             // Dynamic policy options from the database
@@ -53,7 +51,7 @@ namespace Health_Insurance_MGMT.Controllers
             {
                 StatusOptions = statusOptions,
                 PolicyOptions = policyOptions,
-                SelectedStatus = "Requested"
+                
             };
 
             return View(viewModel);
@@ -90,8 +88,6 @@ namespace Health_Insurance_MGMT.Controllers
             model.StatusOptions = new List<SelectListItem>
     {
         new SelectListItem("Requested", "Requested"),
-        new SelectListItem("Approved", "Approved"),
-        new SelectListItem("Disapproved", "Disapproved")
     };
             model.PolicyOptions = _unitofWork.PoliciesRepository.GetAll()
                 .Select(p => new SelectListItem
