@@ -77,11 +77,13 @@ namespace App.Models.Models
         [ValidateNever]
         public string Employee_Pictureurl { get; set; }
 
+        [AllowNull]
         public int PolicyId { get; set; } // Foreign key property
 
+        [AllowNull]
         [ForeignKey("PolicyId")]
         public virtual Policies Policies { get; set; } // Navigation property
-
+        [AllowNull]
         public virtual ICollection<PolicyRequestDetails> PolicyRequestDetails { get; set; } // Collection navigation property
 
         public DateTime EmployeeAdded { get; set; } = DateTime.Now;

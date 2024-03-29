@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 namespace App.Models.Models
@@ -12,16 +13,20 @@ namespace App.Models.Models
 
         [ForeignKey("EmpRegister")]
         [ValidateNever]
+        [AllowNull]
         public int empno { get; set; } // Foreign key from the employees table.
 
         [ForeignKey("Policies")]
         [ValidateNever]
+        [AllowNull]
         public int PolicyId { get; set; } // Foreign key from the policies table.
 
         [ValidateNever]
+        [AllowNull]
         public virtual EmpRegister EmpRegister { get; set; } // Navigation property for the Employee.
 
         [ValidateNever]
+        [AllowNull]
         public virtual Policies Policies { get; set; } // Navigation property for the Policy.
 
         [StringLength(50)]

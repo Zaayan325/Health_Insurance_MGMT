@@ -34,9 +34,10 @@ namespace App.Models.Models
         [Required]
         public double policymonths { get; set; }
 
-
+        [AllowNull]
         public int Ins_Id { get; set; } // Foreign key property
 
+        [AllowNull]
         [ForeignKey("Ins_Id")]
         public virtual InsuranceCompany InsuranceCompany { get; set; } // Navigation property
 
@@ -50,9 +51,9 @@ namespace App.Models.Models
 		public string PolicyTermasandConditionsurl { get; set; }
 
 
-
+        [AllowNull]
         public virtual ICollection<EmpRegister> EmpRegister { get; set; } // Collection navigation property
-
+        [AllowNull]
         public virtual ICollection<PolicyRequestDetails> PolicyRequestDetails { get; set; } // Collection navigation property
     }
 }

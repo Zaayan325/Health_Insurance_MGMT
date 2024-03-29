@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace App.DataAccessLibrary.Migrations
 {
     [DbContext(typeof(HealthInsuranceMGMT))]
-    [Migration("20240327210315_AddAllToDatabase")]
+    [Migration("20240329231913_AddAllToDatabase")]
     partial class AddAllToDatabase
     {
         /// <inheritdoc />
