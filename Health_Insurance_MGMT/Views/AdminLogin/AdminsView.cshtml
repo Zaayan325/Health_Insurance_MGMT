@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "ViewEmp";
+    ViewData["Title"] = "Admin View";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
@@ -10,7 +10,7 @@
         <h1 class="text-success">Admins List</h1>
     </div>
     <div class="col-md-6">
-        <a asp-action="CreateAdmin" asp-controller="AdmiLogin" class="btn  btn-info">Add Admin</a>
+        <a asp-action="CreateAdmin" asp-controller="AdminLogin" class="btn  btn-info">Add Admin</a>
     </div>
 </div>
 
@@ -39,7 +39,7 @@
 
                         <td>
                             <div class="text-center">
-                                 <img class="rounded" src="@Url.Content("~/uploads/AdminData/" + i.AdminPhotourl)" asp-append-version="true" alt="Data Logo" style="height:50px;" /> 
+                                <img class="rounded" src="@Url.Content("~/uploads/AdminData/" + i.AdminPhotourl)" asp-append-version="true" alt="Data Logo" style="height:50px;" />
 
                             </div>
                         </td>
@@ -57,6 +57,7 @@
 
     </div>
 </div>
+
 
 
 

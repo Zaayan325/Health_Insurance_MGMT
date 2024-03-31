@@ -1,30 +1,29 @@
 ﻿@{
     var isLoggedIn = Context.Session.GetInt32("User_Id") != null;
+    var isAdminLoggedIn = Context.Session.GetInt32("Adm_Id") != null;
 }
 
-<li class="nav-item">
-    @{
-        @if (isLoggedIn)
-    {
-        <li class="nav-item">
-            <a class="btn btn-primary ml-lg-3" asp-action="UserDashboard" asp-route-id="@Context.Session.GetInt32("User_Id")" asp-controller="Home">Dashboard</a>
-
-        </li>
-        <form asp-action="LogoutUser" asp-controller="Home" method="post">
-            <button type="submit" class="btn btn-warning ml-lg-3">Logout</button>
-        </form>
-    }
-    
-    else{
-    
+@if (isLoggedIn)
+{
+    <li class="nav-item">
+        <a class="btn btn-primary ml-lg-3" asp-action="UserDashboard" asp-route-id="@Context.Session.GetInt32("User_Id")" asp-controller="Home">User Dashboard</a>
+    </li>
+    <form asp-action="LogoutUser" asp-controller="Home" method="post">
+        <button type="submit" class="btn btn-warning ml-lg-3">Logout</button>
+    </form>
+}
+else if (isAdminLoggedIn)
+{
+    <li class="nav-item">
+        <a class="btn btn-primary ml-lg-3" asp-action="Dashboard"  asp-controller="Admin">Admin Dashboard</a>
+    </li>
+    <form asp-action="AdminLogout" asp-controller="Home" method="post">
+        <button type="submit" class="btn btn-warning ml-lg-3">Logout</button>
+    </form>
+}
+else
+{
     <li class="nav-item">
         <a class="btn btn-primary ml-lg-3" asp-action="LoginUser" asp-controller="Home">Login</a>
-
     </li>
-    }
-
-    }
-    
-
-
-
+}

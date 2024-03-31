@@ -26,7 +26,9 @@ namespace App.DataAccessLibrary.Infrastructure.Repository
             {
                 // Update properties
                 policyreqfromdb.Status = policyRequestDetails.Status;
-                
+                //policyreqfromdb.RequestDate = policyRequestDetails.RequestDate;
+                //policyreqfromdb.RequestId = policyRequestDetails.RequestId;
+                ///policyreqfromdb.empno = policyRequestDetails.empno;
                
               
                 _context.PolicyRequestDetails.Update(policyreqfromdb);

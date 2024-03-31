@@ -1,8 +1,10 @@
 ﻿using App.DataAccessLibrary.Infrastructure.IRepository;
+using App.DataAccessLibrary.Infrastructure.Repository;
 using App.Models.Models;
 using App.Models.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace Health_Insurance_MGMT.Controllers
 {
@@ -18,19 +20,8 @@ namespace Health_Insurance_MGMT.Controllers
             _webHostEnvironment = webHostEnvironment;
         }
 
-        // GET: AdminLoginController
-        public ActionResult AdminsView()
-        {
-            IEnumerable<AdminLogin> adminLogins = _unitofWork.AdminLoginRepository.GetAll();
-            return View(adminLogins);
-        }
-
-        // GET: AdminLoginController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
+       
+       
         // GET: AdminLoginController/Create
         public ActionResult CreateAdmin()
         {
@@ -90,9 +81,11 @@ namespace Health_Insurance_MGMT.Controllers
 		}
 
 		// GET: AdminLoginController/Edit/5
-		public ActionResult Edit(int id)
+		public ActionResult AdminsView()
         {
-            return View();
+            IEnumerable<AdminLogin> adminslogedin = _unitofWork.AdminLoginRepository.GetAll();
+            return View(adminslogedin);
+            
         }
 
         // POST: AdminLoginController/Edit/5

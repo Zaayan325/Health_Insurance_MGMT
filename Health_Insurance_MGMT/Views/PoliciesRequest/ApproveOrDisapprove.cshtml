@@ -1,7 +1,7 @@
 ﻿@using App.Models.ViewModels;
 @model PolicyRequestDetailsViewModel
 @{
-    ViewData["Title"] = "Create | Request";
+    ViewData["Title"] = "Update | Request";
     Layout = "~/Views/Shared/_EmployeeDashboard.cshtml";
 
 }
@@ -56,29 +56,31 @@
     <div class="container">
         <div class="row justify-content-center mb-3">
             <div class="form-group">
-                <label>Your Status | Requested</label>
-              
+                <label>Update Status</label>
+
 
             </div>
 
-            <form asp-controller="PoliciesRequest" asp-action="CreateRequestByUser" method="post">
-                
+            <form asp-controller="PoliciesRequest" asp-action="ApproveOrDisapprove" method="post">
+
+                <input asp-for="RequestId" hidden class="form-control" />
+
+                <label>Employeee Number</label>
+                <label asp-for="empno"  class="form-control" />
 
 
-                    <input asp-for="empno" hidden value="@Context.Session.GetInt32("User_Id")"  class="form-control" />
-                   
-                
+
                 <div class="form-group">
                     <label asp-for="SelectedPolicy_Id" class="control-label"> Select Policy </label>
                     <select asp-for="SelectedPolicy_Id" asp-items="Model.PolicyOptions" class="form-control"></select>
                 </div>
 
-                <div  class="form-group">
-                    <label  asp-for="SelectedStatus" class="control-label"></label>
-                    <select  asp-for="SelectedStatus" asp-items="Model.StatusOptions" class="form-control"></select>
-                    <span  asp-validation-for="SelectedStatus" class="text-danger"></span>
+                <div class="form-group">
+                    <label asp-for="SelectedStatus" class="control-label"></label>
+                    <select asp-for="SelectedStatus" asp-items="Model.StatusOptions" class="form-control"></select>
+                    <span asp-validation-for="SelectedStatus" class="text-danger"></span>
                 </div>
-                
+
 
 
 
@@ -88,7 +90,7 @@
 
                 <div class="col-12 text-center">
                     <!-- Centered button -->
-                    <button class="submitBTN" type="submit">Request Policy</button>
+                    <button class="submitBTN" type="submit">Update Policy</button>
                 </div>
 
 

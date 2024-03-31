@@ -22,14 +22,101 @@ namespace Health_Insurance_MGMT.Controllers
         }
 
 
-        // GET: PoliciesRequestController/Details/5
-        public ActionResult Details(int id)
+        public IActionResult ViewPolicyRequests()
         {
-            return View();
+            IEnumerable<PolicyRequestDetails> policiesreq = _unitofWork.PolicyRequestRepository.GetAll();
+            return View(policiesreq);
+        }
+        public IActionResult ApproveOrDisapprove(int id)
+        {
+            
+            var policyRequest = _unitofWork.PolicyRequestRepository.GetT(pr => pr.RequestId == id);
+            if (policyRequest == null)
+            {
+                return NotFound();
+            }
+
+            // Static status options
+            var statusOptions = new List<SelectListItem>
+    {
+        new SelectListItem("Requested", "Requested"),
+        new SelectListItem("Approved", "Approved"),
+        new SelectListItem("Dis-Approved", "Dis-Approved"),
+    };
+
+            // Dynamic policy options from the database
+            var policyOptions = _unitofWork.PoliciesRepository.GetAll()
+                .Select(p => new SelectListItem { Value = p.PolicyId.ToString(), Text = p.PolicyName })
+                .ToList();
+
+            // Create and populate the ViewModel
+            var viewModel = new PolicyRequestDetailsViewModel
+            {
+                RequestId = policyRequest.RequestId,
+                
+                SelectedPolicy_Id = policyRequest.PolicyId,
+                SelectedStatus = policyRequest.Status,
+                PolicyOptions = policyOptions,
+                StatusOptions = statusOptions
+            };
+
+            return View(viewModel);
         }
 
+
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult ApproveOrDisapprove(PolicyRequestDetailsViewModel viewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var policyRequest = _unitofWork.PolicyRequestRepository.GetT(pr => pr.RequestId == viewModel.RequestId);
+                if (policyRequest == null)
+                {
+                    return NotFound();
+                }
+
+                // No file upload processing is needed here as we're updating policy request details
+
+                // Update properties from ViewModel to Domain Model
+                // Although typically not changed in an approval process
+                policyRequest.PolicyId = viewModel.SelectedPolicy_Id;
+                policyRequest.Status = viewModel.SelectedStatus;
+
+                // Update the policy request in the database
+                _unitofWork.PolicyRequestRepository.Update(policyRequest);
+                _unitofWork.save(); // Make sure to call the save method to commit changes
+
+                return RedirectToAction("Dashboard", "Admin"); // Redirect to the desired page after successful update
+            }
+
+            // Repopulate PolicyOptions and StatusOptions if model validation fails
+            viewModel.PolicyOptions = _unitofWork.PoliciesRepository.GetAll()
+                                         .Select(p => new SelectListItem
+                                         {
+                                             Value = p.PolicyId.ToString(),
+                                             Text = p.PolicyName
+                                         }).ToList();
+
+            viewModel.StatusOptions = new List<SelectListItem>
+    {
+        new SelectListItem("Requested", "Requested"),
+        new SelectListItem("Approved", "Approved"),
+        new SelectListItem("Dis-Approved", "Dis-Approved"),
+    };
+
+            return View(viewModel);
+        }
+
+
+
+
+
+
         // GET: PoliciesRequestController/Create
-        
+
         public IActionResult CreateRequestByUser()
         {
             // Static status options

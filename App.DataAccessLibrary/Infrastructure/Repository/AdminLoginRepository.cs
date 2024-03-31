@@ -40,5 +40,18 @@ namespace App.DataAccessLibrary.Infrastructure.Repository
             }
         }
 
-    }
+		//public bool ValidateAdmin(string emails, string AdminPassword, int Adm_Id);
+		//{
+		//	var user = _context.AdminLogin.FirstOrDefault(u => u.Email == Email && u.password == password && u.empno == empno);
+		//	return user != null;
+		//}
+
+        public bool ValidateAdmin(string Email ,string AdminPassword,int Adm_Id)
+        {
+            var admin = _context.AdminLogin.FirstOrDefault(u=>u.Email == Email && u.AdminPassword == AdminPassword && u.Adm_ID ==Adm_Id);
+            return admin != null;
+        }
+
+
+	}
 }

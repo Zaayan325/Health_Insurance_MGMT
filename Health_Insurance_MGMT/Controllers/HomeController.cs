@@ -98,7 +98,22 @@ namespace App.Controllers
                 return RedirectToAction("LoginUser");
             }
         }
+        //Login For the Admin 
 
+        [Route("LoginAdmin")]
+        public IActionResult LoginAdmin()
+        {
+            if (HttpContext.Session.GetInt32("Adm_Id") != null)
+            {
+
+                return RedirectToAction("Index");
+
+            }
+            else
+            {
+                return View();
+            }
+        }
 
         [Route("Contact")]
 		public IActionResult Contact()
@@ -116,8 +131,41 @@ namespace App.Controllers
             
         }
 
-		// POST: ContactController/Create
 		[HttpPost]
+		[ValidateAntiForgeryToken]
+		[Route("LoginAdmin")]
+		public IActionResult LoginAdmin(string Email, string AdminPassword, int Adm_ID)
+		{
+			// Directly validate the plaintext email and password with the database
+			if (_unitofWork.AdminLoginRepository.ValidateAdmin(Email, AdminPassword, Adm_ID))
+			{
+				// Set user email in session after successful validation
+				HttpContext.Session.SetInt32("Adm_Id", Adm_ID);
+
+				// Redirect to a secured page
+				return RedirectToAction("Index");
+			}
+
+			else
+			{
+				// Display an error message if credentials are invalid
+				ViewBag.ErrorMessage = "Invalid credentials";
+				return View("LoginAdmin"); // Make sure the view name is correct
+			}
+		}
+
+        [HttpPost]
+        public IActionResult AdminLogout()
+        {
+            // Clear the user's session
+
+            HttpContext.Session.Remove("Adm_Id");
+
+            // Redirect to the homepage or login page
+            return RedirectToAction("Index");
+        }
+        // POST: ContactController/Create
+        [HttpPost]
 		[ValidateAntiForgeryToken]
 		[Route("Contact")]
 		public IActionResult Contact(Contact contacts)
