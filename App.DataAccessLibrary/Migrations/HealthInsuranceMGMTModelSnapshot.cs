@@ -69,42 +69,73 @@ namespace App.DataAccessLibrary.Migrations
                     b.HasKey("Adm_ID");
 
                     b.ToTable("AdminLogin");
-                });
 
-            modelBuilder.Entity("App.Models.Models.CompanyDetails", b =>
-                {
-                    b.Property<int>("CompanyId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CompanyId"));
-
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
-
-                    b.Property<DateTime>("CompanyDetailsAdded")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("CompanyName")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("CompanyURL")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("Phone")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
-                    b.HasKey("CompanyId");
-
-                    b.ToTable("CompanyDetails");
+                    b.HasData(
+                        new
+                        {
+                            Adm_ID = 1,
+                            Address = "123 Admin St, Admin City",
+                            AdminAdded = new DateTime(2024, 4, 2, 23, 40, 26, 1, DateTimeKind.Local).AddTicks(4794),
+                            AdminName = "Syed Kashan Abbas Naqvi",
+                            AdminPassword = "kashan110",
+                            AdminPhotourl = "/img/doctors/doctor_1.jpg",
+                            ConfirmPassword = "kashan110",
+                            Email = "kashan2209e@aptechgdn.net",
+                            Phone = "1234567890",
+                            Role = "Admin"
+                        },
+                        new
+                        {
+                            Adm_ID = 2,
+                            Address = "456 Admin Lane, Admin Town",
+                            AdminAdded = new DateTime(2024, 4, 2, 23, 40, 26, 1, DateTimeKind.Local).AddTicks(4826),
+                            AdminName = "Asghar Abbas",
+                            AdminPassword = "asghar110",
+                            AdminPhotourl = "/img/doctors/doctor_1.jpg",
+                            ConfirmPassword = "asghar110",
+                            Email = "asghar2209e@aptechgdn.net",
+                            Phone = "0987654321",
+                            Role = "Admin"
+                        },
+                        new
+                        {
+                            Adm_ID = 3,
+                            Address = "456 Admin Lane, Admin Town",
+                            AdminAdded = new DateTime(2024, 4, 2, 23, 40, 26, 1, DateTimeKind.Local).AddTicks(4829),
+                            AdminName = "Ali Shan",
+                            AdminPassword = "alishan110",
+                            AdminPhotourl = "/img/doctors/doctor_3.jpg",
+                            ConfirmPassword = "alishan110",
+                            Email = "alishan2209e@aptechgdn.net",
+                            Phone = "0987654321",
+                            Role = "Admin"
+                        },
+                        new
+                        {
+                            Adm_ID = 4,
+                            Address = "456 Admin Lane, Admin Town",
+                            AdminAdded = new DateTime(2024, 4, 2, 23, 40, 26, 1, DateTimeKind.Local).AddTicks(4831),
+                            AdminName = "Zayaan Zubair",
+                            AdminPassword = "zaayan110",
+                            AdminPhotourl = "/img/doctors/doctor_2.jpg",
+                            ConfirmPassword = "zaayan110",
+                            Email = "zaayan220901e@aptechgdn.net",
+                            Phone = "0987654321",
+                            Role = "Admin"
+                        },
+                        new
+                        {
+                            Adm_ID = 5,
+                            Address = "456 Admin Lane, Admin Town",
+                            AdminAdded = new DateTime(2024, 4, 2, 23, 40, 26, 1, DateTimeKind.Local).AddTicks(4833),
+                            AdminName = "Waleed Hoth",
+                            AdminPassword = "waleed110",
+                            AdminPhotourl = "/img/doctors/doctor_1.jpg",
+                            ConfirmPassword = "waleed110",
+                            Email = "waleed2209e@aptechgdn.net",
+                            Phone = "0987654321",
+                            Role = "Admin"
+                        });
                 });
 
             modelBuilder.Entity("App.Models.Models.Contact", b =>
@@ -229,6 +260,113 @@ namespace App.DataAccessLibrary.Migrations
                     b.HasIndex("PolicyId");
 
                     b.ToTable("EmpRegister");
+
+                    b.HasData(
+                        new
+                        {
+                            empno = 1,
+                            EmployeeAdded = new DateTime(2024, 4, 2, 23, 40, 26, 1, DateTimeKind.Local).AddTicks(4750),
+                            Employee_Pictureurl = "/img/doctors/doctor_1.jpg",
+                            PolicyId = 1,
+                            Role = "Employee",
+                            Salary = 80000,
+                            address = "456 Developer Rd.",
+                            city = "DevCity",
+                            contactno = "0987654321",
+                            country = "TechLand",
+                            designation = "Software Engineer",
+                            firstname = "John",
+                            joindate = new DateTime(2023, 12, 24, 23, 40, 26, 1, DateTimeKind.Local).AddTicks(4752),
+                            lastname = "Doe",
+                            password = "password",
+                            policystatus = "Active",
+                            state = "TechState",
+                            username = "johndoe"
+                        },
+                        new
+                        {
+                            empno = 2,
+                            EmployeeAdded = new DateTime(2024, 4, 2, 23, 40, 26, 1, DateTimeKind.Local).AddTicks(4761),
+                            Employee_Pictureurl = "/img/doctors/doctor_1.jpg",
+                            PolicyId = 2,
+                            Role = "Employee",
+                            Salary = 95000,
+                            address = "789 Project Blvd.",
+                            city = "ManageCity",
+                            contactno = "1234567890",
+                            country = "LeadLand",
+                            designation = "Project Manager",
+                            firstname = "Alice",
+                            joindate = new DateTime(2023, 9, 15, 23, 40, 26, 1, DateTimeKind.Local).AddTicks(4762),
+                            lastname = "Johnson",
+                            password = "securepassword",
+                            policystatus = "Active",
+                            state = "ManageState",
+                            username = "alicejohnson"
+                        },
+                        new
+                        {
+                            empno = 3,
+                            EmployeeAdded = new DateTime(2024, 4, 2, 23, 40, 26, 1, DateTimeKind.Local).AddTicks(4765),
+                            Employee_Pictureurl = "/img/doctors/doctor_1.jpg",
+                            PolicyId = 3,
+                            Role = "Employee",
+                            Salary = 70000,
+                            address = "101 QA Lane",
+                            city = "TestCity",
+                            contactno = "2345678901",
+                            country = "QualityLand",
+                            designation = "QA Engineer",
+                            firstname = "Bob",
+                            joindate = new DateTime(2023, 11, 4, 23, 40, 26, 1, DateTimeKind.Local).AddTicks(4766),
+                            lastname = "Smith",
+                            password = "testpassword",
+                            policystatus = "Active",
+                            state = "TestState",
+                            username = "bobsmith"
+                        },
+                        new
+                        {
+                            empno = 4,
+                            EmployeeAdded = new DateTime(2024, 4, 2, 23, 40, 26, 1, DateTimeKind.Local).AddTicks(4768),
+                            Employee_Pictureurl = "/img/doctors/doctor_1.jpg",
+                            PolicyId = 2,
+                            Role = "Employee",
+                            Salary = 85000,
+                            address = "404 DevOps Way",
+                            city = "OpsCity",
+                            contactno = "3456789012",
+                            country = "DeployLand",
+                            designation = "DevOps Specialist",
+                            firstname = "Carol",
+                            joindate = new DateTime(2023, 12, 4, 23, 40, 26, 1, DateTimeKind.Local).AddTicks(4769),
+                            lastname = "Williams",
+                            password = "devopspass",
+                            policystatus = "Active",
+                            state = "OpsState",
+                            username = "carolw"
+                        },
+                        new
+                        {
+                            empno = 5,
+                            EmployeeAdded = new DateTime(2024, 4, 2, 23, 40, 26, 1, DateTimeKind.Local).AddTicks(4771),
+                            Employee_Pictureurl = "/img/doctors/doctor_1.jpg",
+                            PolicyId = 1,
+                            Role = "Employee",
+                            Salary = 75000,
+                            address = "202 Design St.",
+                            city = "DesignCity",
+                            contactno = "4567890123",
+                            country = "CreativeLand",
+                            designation = "UI/UX Designer",
+                            firstname = "Dave",
+                            joindate = new DateTime(2023, 10, 5, 23, 40, 26, 1, DateTimeKind.Local).AddTicks(4771),
+                            lastname = "Brown",
+                            password = "designpass",
+                            policystatus = "Active",
+                            state = "DesignState",
+                            username = "davebrown"
+                        });
                 });
 
             modelBuilder.Entity("App.Models.Models.HospitalInfo", b =>
@@ -309,6 +447,41 @@ namespace App.DataAccessLibrary.Migrations
                     b.HasKey("Ins_Id");
 
                     b.ToTable("InsuranceCompany");
+
+                    b.HasData(
+                        new
+                        {
+                            Ins_Id = 1,
+                            Address = "123 Insurance Lane",
+                            CompantWebsiteUrl = "https://www.healthguard.com",
+                            Ins_CompanyLogourl = "https://cdn2.vectorstock.com/i/1000x1000/21/56/health-insurance-emblem-vector-4462156.jpg",
+                            Ins_Description = "Comprehensive health insurance for all your needs.",
+                            Ins_Name = "HealthGuard",
+                            InsuranceCompanyAdded = new DateTime(2024, 4, 2, 23, 40, 26, 1, DateTimeKind.Local).AddTicks(4582),
+                            Phone = "1234567890"
+                        },
+                        new
+                        {
+                            Ins_Id = 2,
+                            Address = "123 Insurance Lane",
+                            CompantWebsiteUrl = "https://www.healthguard.com",
+                            Ins_CompanyLogourl = "https://cdn2.vectorstock.com/i/1000x1000/21/56/health-insurance-emblem-vector-4462156.jpg",
+                            Ins_Description = "Comprehensive health i for all your needs.",
+                            Ins_Name = "HealtyLife",
+                            InsuranceCompanyAdded = new DateTime(2024, 4, 2, 23, 40, 26, 1, DateTimeKind.Local).AddTicks(4595),
+                            Phone = "1234567890"
+                        },
+                        new
+                        {
+                            Ins_Id = 3,
+                            Address = "12334 Insurance Lane",
+                            CompantWebsiteUrl = "https://www.healthguard.com",
+                            Ins_CompanyLogourl = "https://cdn2.vectorstock.com/i/1000x1000/21/56/health-insurance-emblem-vector-4462156.jpg",
+                            Ins_Description = "Life is Great do all Work.",
+                            Ins_Name = "Pure Life",
+                            InsuranceCompanyAdded = new DateTime(2024, 4, 2, 23, 40, 26, 1, DateTimeKind.Local).AddTicks(4597),
+                            Phone = "1234567890"
+                        });
                 });
 
             modelBuilder.Entity("App.Models.Models.Policies", b =>
@@ -355,6 +528,68 @@ namespace App.DataAccessLibrary.Migrations
                     b.HasIndex("Ins_Id");
 
                     b.ToTable("Policies");
+
+                    b.HasData(
+                        new
+                        {
+                            PolicyId = 1,
+                            Ins_Id = 1,
+                            MedicalId = "MED123",
+                            PolicyDescription = "Covers all medical expenses for your family.",
+                            PolicyFullAmount = 500000.0,
+                            PolicyName = "Family Health Plan",
+                            PolicyTermasandConditionsurl = "/documents/Instagram for Business Guide 2023.pdf",
+                            equatedmonthlyinstalment = 15000.0,
+                            policymonths = 36.0
+                        },
+                        new
+                        {
+                            PolicyId = 2,
+                            Ins_Id = 2,
+                            MedicalId = "MED234",
+                            PolicyDescription = "Personal health insurance plan for individuals.",
+                            PolicyFullAmount = 200000.0,
+                            PolicyName = "Individual Health Plan",
+                            PolicyTermasandConditionsurl = "/documents/Instagram for Business Guide 2023.pdf",
+                            equatedmonthlyinstalment = 5500.0,
+                            policymonths = 24.0
+                        },
+                        new
+                        {
+                            PolicyId = 3,
+                            Ins_Id = 2,
+                            MedicalId = "MED345",
+                            PolicyDescription = "Comprehensive dental care for families and individuals.",
+                            PolicyFullAmount = 100000.0,
+                            PolicyName = "Dental Care Plan",
+                            PolicyTermasandConditionsurl = "/documents/Instagram for Business Guide 2023.pdf",
+                            equatedmonthlyinstalment = 4000.0,
+                            policymonths = 12.0
+                        },
+                        new
+                        {
+                            PolicyId = 4,
+                            Ins_Id = 3,
+                            MedicalId = "MED456",
+                            PolicyDescription = "Insurance coverage for eye care and vision health.",
+                            PolicyFullAmount = 75000.0,
+                            PolicyName = "Vision Care Plan",
+                            PolicyTermasandConditionsurl = "/documents/Instagram for Business Guide 2023.pdf",
+                            equatedmonthlyinstalment = 3100.0,
+                            policymonths = 12.0
+                        },
+                        new
+                        {
+                            PolicyId = 5,
+                            Ins_Id = 1,
+                            MedicalId = "MED567",
+                            PolicyDescription = "Emergency health coverage for unexpected medical needs.",
+                            PolicyFullAmount = 300000.0,
+                            PolicyName = "Emergency Health Plan",
+                            PolicyTermasandConditionsurl = "/documents/Instagram for Business Guide 2023.pdf",
+                            equatedmonthlyinstalment = 8300.0,
+                            policymonths = 18.0
+                        });
                 });
 
             modelBuilder.Entity("App.Models.Models.PolicyRequestDetails", b =>
