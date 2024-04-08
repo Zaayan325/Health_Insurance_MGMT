@@ -30,7 +30,23 @@ namespace Health_Insurance_MGMT.Controllers
             // Storing the count in TempData
             TempData["EmployeeCount"] = employeeCount;
 
-            return View();
+            int policies =_unitofWork.PoliciesRepository.GetAll().Count();
+			TempData["PolicyCount"] = policies;
+
+            int companies = _unitofWork.InsuranceCompanyRepository.GetAll().Count();
+            TempData["CompanyCount"] = companies;
+
+            int contacts = _unitofWork.ContactRepository.GetAll().Count();
+            TempData["ContactCount"] = contacts;
+
+            int policyrequests = _unitofWork.PolicyRequestRepository.GetAll().Count();
+            TempData["PolicyReqCount"] = policyrequests;
+
+            int totaladmins = _unitofWork.AdminLoginRepository.GetAll().Count();
+            TempData["AdminCount"] = totaladmins;
+
+            IEnumerable<PolicyRequestDetails> policiesreq = _unitofWork.PolicyRequestRepository.GetAll();
+            return View(policiesreq);
         }
         //This Method will Only return view
 

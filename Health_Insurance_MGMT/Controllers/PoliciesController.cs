@@ -28,11 +28,18 @@ namespace Health_Insurance_MGMT.Controllers
         }
 
         // GET: PoliciesController/Details/5
-        public ActionResult Details(int id)
+      
+        public ActionResult DetailsPolicies(int id)
         {
-            return View();
-        }
+            var policies = _unitofWork.PoliciesRepository.GetT(pol => pol.PolicyId == id);
+            if (policies == null)
+            {
+                return NotFound();
+            }
 
+            // The view name here should exactly match the file name of the view
+            return View("DetailsPolicies", policies);
+        }
         // GET: PoliciesController/Create
         [HttpGet]
         public IActionResult CreatePolicy()
@@ -174,30 +181,103 @@ public IActionResult CreatePolicy(PolicyCreationViewModel model)
 
 
 
-        // GET: PoliciesController/Edit/5
-        public ActionResult Edit(int id)
+        [HttpGet]
+        public IActionResult EditPolicy(int id)
         {
-            return View();
+            var policy = _unitofWork.PoliciesRepository.GetT(p => p.PolicyId == id);
+            if (policy == null)
+            {
+                return NotFound();
+            }
+
+            var viewModel = new PolicyCreationViewModel
+            {
+                PolicyId = id,
+                PolicyName = policy.PolicyName,
+                PolicyDescription = policy.PolicyDescription,
+                PolicyFullAmount = policy.PolicyFullAmount,
+                EquatedMonthlyInstalment = policy.equatedmonthlyinstalment,
+                PolicyMonths = policy.policymonths,
+                SelectedIns_Id = policy.Ins_Id,
+                MedicalId = policy.MedicalId,
+                InsuranceCompanies = _unitofWork.InsuranceCompanyRepository.GetAll()
+                                     .Select(i => new SelectListItem { Value = i.Ins_Id.ToString(), Text = i.Ins_Name })
+                                     .ToList()
+            };
+
+            return View(viewModel);
         }
+
 
         // POST: PoliciesController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public IActionResult EditPolicy(PolicyCreationViewModel model)
         {
-            try
+            if (ModelState.IsValid)
             {
-                return RedirectToAction(nameof(Index));
+                var policy = _unitofWork.PoliciesRepository.GetT(p => p.PolicyId == model.PolicyId);
+                if (policy == null)
+                {
+                    return NotFound();
+                }
+
+                string filePath = ProcessUploadedDocument(model); // Handle the document upload
+                if (!string.IsNullOrEmpty(filePath)) // Check if a new document was uploaded
+                {
+                    policy.PolicyTermasandConditionsurl = filePath; // Update the document URL/path in the domain model
+                }
+
+                // Map updated properties from ViewModel to Domain Model
+                policy.PolicyName = model.PolicyName;
+                policy.PolicyDescription = model.PolicyDescription;
+                policy.PolicyFullAmount = model.PolicyFullAmount;
+                policy.equatedmonthlyinstalment = model.EquatedMonthlyInstalment;
+                policy.policymonths = model.PolicyMonths;
+                policy.Ins_Id = model.SelectedIns_Id;
+                policy.MedicalId = model.MedicalId;
+
+                _unitofWork.PoliciesRepository.Update(policy); // Use synchronous update method
+                _unitofWork.save(); // Assuming there's a save method to commit changes synchronously
+
+                return RedirectToAction("Dashboard", "Admin");
             }
-            catch
-            {
-                return View();
-            }
+
+            // Repopulate InsuranceCompanies if model validation fails
+            model.InsuranceCompanies = _unitofWork.InsuranceCompanyRepository.GetAll()
+                                    .Select(i => new SelectListItem
+                                    {
+                                        Value = i.Ins_Id.ToString(),
+                                        Text = i.Ins_Name
+                                    }).ToList();
+
+            return View(model);
         }
 
-		// GET: PoliciesController/Delete/5
-		
-		public IActionResult DeletePolicy(int? id)
+
+        private string ProcessUploadedDocument(PolicyCreationViewModel model)
+        {
+            string uniqueFileName = null;
+
+            if (model.PolicyTermsAndConditions != null && model.PolicyTermsAndConditions.Length > 0)
+            {
+                string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "uploads", "PoliciesData");
+                uniqueFileName = Guid.NewGuid().ToString() + "_" + Path.GetFileName(model.PolicyTermsAndConditions.FileName);
+                string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    model.PolicyTermsAndConditions.CopyTo(fileStream);
+                }
+                return $"~/uploads/PoliciesData/{uniqueFileName}";
+            }
+
+            return uniqueFileName;
+        }
+
+
+        // GET: PoliciesController/Delete/5
+
+        public IActionResult DeletePolicy(int? id)
         {
 			if (id == null || id == 0)
 			{

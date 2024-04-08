@@ -187,46 +187,65 @@ namespace Health_Insurance_MGMT.Controllers
         }
 
 
-        // GET: PoliciesRequestController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
+       //For checking that Policies of that whose Accepted and disapproved
 
-        // POST: PoliciesRequestController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        public IActionResult MyPolicyRequests(int id)
+{
+            // Replace this with the actual logic to get the current user's employee number
+            var currentUserEmpNo = id; // This is just an example; adjust according to your auth system
+
+    IEnumerable<PolicyRequestDetails> myRequests = _unitofWork.PolicyRequestRepository.GetAll()
+        .Where(pr => pr.empno == currentUserEmpNo); // Filter requests by the current user's empno
+
+    return View(myRequests);
+}
+
+
 
         // GET: PoliciesRequestController/Delete/5
-        public ActionResult Delete(int id)
+        public IActionResult DeleteRequestPolicy(int? id)
         {
-            return View();
+            if (id == null || id == 0)
+            {
+                return NotFound();
+
+
+            }
+            var policiesreq = _unitofWork.PolicyRequestRepository.GetT(x => x.RequestId == id);
+
+
+            if (policiesreq == null)
+            {
+                return NotFound();
+            }
+
+            return View(policiesreq);
         }
 
-        // POST: PoliciesRequestController/Delete/5
-        [HttpPost]
+
+
+        // POST: PoliciesController/Delete/5
+        [HttpPost, ActionName("DeleteRequestPolicy")]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public IActionResult DeleteRequestPolicyPost(int? id)
         {
-            try
+            if (id == null || id == 0)
             {
-                return RedirectToAction(nameof(Index));
+                return NotFound();
             }
-            catch
+
+            var policiesreq = _unitofWork.PolicyRequestRepository.GetT(x => x.RequestId == id);
+            if (policiesreq == null)
             {
-                return View();
+                return NotFound();
             }
+
+
+            _unitofWork.PolicyRequestRepository.Delete(policiesreq);
+            _unitofWork.save();
+
+
+            return RedirectToAction("ViewPolicyRequests");
         }
     }
 }

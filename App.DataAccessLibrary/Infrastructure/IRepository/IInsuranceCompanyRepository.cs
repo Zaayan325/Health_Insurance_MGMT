@@ -10,7 +10,7 @@ namespace App.DataAccessLibrary.Infrastructure.IRepository
     public interface IInsuranceCompanyRepository : IRepository<InsuranceCompany>
     {
         void Update(InsuranceCompany insuranceCompany);
-    
 
+        IEnumerable<InsuranceCompany> GetAllInsuranceCompanies();
     }
 }

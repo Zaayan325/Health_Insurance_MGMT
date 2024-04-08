@@ -1,6 +1,8 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+@model IEnumerable<App.Models.Models.InsuranceCompany>
+
 
 <div class="page-hero bg-image overlay-dark" style="background-image: url(/img/bg_image_1.jpg);">
     <div class="hero-section">
@@ -74,93 +76,94 @@
     </div> <!-- .bg-light -->
   </div> <!-- .bg-light -->
 
-  <div class="page-section">
+<div class="page-section">
     <div class="container">
-      <h1 class="text-center mb-5 wow fadeInUp">Our Doctors</h1>
+        <h1 class="text-center mb-5 wow fadeInUp">Our Doctors</h1>
 
-      <div class="owl-carousel wow fadeInUp" id="doctorSlideshow">
-        <div class="item">
-          <div class="card-doctor">
-            <div class="header">
-              <img src="~/img/doctors/doctor_1.jpg" alt="">
-              <div class="meta">
-                <a href="#"><span class="mai-call"></span></a>
-                <a href="#"><span class="mai-logo-whatsapp"></span></a>
-              </div>
+        <div class="owl-carousel wow fadeInUp" id="doctorSlideshow">
+            <div class="item">
+                <div class="card-doctor">
+                    <div class="header">
+                        <img src="~/img/doctors/doctor_1.jpg" alt="">
+                        <div class="meta">
+                            <a href="#"><span class="mai-call"></span></a>
+                            <a href="#"><span class="mai-logo-whatsapp"></span></a>
+                        </div>
+                    </div>
+                    <div class="body">
+                        <p class="text-xl mb-0">Dr. Stein Albert</p>
+                        <span class="text-sm text-grey">Cardiology</span>
+                    </div>
+                </div>
             </div>
-            <div class="body">
-              <p class="text-xl mb-0">Dr. Stein Albert</p>
-              <span class="text-sm text-grey">Cardiology</span>
+            <div class="item">
+                <div class="card-doctor">
+                    <div class="header">
+                        <img src="~/img/doctors/doctor_2.jpg" alt="">
+                        <div class="meta">
+                            <a href="#"><span class="mai-call"></span></a>
+                            <a href="#"><span class="mai-logo-whatsapp"></span></a>
+                        </div>
+                    </div>
+                    <div class="body">
+                        <p class="text-xl mb-0">Dr. Alexa Melvin</p>
+                        <span class="text-sm text-grey">Dental</span>
+                    </div>
+                </div>
             </div>
-          </div>
+            <div class="item">
+                <div class="card-doctor">
+                    <div class="header">
+                        <img src="~/img/doctors/doctor_3.jpg" alt="">
+                        <div class="meta">
+                            <a href="#"><span class="mai-call"></span></a>
+                            <a href="#"><span class="mai-logo-whatsapp"></span></a>
+                        </div>
+                    </div>
+                    <div class="body">
+                        <p class="text-xl mb-0">Dr. Rebecca Steffany</p>
+                        <span class="text-sm text-grey">General Health</span>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="card-doctor">
+                    <div class="header">
+                        <img src="~/img/doctors/doctor_3.jpg" alt="">
+                        <div class="meta">
+                            <a href="#"><span class="mai-call"></span></a>
+                            <a href="#"><span class="mai-logo-whatsapp"></span></a>
+                        </div>
+                    </div>
+                    <div class="body">
+                        <p class="text-xl mb-0">Dr. Rebecca Steffany</p>
+                        <span class="text-sm text-grey">General Health</span>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="card-doctor">
+                    <div class="header">
+                        <img src="~/img/doctors/doctor_3.jpg" alt="">
+                        <div class="meta">
+                            <a href="#"><span class="mai-call"></span></a>
+                            <a href="#"><span class="mai-logo-whatsapp"></span></a>
+                        </div>
+                    </div>
+                    <div class="body">
+                        <p class="text-xl mb-0">Dr. Rebecca Steffany</p>
+                        <span class="text-sm text-grey">General Health</span>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="item">
-          <div class="card-doctor">
-            <div class="header">
-              <img src="~/img/doctors/doctor_2.jpg" alt="">
-              <div class="meta">
-                <a href="#"><span class="mai-call"></span></a>
-                <a href="#"><span class="mai-logo-whatsapp"></span></a>
-              </div>
-            </div>
-            <div class="body">
-              <p class="text-xl mb-0">Dr. Alexa Melvin</p>
-              <span class="text-sm text-grey">Dental</span>
-            </div>
-          </div>
-        </div>
-        <div class="item">
-          <div class="card-doctor">
-            <div class="header">
-              <img src="~/img/doctors/doctor_3.jpg" alt="">
-              <div class="meta">
-                <a href="#"><span class="mai-call"></span></a>
-                <a href="#"><span class="mai-logo-whatsapp"></span></a>
-              </div>
-            </div>
-            <div class="body">
-              <p class="text-xl mb-0">Dr. Rebecca Steffany</p>
-              <span class="text-sm text-grey">General Health</span>
-            </div>
-          </div>
-        </div>
-        <div class="item">
-          <div class="card-doctor">
-            <div class="header">
-              <img src="~/img/doctors/doctor_3.jpg" alt="">
-              <div class="meta">
-                <a href="#"><span class="mai-call"></span></a>
-                <a href="#"><span class="mai-logo-whatsapp"></span></a>
-              </div>
-            </div>
-            <div class="body">
-              <p class="text-xl mb-0">Dr. Rebecca Steffany</p>
-              <span class="text-sm text-grey">General Health</span>
-            </div>
-          </div>
-        </div>
-        <div class="item">
-          <div class="card-doctor">
-            <div class="header">
-              <img src="~/img/doctors/doctor_3.jpg" alt="">
-              <div class="meta">
-                <a href="#"><span class="mai-call"></span></a>
-                <a href="#"><span class="mai-logo-whatsapp"></span></a>
-              </div>
-            </div>
-            <div class="body">
-              <p class="text-xl mb-0">Dr. Rebecca Steffany</p>
-              <span class="text-sm text-grey">General Health</span>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
-  </div>
+</div>
+  
 
   
 
-  <div class="page-section">
+ 
 @*     <div class="container">
       <h1 class="text-center wow fadeInUp">Make an Appointment</h1>
 
@@ -194,8 +197,7 @@
 
         <button type="submit" class="btn btn-primary mt-3 wow zoomIn">Submit Request</button>
       </form> *@
-    </div>
-  </div> <!-- .page-section -->
+    <!-- .page-section -->
 
   <div class="page-section banner-home bg-image" style="background-image: url(/img/banner-pattern.svg);">
     <div class="container py-5 py-lg-0">

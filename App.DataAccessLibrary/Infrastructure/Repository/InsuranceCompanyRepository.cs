@@ -17,6 +17,10 @@ namespace App.DataAccessLibrary.Infrastructure.Repository
         {
             _context = context;
         }
+        public IEnumerable<InsuranceCompany> GetAllInsuranceCompanies()
+        {
+            return _context.InsuranceCompany.ToList();
+        }
 
         public void Update(InsuranceCompany insuranceCompany)
         {

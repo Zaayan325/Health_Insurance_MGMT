@@ -7,6 +7,7 @@ using DocumentFormat.OpenXml.Spreadsheet;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using System.Text.Json;
 
 namespace App.Controllers
 {
@@ -24,7 +25,8 @@ namespace App.Controllers
         [Route("Home")]
         public IActionResult Index()
         {
-            return View();
+            var insuranceCompanies = _unitofWork.InsuranceCompanyRepository.GetAllInsuranceCompanies();
+            return View(insuranceCompanies);
         }
 
         [Route("Login")]
@@ -141,6 +143,13 @@ namespace App.Controllers
 			{
 				// Set user email in session after successful validation
 				HttpContext.Session.SetInt32("Adm_Id", Adm_ID);
+				var adminImageUrl = _unitofWork.AdminLoginRepository.GetAdminImageUrlById(Adm_ID);
+                //var admindesignation = _unitofWork.AdminLoginRepository.GetAdminDesignation(Adm_ID);
+				HttpContext.Session.SetString("AdminImageUrl", adminImageUrl); // Store image URL in session
+				HttpContext.Session.SetString("AdminUsername", Email); // Store username URL in session
+
+                
+                
 
 				// Redirect to a secured page
 				return RedirectToAction("Index");
@@ -190,11 +199,43 @@ namespace App.Controllers
             
 		}
 
+        [HttpGet]
+        public IActionResult LockScreen()
+        {
+            // Set a flag in session to indicate the session is locked
+            HttpContext.Session.SetString("IsLocked", "true");
+            ViewBag.AdminUsername = HttpContext.Session.GetString("AdminUsername");
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult UnlockScreen(string Email, string password)
+        {
+            int? adminId = HttpContext.Session.GetInt32("Adm_Id");
+            // You can check if the session was previously set and is now locked
+            var isLocked = HttpContext.Session.GetString("IsLocked");
+            if (adminId != null && isLocked == "true" && _unitofWork.AdminLoginRepository.ValidateAdmin(Email, password, adminId.Value))
+            {
+                // Clear the locked state, but keep the session active
+                HttpContext.Session.Remove("IsLocked");
+
+                // Redirect to the secured page or dashboard
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                // Stay on the lock screen and show an error message if credentials are invalid
+                ViewBag.ErrorMessage = "Invalid credentials or session not found";
+                return View("LockScreen");
+            }
+        }
 
 
-		//For Viewing It 
 
-		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        //For Viewing It 
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });

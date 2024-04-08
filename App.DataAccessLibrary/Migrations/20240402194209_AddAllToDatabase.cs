@@ -191,11 +191,11 @@ namespace App.DataAccessLibrary.Migrations
                 columns: new[] { "Adm_ID", "Address", "AdminAdded", "AdminName", "AdminPassword", "AdminPhotourl", "ConfirmPassword", "Email", "Phone", "Role" },
                 values: new object[,]
                 {
-                    { 1, "123 Admin St, Admin City", new DateTime(2024, 4, 2, 23, 40, 26, 1, DateTimeKind.Local).AddTicks(4794), "Syed Kashan Abbas Naqvi", "kashan110", "/img/doctors/doctor_1.jpg", "kashan110", "kashan2209e@aptechgdn.net", "1234567890", "Admin" },
-                    { 2, "456 Admin Lane, Admin Town", new DateTime(2024, 4, 2, 23, 40, 26, 1, DateTimeKind.Local).AddTicks(4826), "Asghar Abbas", "asghar110", "/img/doctors/doctor_1.jpg", "asghar110", "asghar2209e@aptechgdn.net", "0987654321", "Admin" },
-                    { 3, "456 Admin Lane, Admin Town", new DateTime(2024, 4, 2, 23, 40, 26, 1, DateTimeKind.Local).AddTicks(4829), "Ali Shan", "alishan110", "/img/doctors/doctor_3.jpg", "alishan110", "alishan2209e@aptechgdn.net", "0987654321", "Admin" },
-                    { 4, "456 Admin Lane, Admin Town", new DateTime(2024, 4, 2, 23, 40, 26, 1, DateTimeKind.Local).AddTicks(4831), "Zayaan Zubair", "zaayan110", "/img/doctors/doctor_2.jpg", "zaayan110", "zaayan220901e@aptechgdn.net", "0987654321", "Admin" },
-                    { 5, "456 Admin Lane, Admin Town", new DateTime(2024, 4, 2, 23, 40, 26, 1, DateTimeKind.Local).AddTicks(4833), "Waleed Hoth", "waleed110", "/img/doctors/doctor_1.jpg", "waleed110", "waleed2209e@aptechgdn.net", "0987654321", "Admin" }
+                    { 1, "123 Admin St, Admin City", new DateTime(2024, 4, 3, 0, 42, 9, 517, DateTimeKind.Local).AddTicks(7353), "Syed Kashan Abbas Naqvi", "kashan110", "~/img/doctors/doctor_1.jpg", "kashan110", "kashan2209e@aptechgdn.net", "1234567890", "Admin" },
+                    { 2, "456 Admin Lane, Admin Town", new DateTime(2024, 4, 3, 0, 42, 9, 517, DateTimeKind.Local).AddTicks(7356), "Asghar Abbas", "asghar110", "~/img/doctors/doctor_1.jpg", "asghar110", "asghar2209e@aptechgdn.net", "0987654321", "Admin" },
+                    { 3, "456 Admin Lane, Admin Town", new DateTime(2024, 4, 3, 0, 42, 9, 517, DateTimeKind.Local).AddTicks(7358), "Ali Shan", "alishan110", "~/img/doctors/doctor_3.jpg", "alishan110", "alishan2209e@aptechgdn.net", "0987654321", "Admin" },
+                    { 4, "456 Admin Lane, Admin Town", new DateTime(2024, 4, 3, 0, 42, 9, 517, DateTimeKind.Local).AddTicks(7360), "Zayaan Zubair", "zaayan110", "~/img/doctors/doctor_2.jpg", "zaayan110", "zaayan220901e@aptechgdn.net", "0987654321", "Admin" },
+                    { 5, "456 Admin Lane, Admin Town", new DateTime(2024, 4, 3, 0, 42, 9, 517, DateTimeKind.Local).AddTicks(7363), "Waleed Hoth", "waleed110", "~/img/doctors/doctor_1.jpg", "waleed110", "waleed2209e@aptechgdn.net", "0987654321", "Admin" }
                 });
 
             migrationBuilder.InsertData(
@@ -203,9 +203,9 @@ namespace App.DataAccessLibrary.Migrations
                 columns: new[] { "Ins_Id", "Address", "CompantWebsiteUrl", "Ins_CompanyLogourl", "Ins_Description", "Ins_Name", "InsuranceCompanyAdded", "Phone" },
                 values: new object[,]
                 {
-                    { 1, "123 Insurance Lane", "https://www.healthguard.com", "https://cdn2.vectorstock.com/i/1000x1000/21/56/health-insurance-emblem-vector-4462156.jpg", "Comprehensive health insurance for all your needs.", "HealthGuard", new DateTime(2024, 4, 2, 23, 40, 26, 1, DateTimeKind.Local).AddTicks(4582), "1234567890" },
-                    { 2, "123 Insurance Lane", "https://www.healthguard.com", "https://cdn2.vectorstock.com/i/1000x1000/21/56/health-insurance-emblem-vector-4462156.jpg", "Comprehensive health i for all your needs.", "HealtyLife", new DateTime(2024, 4, 2, 23, 40, 26, 1, DateTimeKind.Local).AddTicks(4595), "1234567890" },
-                    { 3, "12334 Insurance Lane", "https://www.healthguard.com", "https://cdn2.vectorstock.com/i/1000x1000/21/56/health-insurance-emblem-vector-4462156.jpg", "Life is Great do all Work.", "Pure Life", new DateTime(2024, 4, 2, 23, 40, 26, 1, DateTimeKind.Local).AddTicks(4597), "1234567890" }
+                    { 1, "123 Insurance Lane", "https://www.healthguard.com", "https://cdn2.vectorstock.com/i/1000x1000/21/56/health-insurance-emblem-vector-4462156.jpg", "Comprehensive health insurance for all your needs.", "HealthGuard", new DateTime(2024, 4, 3, 0, 42, 9, 517, DateTimeKind.Local).AddTicks(7124), "1234567890" },
+                    { 2, "123 Insurance Lane", "https://www.healthguard.com", "https://cdn2.vectorstock.com/i/1000x1000/21/56/health-insurance-emblem-vector-4462156.jpg", "Comprehensive health i for all your needs.", "HealtyLife", new DateTime(2024, 4, 3, 0, 42, 9, 517, DateTimeKind.Local).AddTicks(7135), "1234567890" },
+                    { 3, "12334 Insurance Lane", "https://www.healthguard.com", "https://cdn2.vectorstock.com/i/1000x1000/21/56/health-insurance-emblem-vector-4462156.jpg", "Life is Great do all Work.", "Pure Life", new DateTime(2024, 4, 3, 0, 42, 9, 517, DateTimeKind.Local).AddTicks(7137), "1234567890" }
                 });
 
             migrationBuilder.InsertData(
@@ -213,11 +213,11 @@ namespace App.DataAccessLibrary.Migrations
                 columns: new[] { "PolicyId", "Ins_Id", "MedicalId", "PolicyDescription", "PolicyFullAmount", "PolicyName", "PolicyTermasandConditionsurl", "equatedmonthlyinstalment", "policymonths" },
                 values: new object[,]
                 {
-                    { 1, 1, "MED123", "Covers all medical expenses for your family.", 500000.0, "Family Health Plan", "/documents/Instagram for Business Guide 2023.pdf", 15000.0, 36.0 },
-                    { 2, 2, "MED234", "Personal health insurance plan for individuals.", 200000.0, "Individual Health Plan", "/documents/Instagram for Business Guide 2023.pdf", 5500.0, 24.0 },
-                    { 3, 2, "MED345", "Comprehensive dental care for families and individuals.", 100000.0, "Dental Care Plan", "/documents/Instagram for Business Guide 2023.pdf", 4000.0, 12.0 },
-                    { 4, 3, "MED456", "Insurance coverage for eye care and vision health.", 75000.0, "Vision Care Plan", "/documents/Instagram for Business Guide 2023.pdf", 3100.0, 12.0 },
-                    { 5, 1, "MED567", "Emergency health coverage for unexpected medical needs.", 300000.0, "Emergency Health Plan", "/documents/Instagram for Business Guide 2023.pdf", 8300.0, 18.0 }
+                    { 1, 1, "MED123", "Covers all medical expenses for your family.", 500000.0, "Family Health Plan", "~/documents/Instagram for Business Guide 2023.pdf", 15000.0, 36.0 },
+                    { 2, 2, "MED234", "Personal health insurance plan for individuals.", 200000.0, "Individual Health Plan", "~/documents/Instagram for Business Guide 2023.pdf", 5500.0, 24.0 },
+                    { 3, 2, "MED345", "Comprehensive dental care for families and individuals.", 100000.0, "Dental Care Plan", "~/documents/Instagram for Business Guide 2023.pdf", 4000.0, 12.0 },
+                    { 4, 3, "MED456", "Insurance coverage for eye care and vision health.", 75000.0, "Vision Care Plan", "~/documents/Instagram for Business Guide 2023.pdf", 3100.0, 12.0 },
+                    { 5, 1, "MED567", "Emergency health coverage for unexpected medical needs.", 300000.0, "Emergency Health Plan", "~/documents/Instagram for Business Guide 2023.pdf", 8300.0, 18.0 }
                 });
 
             migrationBuilder.InsertData(
@@ -225,11 +225,11 @@ namespace App.DataAccessLibrary.Migrations
                 columns: new[] { "empno", "EmployeeAdded", "Employee_Pictureurl", "PolicyId", "Role", "Salary", "address", "city", "contactno", "country", "designation", "firstname", "joindate", "lastname", "password", "policystatus", "state", "username" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2024, 4, 2, 23, 40, 26, 1, DateTimeKind.Local).AddTicks(4750), "/img/doctors/doctor_1.jpg", 1, "Employee", 80000, "456 Developer Rd.", "DevCity", "0987654321", "TechLand", "Software Engineer", "John", new DateTime(2023, 12, 24, 23, 40, 26, 1, DateTimeKind.Local).AddTicks(4752), "Doe", "password", "Active", "TechState", "johndoe" },
-                    { 2, new DateTime(2024, 4, 2, 23, 40, 26, 1, DateTimeKind.Local).AddTicks(4761), "/img/doctors/doctor_1.jpg", 2, "Employee", 95000, "789 Project Blvd.", "ManageCity", "1234567890", "LeadLand", "Project Manager", "Alice", new DateTime(2023, 9, 15, 23, 40, 26, 1, DateTimeKind.Local).AddTicks(4762), "Johnson", "securepassword", "Active", "ManageState", "alicejohnson" },
-                    { 3, new DateTime(2024, 4, 2, 23, 40, 26, 1, DateTimeKind.Local).AddTicks(4765), "/img/doctors/doctor_1.jpg", 3, "Employee", 70000, "101 QA Lane", "TestCity", "2345678901", "QualityLand", "QA Engineer", "Bob", new DateTime(2023, 11, 4, 23, 40, 26, 1, DateTimeKind.Local).AddTicks(4766), "Smith", "testpassword", "Active", "TestState", "bobsmith" },
-                    { 4, new DateTime(2024, 4, 2, 23, 40, 26, 1, DateTimeKind.Local).AddTicks(4768), "/img/doctors/doctor_1.jpg", 2, "Employee", 85000, "404 DevOps Way", "OpsCity", "3456789012", "DeployLand", "DevOps Specialist", "Carol", new DateTime(2023, 12, 4, 23, 40, 26, 1, DateTimeKind.Local).AddTicks(4769), "Williams", "devopspass", "Active", "OpsState", "carolw" },
-                    { 5, new DateTime(2024, 4, 2, 23, 40, 26, 1, DateTimeKind.Local).AddTicks(4771), "/img/doctors/doctor_1.jpg", 1, "Employee", 75000, "202 Design St.", "DesignCity", "4567890123", "CreativeLand", "UI/UX Designer", "Dave", new DateTime(2023, 10, 5, 23, 40, 26, 1, DateTimeKind.Local).AddTicks(4771), "Brown", "designpass", "Active", "DesignState", "davebrown" }
+                    { 1, new DateTime(2024, 4, 3, 0, 42, 9, 517, DateTimeKind.Local).AddTicks(7305), "~/img/doctors/doctor_1.jpg", 1, "Employee", 80000, "456 Developer Rd.", "DevCity", "0987654321", "TechLand", "Software Engineer", "John", new DateTime(2023, 12, 25, 0, 42, 9, 517, DateTimeKind.Local).AddTicks(7307), "Doe", "password", "Active", "TechState", "johndoe" },
+                    { 2, new DateTime(2024, 4, 3, 0, 42, 9, 517, DateTimeKind.Local).AddTicks(7316), "~/img/doctors/doctor_1.jpg", 2, "Employee", 95000, "789 Project Blvd.", "ManageCity", "1234567890", "LeadLand", "Project Manager", "Alice", new DateTime(2023, 9, 16, 0, 42, 9, 517, DateTimeKind.Local).AddTicks(7317), "Johnson", "securepassword", "Active", "ManageState", "alicejohnson" },
+                    { 3, new DateTime(2024, 4, 3, 0, 42, 9, 517, DateTimeKind.Local).AddTicks(7320), "~/img/doctors/doctor_1.jpg", 3, "Employee", 70000, "101 QA Lane", "TestCity", "2345678901", "QualityLand", "QA Engineer", "Bob", new DateTime(2023, 11, 5, 0, 42, 9, 517, DateTimeKind.Local).AddTicks(7321), "Smith", "testpassword", "Active", "TestState", "bobsmith" },
+                    { 4, new DateTime(2024, 4, 3, 0, 42, 9, 517, DateTimeKind.Local).AddTicks(7323), "~/img/doctors/doctor_1.jpg", 2, "Employee", 85000, "404 DevOps Way", "OpsCity", "3456789012", "DeployLand", "DevOps Specialist", "Carol", new DateTime(2023, 12, 5, 0, 42, 9, 517, DateTimeKind.Local).AddTicks(7324), "Williams", "devopspass", "Active", "OpsState", "carolw" },
+                    { 5, new DateTime(2024, 4, 3, 0, 42, 9, 517, DateTimeKind.Local).AddTicks(7326), "~/img/doctors/doctor_1.jpg", 1, "Employee", 75000, "202 Design St.", "DesignCity", "4567890123", "CreativeLand", "UI/UX Designer", "Dave", new DateTime(2023, 10, 6, 0, 42, 9, 517, DateTimeKind.Local).AddTicks(7327), "Brown", "designpass", "Active", "DesignState", "davebrown" }
                 });
 
             migrationBuilder.CreateIndex(

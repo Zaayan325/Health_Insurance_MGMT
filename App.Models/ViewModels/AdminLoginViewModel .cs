@@ -7,6 +7,9 @@ namespace App.Models.ViewModels
 {
     public class AdminLoginViewModel
     {
+        
+        public int Adm_ID { get; set; }
+
         [Required]
         [MaxLength(25, ErrorMessage = "It should be max 25 or min 3 characters.")]
         [MinLength(3, ErrorMessage = "It should be max 25 or min 3 characters.")]

@@ -13,9 +13,12 @@ namespace App.DataAccessLibrary.Infrastructure.IRepository
         void Update(AdminLogin adminLoginn);
 		bool ValidateAdmin(string Email, string AdminPassword, int Adm_Id);
 
-	
+		string GetAdminImageUrlById(int admId);
+        //string GetAdminDesignation(int admId);
+        //AdminLogin GetAdminSessionData(int admId);
 
-
+        //void LockScreen(string userId);
+        //bool UnlockScreen(string userId, string password);
 
 
 

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace App.DataAccessLibrary.Migrations
 {
     [DbContext(typeof(HealthInsuranceMGMT))]
-    [Migration("20240402184026_AddAllToDatabase")]
+    [Migration("20240402194209_AddAllToDatabase")]
     partial class AddAllToDatabase
     {
         /// <inheritdoc />
@@ -78,10 +78,10 @@ namespace App.DataAccessLibrary.Migrations
                         {
                             Adm_ID = 1,
                             Address = "123 Admin St, Admin City",
-                            AdminAdded = new DateTime(2024, 4, 2, 23, 40, 26, 1, DateTimeKind.Local).AddTicks(4794),
+                            AdminAdded = new DateTime(2024, 4, 3, 0, 42, 9, 517, DateTimeKind.Local).AddTicks(7353),
                             AdminName = "Syed Kashan Abbas Naqvi",
                             AdminPassword = "kashan110",
-                            AdminPhotourl = "/img/doctors/doctor_1.jpg",
+                            AdminPhotourl = "~/img/doctors/doctor_1.jpg",
                             ConfirmPassword = "kashan110",
                             Email = "kashan2209e@aptechgdn.net",
                             Phone = "1234567890",
@@ -91,10 +91,10 @@ namespace App.DataAccessLibrary.Migrations
                         {
                             Adm_ID = 2,
                             Address = "456 Admin Lane, Admin Town",
-                            AdminAdded = new DateTime(2024, 4, 2, 23, 40, 26, 1, DateTimeKind.Local).AddTicks(4826),
+                            AdminAdded = new DateTime(2024, 4, 3, 0, 42, 9, 517, DateTimeKind.Local).AddTicks(7356),
                             AdminName = "Asghar Abbas",
                             AdminPassword = "asghar110",
-                            AdminPhotourl = "/img/doctors/doctor_1.jpg",
+                            AdminPhotourl = "~/img/doctors/doctor_1.jpg",
                             ConfirmPassword = "asghar110",
                             Email = "asghar2209e@aptechgdn.net",
                             Phone = "0987654321",
@@ -104,10 +104,10 @@ namespace App.DataAccessLibrary.Migrations
                         {
                             Adm_ID = 3,
                             Address = "456 Admin Lane, Admin Town",
-                            AdminAdded = new DateTime(2024, 4, 2, 23, 40, 26, 1, DateTimeKind.Local).AddTicks(4829),
+                            AdminAdded = new DateTime(2024, 4, 3, 0, 42, 9, 517, DateTimeKind.Local).AddTicks(7358),
                             AdminName = "Ali Shan",
                             AdminPassword = "alishan110",
-                            AdminPhotourl = "/img/doctors/doctor_3.jpg",
+                            AdminPhotourl = "~/img/doctors/doctor_3.jpg",
                             ConfirmPassword = "alishan110",
                             Email = "alishan2209e@aptechgdn.net",
                             Phone = "0987654321",
@@ -117,10 +117,10 @@ namespace App.DataAccessLibrary.Migrations
                         {
                             Adm_ID = 4,
                             Address = "456 Admin Lane, Admin Town",
-                            AdminAdded = new DateTime(2024, 4, 2, 23, 40, 26, 1, DateTimeKind.Local).AddTicks(4831),
+                            AdminAdded = new DateTime(2024, 4, 3, 0, 42, 9, 517, DateTimeKind.Local).AddTicks(7360),
                             AdminName = "Zayaan Zubair",
                             AdminPassword = "zaayan110",
-                            AdminPhotourl = "/img/doctors/doctor_2.jpg",
+                            AdminPhotourl = "~/img/doctors/doctor_2.jpg",
                             ConfirmPassword = "zaayan110",
                             Email = "zaayan220901e@aptechgdn.net",
                             Phone = "0987654321",
@@ -130,10 +130,10 @@ namespace App.DataAccessLibrary.Migrations
                         {
                             Adm_ID = 5,
                             Address = "456 Admin Lane, Admin Town",
-                            AdminAdded = new DateTime(2024, 4, 2, 23, 40, 26, 1, DateTimeKind.Local).AddTicks(4833),
+                            AdminAdded = new DateTime(2024, 4, 3, 0, 42, 9, 517, DateTimeKind.Local).AddTicks(7363),
                             AdminName = "Waleed Hoth",
                             AdminPassword = "waleed110",
-                            AdminPhotourl = "/img/doctors/doctor_1.jpg",
+                            AdminPhotourl = "~/img/doctors/doctor_1.jpg",
                             ConfirmPassword = "waleed110",
                             Email = "waleed2209e@aptechgdn.net",
                             Phone = "0987654321",
@@ -268,8 +268,8 @@ namespace App.DataAccessLibrary.Migrations
                         new
                         {
                             empno = 1,
-                            EmployeeAdded = new DateTime(2024, 4, 2, 23, 40, 26, 1, DateTimeKind.Local).AddTicks(4750),
-                            Employee_Pictureurl = "/img/doctors/doctor_1.jpg",
+                            EmployeeAdded = new DateTime(2024, 4, 3, 0, 42, 9, 517, DateTimeKind.Local).AddTicks(7305),
+                            Employee_Pictureurl = "~/img/doctors/doctor_1.jpg",
                             PolicyId = 1,
                             Role = "Employee",
                             Salary = 80000,
@@ -279,7 +279,7 @@ namespace App.DataAccessLibrary.Migrations
                             country = "TechLand",
                             designation = "Software Engineer",
                             firstname = "John",
-                            joindate = new DateTime(2023, 12, 24, 23, 40, 26, 1, DateTimeKind.Local).AddTicks(4752),
+                            joindate = new DateTime(2023, 12, 25, 0, 42, 9, 517, DateTimeKind.Local).AddTicks(7307),
                             lastname = "Doe",
                             password = "password",
                             policystatus = "Active",
@@ -289,8 +289,8 @@ namespace App.DataAccessLibrary.Migrations
                         new
                         {
                             empno = 2,
-                            EmployeeAdded = new DateTime(2024, 4, 2, 23, 40, 26, 1, DateTimeKind.Local).AddTicks(4761),
-                            Employee_Pictureurl = "/img/doctors/doctor_1.jpg",
+                            EmployeeAdded = new DateTime(2024, 4, 3, 0, 42, 9, 517, DateTimeKind.Local).AddTicks(7316),
+                            Employee_Pictureurl = "~/img/doctors/doctor_1.jpg",
                             PolicyId = 2,
                             Role = "Employee",
                             Salary = 95000,
@@ -300,7 +300,7 @@ namespace App.DataAccessLibrary.Migrations
                             country = "LeadLand",
                             designation = "Project Manager",
                             firstname = "Alice",
-                            joindate = new DateTime(2023, 9, 15, 23, 40, 26, 1, DateTimeKind.Local).AddTicks(4762),
+                            joindate = new DateTime(2023, 9, 16, 0, 42, 9, 517, DateTimeKind.Local).AddTicks(7317),
                             lastname = "Johnson",
                             password = "securepassword",
                             policystatus = "Active",
@@ -310,8 +310,8 @@ namespace App.DataAccessLibrary.Migrations
                         new
                         {
                             empno = 3,
-                            EmployeeAdded = new DateTime(2024, 4, 2, 23, 40, 26, 1, DateTimeKind.Local).AddTicks(4765),
-                            Employee_Pictureurl = "/img/doctors/doctor_1.jpg",
+                            EmployeeAdded = new DateTime(2024, 4, 3, 0, 42, 9, 517, DateTimeKind.Local).AddTicks(7320),
+                            Employee_Pictureurl = "~/img/doctors/doctor_1.jpg",
                             PolicyId = 3,
                             Role = "Employee",
                             Salary = 70000,
@@ -321,7 +321,7 @@ namespace App.DataAccessLibrary.Migrations
                             country = "QualityLand",
                             designation = "QA Engineer",
                             firstname = "Bob",
-                            joindate = new DateTime(2023, 11, 4, 23, 40, 26, 1, DateTimeKind.Local).AddTicks(4766),
+                            joindate = new DateTime(2023, 11, 5, 0, 42, 9, 517, DateTimeKind.Local).AddTicks(7321),
                             lastname = "Smith",
                             password = "testpassword",
                             policystatus = "Active",
@@ -331,8 +331,8 @@ namespace App.DataAccessLibrary.Migrations
                         new
                         {
                             empno = 4,
-                            EmployeeAdded = new DateTime(2024, 4, 2, 23, 40, 26, 1, DateTimeKind.Local).AddTicks(4768),
-                            Employee_Pictureurl = "/img/doctors/doctor_1.jpg",
+                            EmployeeAdded = new DateTime(2024, 4, 3, 0, 42, 9, 517, DateTimeKind.Local).AddTicks(7323),
+                            Employee_Pictureurl = "~/img/doctors/doctor_1.jpg",
                             PolicyId = 2,
                             Role = "Employee",
                             Salary = 85000,
@@ -342,7 +342,7 @@ namespace App.DataAccessLibrary.Migrations
                             country = "DeployLand",
                             designation = "DevOps Specialist",
                             firstname = "Carol",
-                            joindate = new DateTime(2023, 12, 4, 23, 40, 26, 1, DateTimeKind.Local).AddTicks(4769),
+                            joindate = new DateTime(2023, 12, 5, 0, 42, 9, 517, DateTimeKind.Local).AddTicks(7324),
                             lastname = "Williams",
                             password = "devopspass",
                             policystatus = "Active",
@@ -352,8 +352,8 @@ namespace App.DataAccessLibrary.Migrations
                         new
                         {
                             empno = 5,
-                            EmployeeAdded = new DateTime(2024, 4, 2, 23, 40, 26, 1, DateTimeKind.Local).AddTicks(4771),
-                            Employee_Pictureurl = "/img/doctors/doctor_1.jpg",
+                            EmployeeAdded = new DateTime(2024, 4, 3, 0, 42, 9, 517, DateTimeKind.Local).AddTicks(7326),
+                            Employee_Pictureurl = "~/img/doctors/doctor_1.jpg",
                             PolicyId = 1,
                             Role = "Employee",
                             Salary = 75000,
@@ -363,7 +363,7 @@ namespace App.DataAccessLibrary.Migrations
                             country = "CreativeLand",
                             designation = "UI/UX Designer",
                             firstname = "Dave",
-                            joindate = new DateTime(2023, 10, 5, 23, 40, 26, 1, DateTimeKind.Local).AddTicks(4771),
+                            joindate = new DateTime(2023, 10, 6, 0, 42, 9, 517, DateTimeKind.Local).AddTicks(7327),
                             lastname = "Brown",
                             password = "designpass",
                             policystatus = "Active",
@@ -460,7 +460,7 @@ namespace App.DataAccessLibrary.Migrations
                             Ins_CompanyLogourl = "https://cdn2.vectorstock.com/i/1000x1000/21/56/health-insurance-emblem-vector-4462156.jpg",
                             Ins_Description = "Comprehensive health insurance for all your needs.",
                             Ins_Name = "HealthGuard",
-                            InsuranceCompanyAdded = new DateTime(2024, 4, 2, 23, 40, 26, 1, DateTimeKind.Local).AddTicks(4582),
+                            InsuranceCompanyAdded = new DateTime(2024, 4, 3, 0, 42, 9, 517, DateTimeKind.Local).AddTicks(7124),
                             Phone = "1234567890"
                         },
                         new
@@ -471,7 +471,7 @@ namespace App.DataAccessLibrary.Migrations
                             Ins_CompanyLogourl = "https://cdn2.vectorstock.com/i/1000x1000/21/56/health-insurance-emblem-vector-4462156.jpg",
                             Ins_Description = "Comprehensive health i for all your needs.",
                             Ins_Name = "HealtyLife",
-                            InsuranceCompanyAdded = new DateTime(2024, 4, 2, 23, 40, 26, 1, DateTimeKind.Local).AddTicks(4595),
+                            InsuranceCompanyAdded = new DateTime(2024, 4, 3, 0, 42, 9, 517, DateTimeKind.Local).AddTicks(7135),
                             Phone = "1234567890"
                         },
                         new
@@ -482,7 +482,7 @@ namespace App.DataAccessLibrary.Migrations
                             Ins_CompanyLogourl = "https://cdn2.vectorstock.com/i/1000x1000/21/56/health-insurance-emblem-vector-4462156.jpg",
                             Ins_Description = "Life is Great do all Work.",
                             Ins_Name = "Pure Life",
-                            InsuranceCompanyAdded = new DateTime(2024, 4, 2, 23, 40, 26, 1, DateTimeKind.Local).AddTicks(4597),
+                            InsuranceCompanyAdded = new DateTime(2024, 4, 3, 0, 42, 9, 517, DateTimeKind.Local).AddTicks(7137),
                             Phone = "1234567890"
                         });
                 });
@@ -541,7 +541,7 @@ namespace App.DataAccessLibrary.Migrations
                             PolicyDescription = "Covers all medical expenses for your family.",
                             PolicyFullAmount = 500000.0,
                             PolicyName = "Family Health Plan",
-                            PolicyTermasandConditionsurl = "/documents/Instagram for Business Guide 2023.pdf",
+                            PolicyTermasandConditionsurl = "~/documents/Instagram for Business Guide 2023.pdf",
                             equatedmonthlyinstalment = 15000.0,
                             policymonths = 36.0
                         },
@@ -553,7 +553,7 @@ namespace App.DataAccessLibrary.Migrations
                             PolicyDescription = "Personal health insurance plan for individuals.",
                             PolicyFullAmount = 200000.0,
                             PolicyName = "Individual Health Plan",
-                            PolicyTermasandConditionsurl = "/documents/Instagram for Business Guide 2023.pdf",
+                            PolicyTermasandConditionsurl = "~/documents/Instagram for Business Guide 2023.pdf",
                             equatedmonthlyinstalment = 5500.0,
                             policymonths = 24.0
                         },
@@ -565,7 +565,7 @@ namespace App.DataAccessLibrary.Migrations
                             PolicyDescription = "Comprehensive dental care for families and individuals.",
                             PolicyFullAmount = 100000.0,
                             PolicyName = "Dental Care Plan",
-                            PolicyTermasandConditionsurl = "/documents/Instagram for Business Guide 2023.pdf",
+                            PolicyTermasandConditionsurl = "~/documents/Instagram for Business Guide 2023.pdf",
                             equatedmonthlyinstalment = 4000.0,
                             policymonths = 12.0
                         },
@@ -577,7 +577,7 @@ namespace App.DataAccessLibrary.Migrations
                             PolicyDescription = "Insurance coverage for eye care and vision health.",
                             PolicyFullAmount = 75000.0,
                             PolicyName = "Vision Care Plan",
-                            PolicyTermasandConditionsurl = "/documents/Instagram for Business Guide 2023.pdf",
+                            PolicyTermasandConditionsurl = "~/documents/Instagram for Business Guide 2023.pdf",
                             equatedmonthlyinstalment = 3100.0,
                             policymonths = 12.0
                         },
@@ -589,7 +589,7 @@ namespace App.DataAccessLibrary.Migrations
                             PolicyDescription = "Emergency health coverage for unexpected medical needs.",
                             PolicyFullAmount = 300000.0,
                             PolicyName = "Emergency Health Plan",
-                            PolicyTermasandConditionsurl = "/documents/Instagram for Business Guide 2023.pdf",
+                            PolicyTermasandConditionsurl = "~/documents/Instagram for Business Guide 2023.pdf",
                             equatedmonthlyinstalment = 8300.0,
                             policymonths = 18.0
                         });

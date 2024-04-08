@@ -83,55 +83,57 @@ namespace Health_Insurance_MGMT.Controllers
 
 
         // POST: EmployeeController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> UpdateEmployee(EmpRegisterViewModel viewModel)
+       [HttpPost]
+[ValidateAntiForgeryToken]
+public IActionResult UpdateEmployee(EmpRegisterViewModel viewModel)
+{
+    if (ModelState.IsValid)
+    {
+        var empRegister = _unitofWork.EmpRegisterRepository.GetT(emp => emp.empno == viewModel.empno);
+        if (empRegister == null)
         {
-            if (ModelState.IsValid)
-            {
-                var empRegister = _unitofWork.EmpRegisterRepository.GetT(emp => emp.empno == viewModel.empno);
-                if (empRegister == null)
-                {
-                    return NotFound();
-                }
-
-                string uniqueFileName = ProcessUploadedFile(viewModel); // Handle the file upload
-                if (!string.IsNullOrEmpty(uniqueFileName)) // Check if a new file was uploaded
-                {
-                    empRegister.Employee_Pictureurl = uniqueFileName; // Update the picture URL/path in the domain model
-                }
-
-                // Map updated properties from ViewModel to Domain Model
-                empRegister.designation = viewModel.designation;
-                empRegister.joindate = viewModel.joindate;
-                empRegister.Salary = viewModel.Salary;
-                empRegister.firstname = viewModel.firstname;
-                empRegister.lastname = viewModel.lastname;
-                empRegister.username = viewModel.username;
-                empRegister.password = viewModel.password;
-                empRegister.address = viewModel.address;
-                empRegister.contactno = viewModel.contactno;
-                empRegister.state = viewModel.state;
-                empRegister.country = viewModel.country;
-                empRegister.city = viewModel.city;
-                empRegister.policystatus = viewModel.policystatus;
-                empRegister.PolicyId = viewModel.SelectedPolicyId;
-
-                await _unitofWork.EmpRegisterRepository.UpdateAsync(empRegister); // Now correctly awaits the async method
-
-                return RedirectToAction("Dashboard", "Admin");
-            }
-
-            // Repopulate PolicyOptions if model validation fails
-            viewModel.PolicyOptions = _unitofWork.PoliciesRepository.GetAll()
-                                       .Select(p => new SelectListItem
-                                       {
-                                           Value = p.PolicyId.ToString(),
-                                           Text = p.PolicyName
-                                       }).ToList();
-
-            return View(viewModel);
+            return NotFound();
         }
+
+        string uniqueFileName = ProcessUploadedFile(viewModel); // Handle the file upload
+        if (!string.IsNullOrEmpty(uniqueFileName)) // Check if a new file was uploaded
+        {
+            empRegister.Employee_Pictureurl = uniqueFileName; // Update the picture URL/path in the domain model
+        }
+
+        // Map updated properties from ViewModel to Domain Model
+        empRegister.designation = viewModel.designation;
+        empRegister.joindate = viewModel.joindate;
+        empRegister.Salary = viewModel.Salary;
+        empRegister.firstname = viewModel.firstname;
+        empRegister.lastname = viewModel.lastname;
+        empRegister.username = viewModel.username;
+        empRegister.password = viewModel.password;
+        empRegister.address = viewModel.address;
+        empRegister.contactno = viewModel.contactno;
+        empRegister.state = viewModel.state;
+        empRegister.country = viewModel.country;
+        empRegister.city = viewModel.city;
+        empRegister.policystatus = viewModel.policystatus;
+        empRegister.PolicyId = viewModel.SelectedPolicyId;
+
+        _unitofWork.EmpRegisterRepository.Update(empRegister); // Use synchronous update method
+        _unitofWork.save(); // Assuming this is the method to commit the changes to the database
+
+        return RedirectToAction("Dashboard", "Admin");
+    }
+
+    // Repopulate PolicyOptions if model validation fails
+    viewModel.PolicyOptions = _unitofWork.PoliciesRepository.GetAll()
+                                .Select(p => new SelectListItem
+                                {
+                                    Value = p.PolicyId.ToString(),
+                                    Text = p.PolicyName
+                                }).ToList();
+
+    return View(viewModel);
+}
+
 
         private string ProcessUploadedFile(EmpRegisterViewModel viewModel)
         {
@@ -234,7 +236,7 @@ namespace Health_Insurance_MGMT.Controllers
         // POST: EmployeeController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EmployeeEditbyUser(EmpRegisterViewModel viewModel)
+        public IActionResult EmployeeEditbyUser(EmpRegisterViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
@@ -266,7 +268,10 @@ namespace Health_Insurance_MGMT.Controllers
                 empRegister.policystatus = viewModel.policystatus;
                 empRegister.PolicyId = viewModel.SelectedPolicyId;
 
-                await _unitofWork.EmpRegisterRepository.UpdateAsync(empRegister); // Ensure this method exists or is properly implemented
+                _unitofWork.EmpRegisterRepository.Update(empRegister); // Use the synchronous Update method
+
+                // Assuming Save or SaveChanges method commits the update to the database synchronously
+                _unitofWork.save();
 
                 return RedirectToAction("Index", "Home");
             }
@@ -281,6 +286,7 @@ namespace Health_Insurance_MGMT.Controllers
 
             return View(viewModel);
         }
+
 
 
 

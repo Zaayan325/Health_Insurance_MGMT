@@ -12,6 +12,16 @@
     <div class="col-md-6">
         <a asp-action="CreateAdmin" asp-controller="AdminLogin" class="btn  btn-info">Add Admin</a>
     </div>
+    @if (TempData["AlertMessage"] != null)
+    {
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            @TempData["AlertMessage"]
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
+
 </div>
 
 
@@ -45,9 +55,8 @@
                         </td>
 
                         <td>
-                            <a asp-action="EditInsurance" asp-controller="Insurance" asp-route-id="@i.Adm_ID" class="btn btn-group-sm btn-outline-success">Edit</a>
-                            <a asp-action="DeleteInsurance" asp-controller="Insurance" asp-route-id="@i.Adm_ID" class="btn btn-group-sm btn-outline-danger">Delete</a>
-                            <a asp-action="DetailsInsurance" asp-controller="Insurance" asp-route-id="@i.Adm_ID" class="btn btn-group-sm btn-outline-success">Details</a>
+                            <a asp-action="EditAdmin" asp-controller="AdminLogin" asp-route-id="@i.Adm_ID" class="btn btn-group-sm btn-outline-success">Edit</a>
+                            <a asp-action="DeleteAdmin" asp-controller="AdminLogin" asp-route-id="@i.Adm_ID" class="btn btn-group-sm btn-outline-danger">Delete</a>
                         </td>
                     </tr>
                 }

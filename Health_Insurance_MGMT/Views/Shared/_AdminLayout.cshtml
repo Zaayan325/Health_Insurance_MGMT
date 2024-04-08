@@ -41,10 +41,26 @@
 
 				<div class="">
 					<div class="main-menu-header">
-						<img class="img-radius" src="~/adminassets/images/user/avatar-2.jpg" alt="User-Profile-Image">
+						@if (Context.Session.GetInt32("Adm_Id") != null)
+						{
+							// Assuming the session stores just the filename of the image
+							var adminImageFilename = Context.Session.GetString("AdminImageUrl");
+							// Construct the path dynamically
+							var imagePath = Url.Content($"~/uploads/AdminData/{adminImageFilename}");
+
+							<img src="@imagePath" class="img-radius rounded-full" alt="Admin-Profile-Image">
+						}
+
 						<div class="user-details">
-							<span>John Doe</span>
-							<div id="more-details">UX Designer<i class="fa fa-chevron-down m-l-5"></i></div>
+							@if (Context.Session.GetInt32("AdminUsername") != null)
+							{
+
+
+								<span>@Context.Session.GetString("AdminUsername")</span>
+								
+							}
+							 <!-- Consider also dynamically updating the name based on session information -->
+							<div id="more-details">Admin<i class="fa fa-chevron-down m-l-5"></i></div>
 						</div>
 					</div>
 					<div class="collapse" id="nav-user-link">
@@ -55,6 +71,8 @@
 						</ul>
 					</div>
 				</div>
+
+
 
 				<ul class="nav pcoded-inner-navbar ">
 
@@ -283,17 +301,33 @@
 						</a>
 						<div class="dropdown-menu dropdown-menu-right profile-notification">
 							<div class="pro-head">
-								<img src="~/assets/images/user/avatar-1.jpg" class="img-radius" alt="User-Profile-Image">
-								<span>John Doe</span>
-								<a href="auth-signin.html" class="dud-logout" title="Logout">
-									<i class="feather icon-log-out"></i>
-								</a>
+								@if (Context.Session.GetInt32("Adm_Id") != null)
+								{
+									// Assuming the session stores just the filename of the image
+									var adminImageFilename = Context.Session.GetString("AdminImageUrl");
+									// Construct the path dynamically
+									var imagePath = Url.Content($"~/uploads/AdminData/{adminImageFilename}");
+
+									<img src="@imagePath" class="img-radius rounded-full" alt="Admin-Profile-Image">
+								}
+								@if (Context.Session.GetInt32("AdminUsername") != null)
+								{
+
+
+									<span>@Context.Session.GetString("AdminUsername")</span>
+
+								}
+								<form asp-controller="Home" asp-action="AdminLogout" method="post" style="display:inline;">
+									<button type="submit" class="dud-logout" title="Logout" style="border: none; background: none; cursor: pointer;">
+										<i class="feather icon-log-out"></i>
+									</button>
+								</form>
+								
 							</div>
 							<ul class="pro-body">
 								<li><a href="user-profile.html" class="dropdown-item"><i class="feather icon-user"></i> Profile</a></li>
-								<li><a href="email_inbox.html" class="dropdown-item"><i class="feather icon-mail"></i> My Messages</a></li>
-								<li><a href="auth-signin.html" class="dropdown-item"><i class="feather icon-lock"></i> Lock Screen</a></li>
-							</ul>
+								<li><a asp-controller="Home" asp-action="LockScreen" class="dropdown-item"><i class="feather icon-lock"></i> Lock Screen</a></li>
+
 						</div>
 					</div>
 				</li>
