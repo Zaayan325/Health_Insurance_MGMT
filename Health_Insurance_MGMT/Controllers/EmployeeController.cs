@@ -27,6 +27,11 @@ namespace Health_Insurance_MGMT.Controllers
         // GET: EmployeeController/Details/5
         public ActionResult DetailsEmployee(int id)
         {
+            if (HttpContext.Session.GetInt32("Adm_Id") == null)
+            {
+                return RedirectToAction("LoginAdmin", "Home");
+
+            }
             var employee = _unitofWork.EmpRegisterRepository.GetT(emp => emp.empno == id);
             if (employee == null)
             {
@@ -47,6 +52,11 @@ namespace Health_Insurance_MGMT.Controllers
         // GET: EmployeeController/Edit/5
         public IActionResult UpdateEmployee(int id)
         {
+            if (HttpContext.Session.GetInt32("Adm_Id") == null)
+            {
+                return RedirectToAction("LoginAdmin", "Home");
+
+            }
             var empRegister = _unitofWork.EmpRegisterRepository.GetT(emp => emp.empno == id);
             if (empRegister == null)
             {
@@ -87,7 +97,12 @@ namespace Health_Insurance_MGMT.Controllers
 [ValidateAntiForgeryToken]
 public IActionResult UpdateEmployee(EmpRegisterViewModel viewModel)
 {
-    if (ModelState.IsValid)
+            if (HttpContext.Session.GetInt32("Adm_Id") == null)
+            {
+                return RedirectToAction("LoginAdmin", "Home");
+
+            }
+            if (ModelState.IsValid)
     {
         var empRegister = _unitofWork.EmpRegisterRepository.GetT(emp => emp.empno == viewModel.empno);
         if (empRegister == null)
@@ -157,6 +172,11 @@ public IActionResult UpdateEmployee(EmpRegisterViewModel viewModel)
         // GET: EmployeeController/Delete/5
         public IActionResult DeleteEmployee(int? id)
         {
+            if (HttpContext.Session.GetInt32("Adm_Id") == null)
+            {
+                return RedirectToAction("LoginAdmin", "Home");
+
+            }
             if (id == null || id == 0)
             {
                 return NotFound();
@@ -177,6 +197,11 @@ public IActionResult UpdateEmployee(EmpRegisterViewModel viewModel)
         [ValidateAntiForgeryToken]
         public IActionResult DeleteEmployeePOST(int? id)
         {
+            if (HttpContext.Session.GetInt32("Adm_Id") == null)
+            {
+                return RedirectToAction("LoginAdmin", "Home");
+
+            }
             if (id == null || id == 0)
             {
                 return NotFound();

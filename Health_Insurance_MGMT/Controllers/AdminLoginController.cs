@@ -25,6 +25,11 @@ namespace Health_Insurance_MGMT.Controllers
         // GET: AdminLoginController/Create
         public ActionResult CreateAdmin()
         {
+            if (HttpContext.Session.GetInt32("Adm_Id") == null)
+            {
+                return RedirectToAction("LoginAdmin", "Home");
+
+            }
             return View();
         }
 
@@ -33,7 +38,12 @@ namespace Health_Insurance_MGMT.Controllers
 		[ValidateAntiForgeryToken]
 		public IActionResult CreateAdmin(AdminLoginViewModel model)
 		{
-			if (ModelState.IsValid)
+            if (HttpContext.Session.GetInt32("Adm_Id") == null)
+            {
+                return RedirectToAction("LoginAdmin", "Home");
+
+            }
+            if (ModelState.IsValid)
 			{
 				string uniqueFileName = null;
 				if (model.AdminPhoto != null && model.AdminPhoto.Length > 0)
@@ -83,6 +93,11 @@ namespace Health_Insurance_MGMT.Controllers
 		// GET: AdminLoginController/Edit/5
 		public ActionResult AdminsView()
         {
+            if (HttpContext.Session.GetInt32("Adm_Id") == null)
+            {
+                return RedirectToAction("LoginAdmin", "Home");
+
+            }
             IEnumerable<AdminLogin> adminslogedin = _unitofWork.AdminLoginRepository.GetAll();
             return View(adminslogedin);
             
@@ -91,6 +106,11 @@ namespace Health_Insurance_MGMT.Controllers
         // POST: AdminLoginController/Edit/5
         public ActionResult EditAdmin(int id)
         {
+            if (HttpContext.Session.GetInt32("Adm_Id") == null)
+            {
+                return RedirectToAction("LoginAdmin", "Home");
+
+            }
             var adminLogin = _unitofWork.AdminLoginRepository.GetT(u => u.Adm_ID == id);
             if (adminLogin == null)
             {
@@ -119,6 +139,11 @@ namespace Health_Insurance_MGMT.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EditAdmin(AdminLoginViewModel model)
         {
+            if (HttpContext.Session.GetInt32("Adm_Id") == null)
+            {
+                return RedirectToAction("LoginAdmin", "Home");
+
+            }
             if (ModelState.IsValid)
             {
                 var adminLogin = _unitofWork.AdminLoginRepository.GetT(u => u.Adm_ID == model.Adm_ID);
@@ -174,6 +199,11 @@ namespace Health_Insurance_MGMT.Controllers
         // GET: AdminLoginController/Delete/5
         public ActionResult DeleteAdmin(int id)
         {
+            if (HttpContext.Session.GetInt32("Adm_Id") == null)
+            {
+                return RedirectToAction("LoginAdmin", "Home");
+
+            }
             if (id == null || id == 0)
             {
                 return NotFound();
@@ -203,7 +233,12 @@ namespace Health_Insurance_MGMT.Controllers
 		[ValidateAntiForgeryToken]
 		public IActionResult DeleteAdminPOST(int? id)
 		{
-			if (id == null || id == 0)
+            if (HttpContext.Session.GetInt32("Adm_Id") == null)
+            {
+                return RedirectToAction("LoginAdmin", "Home");
+
+            }
+            if (id == null || id == 0)
 			{
 				return NotFound();
 			}

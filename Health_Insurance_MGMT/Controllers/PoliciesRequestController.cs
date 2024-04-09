@@ -24,12 +24,22 @@ namespace Health_Insurance_MGMT.Controllers
 
         public IActionResult ViewPolicyRequests()
         {
+
+            if (HttpContext.Session.GetInt32("Adm_Id") == null)
+            {
+                return RedirectToAction("LoginAdmin", "Home");
+
+            }
             IEnumerable<PolicyRequestDetails> policiesreq = _unitofWork.PolicyRequestRepository.GetAll();
             return View(policiesreq);
         }
         public IActionResult ApproveOrDisapprove(int id)
         {
-            
+            if (HttpContext.Session.GetInt32("Adm_Id") == null)
+            {
+                return RedirectToAction("LoginAdmin", "Home");
+
+            }
             var policyRequest = _unitofWork.PolicyRequestRepository.GetT(pr => pr.RequestId == id);
             if (policyRequest == null)
             {
@@ -70,6 +80,11 @@ namespace Health_Insurance_MGMT.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult ApproveOrDisapprove(PolicyRequestDetailsViewModel viewModel)
         {
+            if (HttpContext.Session.GetInt32("Adm_Id") == null)
+            {
+                return RedirectToAction("LoginAdmin", "Home");
+
+            }
             if (ModelState.IsValid)
             {
                 var policyRequest = _unitofWork.PolicyRequestRepository.GetT(pr => pr.RequestId == viewModel.RequestId);
@@ -119,6 +134,11 @@ namespace Health_Insurance_MGMT.Controllers
 
         public IActionResult CreateRequestByUser()
         {
+            if (HttpContext.Session.GetInt32("User_Id") == null)
+            {
+                return RedirectToAction("LoginUser", "Home");
+
+            }
             // Static status options
             var statusOptions = new List<SelectListItem>
     {
@@ -151,6 +171,11 @@ namespace Health_Insurance_MGMT.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult CreateRequestByUser(PolicyRequestDetailsViewModel model)
         {
+            if (HttpContext.Session.GetInt32("User_Id") == null)
+            {
+                return RedirectToAction("LoginUser","Home");
+
+            }
             if (ModelState.IsValid)
             {
                 // Map the ViewModel to your domain model
@@ -191,6 +216,11 @@ namespace Health_Insurance_MGMT.Controllers
 
         public IActionResult MyPolicyRequests(int id)
 {
+            if (HttpContext.Session.GetInt32("User_Id") == null)
+            {
+                return RedirectToAction("LoginUser", "Home");
+
+            }
             // Replace this with the actual logic to get the current user's employee number
             var currentUserEmpNo = id; // This is just an example; adjust according to your auth system
 
@@ -205,6 +235,11 @@ namespace Health_Insurance_MGMT.Controllers
         // GET: PoliciesRequestController/Delete/5
         public IActionResult DeleteRequestPolicy(int? id)
         {
+            if (HttpContext.Session.GetInt32("Adm_Id") == null)
+            {
+                return RedirectToAction("LoginAdmin", "Home");
+
+            }
             if (id == null || id == 0)
             {
                 return NotFound();
@@ -229,6 +264,11 @@ namespace Health_Insurance_MGMT.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult DeleteRequestPolicyPost(int? id)
         {
+            if (HttpContext.Session.GetInt32("Adm_Id") == null)
+            {
+                return RedirectToAction("LoginAdmin", "Home");
+
+            }
             if (id == null || id == 0)
             {
                 return NotFound();

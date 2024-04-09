@@ -18,7 +18,7 @@ namespace App.DataAccessLibrary
           Address = "123 Insurance Lane",
           Phone = "1234567890",
           CompantWebsiteUrl = "https://www.healthguard.com",
-          Ins_CompanyLogourl = "https://cdn2.vectorstock.com/i/1000x1000/21/56/health-insurance-emblem-vector-4462156.jpg"
+          Ins_CompanyLogourl = "4799de3c-69c5-442c-813c-9d166c2d30dd_catpicture.jpg"
 
       },  new InsuranceCompany
       {
@@ -28,7 +28,7 @@ namespace App.DataAccessLibrary
           Address = "123 Insurance Lane",
           Phone = "1234567890",
           CompantWebsiteUrl = "https://www.healthguard.com",
-          Ins_CompanyLogourl = "https://cdn2.vectorstock.com/i/1000x1000/21/56/health-insurance-emblem-vector-4462156.jpg"
+          Ins_CompanyLogourl = "4799de3c-69c5-442c-813c-9d166c2d30dd_catpicture.jpg"
 
 
       }, new InsuranceCompany
@@ -39,7 +39,7 @@ namespace App.DataAccessLibrary
           Address = "12334 Insurance Lane",
           Phone = "1234567890",
           CompantWebsiteUrl = "https://www.healthguard.com",
-          Ins_CompanyLogourl = "https://cdn2.vectorstock.com/i/1000x1000/21/56/health-insurance-emblem-vector-4462156.jpg"
+          Ins_CompanyLogourl = "4799de3c-69c5-442c-813c-9d166c2d30dd_catpicture.jpg"
 
 
       }
@@ -127,7 +127,7 @@ namespace App.DataAccessLibrary
          address = "456 Developer Rd.",
          contactno = "0987654321",
          state = "TechState",
-         Employee_Pictureurl = "~/img/doctors/doctor_1.jpg",
+         Employee_Pictureurl = "4799de3c-69c5-442c-813c-9d166c2d30dd_catpicture.jpg",
          country = "TechLand",
          city = "DevCity",
          policystatus = "Active",
@@ -146,7 +146,7 @@ namespace App.DataAccessLibrary
          address = "789 Project Blvd.",
          contactno = "1234567890",
          state = "ManageState",
-         Employee_Pictureurl = "~/img/doctors/doctor_1.jpg",
+         Employee_Pictureurl = "4799de3c-69c5-442c-813c-9d166c2d30dd_catpicture.jpg",
          country = "LeadLand",
          city = "ManageCity",
          policystatus = "Active",
@@ -165,7 +165,7 @@ namespace App.DataAccessLibrary
          address = "101 QA Lane",
          contactno = "2345678901",
          state = "TestState",
-         Employee_Pictureurl = "~/img/doctors/doctor_1.jpg",
+         Employee_Pictureurl =  "4799de3c-69c5-442c-813c-9d166c2d30dd_catpicture.jpg",
          country = "QualityLand",
          city = "TestCity",
          policystatus = "Active",
@@ -184,7 +184,7 @@ namespace App.DataAccessLibrary
          address = "404 DevOps Way",
          contactno = "3456789012",
          state = "OpsState",
-         Employee_Pictureurl = "~/img/doctors/doctor_1.jpg",
+         Employee_Pictureurl =  "4799de3c-69c5-442c-813c-9d166c2d30dd_catpicture.jpg",
          country = "DeployLand",
          city = "OpsCity",
          policystatus = "Active",
@@ -206,7 +206,7 @@ namespace App.DataAccessLibrary
          country = "CreativeLand",
          city = "DesignCity",
          policystatus = "Active",
-         Employee_Pictureurl = "~/img/doctors/doctor_1.jpg",
+         Employee_Pictureurl =  "4799de3c-69c5-442c-813c-9d166c2d30dd_catpicture.jpg",
          PolicyId = 1
      }
  );
@@ -219,7 +219,7 @@ namespace App.DataAccessLibrary
            Email = "kashan2209e@aptechgdn.net",
            AdminPassword = "kashan110", // Consider using a hashed password in production
            ConfirmPassword = "kashan110", // Should be the same as AdminPassword for seeding
-           AdminPhotourl = "~/img/doctors/doctor_1.jpg", // Placeholder URL
+           AdminPhotourl =  "4799de3c-69c5-442c-813c-9d166c2d30dd_catpicture.jpg", // Placeholder URL
            Role = "Admin",
            Address = "123 Admin St, Admin City",
            Phone = "1234567890",
@@ -232,7 +232,7 @@ namespace App.DataAccessLibrary
            Email = "asghar2209e@aptechgdn.net",
            AdminPassword = "asghar110", // Consider using a hashed password in production
            ConfirmPassword = "asghar110", // Should be the same as AdminPassword for seeding
-           AdminPhotourl = "~/img/doctors/doctor_1.jpg", // Placeholder URL
+           AdminPhotourl =  "4799de3c-69c5-442c-813c-9d166c2d30dd_catpicture.jpg", // Placeholder URL
            Role = "Admin",
            Address = "456 Admin Lane, Admin Town",
            Phone = "0987654321",
@@ -246,7 +246,7 @@ namespace App.DataAccessLibrary
            Email = "alishan2209e@aptechgdn.net",
            AdminPassword = "alishan110", // Consider using a hashed password in production
            ConfirmPassword = "alishan110", // Should be the same as AdminPassword for seeding
-           AdminPhotourl = "~/img/doctors/doctor_3.jpg", // Placeholder URL
+           AdminPhotourl =  "4799de3c-69c5-442c-813c-9d166c2d30dd_catpicture.jpg", // Placeholder URL
            Role = "Admin",
            Address = "456 Admin Lane, Admin Town",
            Phone = "0987654321",
@@ -260,7 +260,7 @@ namespace App.DataAccessLibrary
            Email = "zaayan220901e@aptechgdn.net",
            AdminPassword = "zaayan110", // Consider using a hashed password in production
            ConfirmPassword = "zaayan110", // Should be the same as AdminPassword for seeding
-           AdminPhotourl = "~/img/doctors/doctor_2.jpg", // Placeholder URL
+           AdminPhotourl =  "4799de3c-69c5-442c-813c-9d166c2d30dd_catpicture.jpg", // Placeholder URL
            Role = "Admin",
            Address = "456 Admin Lane, Admin Town",
            Phone = "0987654321",
@@ -273,7 +273,7 @@ namespace App.DataAccessLibrary
            Email = "waleed2209e@aptechgdn.net",
            AdminPassword = "waleed110", // Consider using a hashed password in production
            ConfirmPassword = "waleed110", // Should be the same as AdminPassword for seeding
-           AdminPhotourl = "~/img/doctors/doctor_1.jpg", // Placeholder URL
+           AdminPhotourl = "4799de3c-69c5-442c-813c-9d166c2d30dd_catpicture.jpg", // Placeholder URL
            Role = "Admin",
            Address = "456 Admin Lane, Admin Town",
            Phone = "0987654321",

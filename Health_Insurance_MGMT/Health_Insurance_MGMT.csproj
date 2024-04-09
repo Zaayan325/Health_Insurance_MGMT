@@ -28,8 +28,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\uploads\InsuranceCompaniesData\" />
-    <Folder Include="wwwroot\uploads\AdminData\" />
     <Folder Include="wwwroot\uploads\EmployeeData\" />
     <Folder Include="wwwroot\uploads\PoliciesData\" />
   </ItemGroup>

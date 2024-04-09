@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace App.DataAccessLibrary.Migrations
 {
     [DbContext(typeof(HealthInsuranceMGMT))]
-    [Migration("20240402194209_AddAllToDatabase")]
+    [Migration("20240409170524_AddAllToDatabase")]
     partial class AddAllToDatabase
     {
         /// <inheritdoc />
@@ -78,10 +78,10 @@ namespace App.DataAccessLibrary.Migrations
                         {
                             Adm_ID = 1,
                             Address = "123 Admin St, Admin City",
-                            AdminAdded = new DateTime(2024, 4, 3, 0, 42, 9, 517, DateTimeKind.Local).AddTicks(7353),
+                            AdminAdded = new DateTime(2024, 4, 9, 22, 5, 23, 767, DateTimeKind.Local).AddTicks(3019),
                             AdminName = "Syed Kashan Abbas Naqvi",
                             AdminPassword = "kashan110",
-                            AdminPhotourl = "~/img/doctors/doctor_1.jpg",
+                            AdminPhotourl = "4799de3c-69c5-442c-813c-9d166c2d30dd_catpicture.jpg",
                             ConfirmPassword = "kashan110",
                             Email = "kashan2209e@aptechgdn.net",
                             Phone = "1234567890",
@@ -91,10 +91,10 @@ namespace App.DataAccessLibrary.Migrations
                         {
                             Adm_ID = 2,
                             Address = "456 Admin Lane, Admin Town",
-                            AdminAdded = new DateTime(2024, 4, 3, 0, 42, 9, 517, DateTimeKind.Local).AddTicks(7356),
+                            AdminAdded = new DateTime(2024, 4, 9, 22, 5, 23, 767, DateTimeKind.Local).AddTicks(3022),
                             AdminName = "Asghar Abbas",
                             AdminPassword = "asghar110",
-                            AdminPhotourl = "~/img/doctors/doctor_1.jpg",
+                            AdminPhotourl = "4799de3c-69c5-442c-813c-9d166c2d30dd_catpicture.jpg",
                             ConfirmPassword = "asghar110",
                             Email = "asghar2209e@aptechgdn.net",
                             Phone = "0987654321",
@@ -104,10 +104,10 @@ namespace App.DataAccessLibrary.Migrations
                         {
                             Adm_ID = 3,
                             Address = "456 Admin Lane, Admin Town",
-                            AdminAdded = new DateTime(2024, 4, 3, 0, 42, 9, 517, DateTimeKind.Local).AddTicks(7358),
+                            AdminAdded = new DateTime(2024, 4, 9, 22, 5, 23, 767, DateTimeKind.Local).AddTicks(3024),
                             AdminName = "Ali Shan",
                             AdminPassword = "alishan110",
-                            AdminPhotourl = "~/img/doctors/doctor_3.jpg",
+                            AdminPhotourl = "4799de3c-69c5-442c-813c-9d166c2d30dd_catpicture.jpg",
                             ConfirmPassword = "alishan110",
                             Email = "alishan2209e@aptechgdn.net",
                             Phone = "0987654321",
@@ -117,10 +117,10 @@ namespace App.DataAccessLibrary.Migrations
                         {
                             Adm_ID = 4,
                             Address = "456 Admin Lane, Admin Town",
-                            AdminAdded = new DateTime(2024, 4, 3, 0, 42, 9, 517, DateTimeKind.Local).AddTicks(7360),
+                            AdminAdded = new DateTime(2024, 4, 9, 22, 5, 23, 767, DateTimeKind.Local).AddTicks(3088),
                             AdminName = "Zayaan Zubair",
                             AdminPassword = "zaayan110",
-                            AdminPhotourl = "~/img/doctors/doctor_2.jpg",
+                            AdminPhotourl = "4799de3c-69c5-442c-813c-9d166c2d30dd_catpicture.jpg",
                             ConfirmPassword = "zaayan110",
                             Email = "zaayan220901e@aptechgdn.net",
                             Phone = "0987654321",
@@ -130,10 +130,10 @@ namespace App.DataAccessLibrary.Migrations
                         {
                             Adm_ID = 5,
                             Address = "456 Admin Lane, Admin Town",
-                            AdminAdded = new DateTime(2024, 4, 3, 0, 42, 9, 517, DateTimeKind.Local).AddTicks(7363),
+                            AdminAdded = new DateTime(2024, 4, 9, 22, 5, 23, 767, DateTimeKind.Local).AddTicks(3091),
                             AdminName = "Waleed Hoth",
                             AdminPassword = "waleed110",
-                            AdminPhotourl = "~/img/doctors/doctor_1.jpg",
+                            AdminPhotourl = "4799de3c-69c5-442c-813c-9d166c2d30dd_catpicture.jpg",
                             ConfirmPassword = "waleed110",
                             Email = "waleed2209e@aptechgdn.net",
                             Phone = "0987654321",
@@ -268,8 +268,8 @@ namespace App.DataAccessLibrary.Migrations
                         new
                         {
                             empno = 1,
-                            EmployeeAdded = new DateTime(2024, 4, 3, 0, 42, 9, 517, DateTimeKind.Local).AddTicks(7305),
-                            Employee_Pictureurl = "~/img/doctors/doctor_1.jpg",
+                            EmployeeAdded = new DateTime(2024, 4, 9, 22, 5, 23, 767, DateTimeKind.Local).AddTicks(2972),
+                            Employee_Pictureurl = "4799de3c-69c5-442c-813c-9d166c2d30dd_catpicture.jpg",
                             PolicyId = 1,
                             Role = "Employee",
                             Salary = 80000,
@@ -279,7 +279,7 @@ namespace App.DataAccessLibrary.Migrations
                             country = "TechLand",
                             designation = "Software Engineer",
                             firstname = "John",
-                            joindate = new DateTime(2023, 12, 25, 0, 42, 9, 517, DateTimeKind.Local).AddTicks(7307),
+                            joindate = new DateTime(2023, 12, 31, 22, 5, 23, 767, DateTimeKind.Local).AddTicks(2974),
                             lastname = "Doe",
                             password = "password",
                             policystatus = "Active",
@@ -289,8 +289,8 @@ namespace App.DataAccessLibrary.Migrations
                         new
                         {
                             empno = 2,
-                            EmployeeAdded = new DateTime(2024, 4, 3, 0, 42, 9, 517, DateTimeKind.Local).AddTicks(7316),
-                            Employee_Pictureurl = "~/img/doctors/doctor_1.jpg",
+                            EmployeeAdded = new DateTime(2024, 4, 9, 22, 5, 23, 767, DateTimeKind.Local).AddTicks(2982),
+                            Employee_Pictureurl = "4799de3c-69c5-442c-813c-9d166c2d30dd_catpicture.jpg",
                             PolicyId = 2,
                             Role = "Employee",
                             Salary = 95000,
@@ -300,7 +300,7 @@ namespace App.DataAccessLibrary.Migrations
                             country = "LeadLand",
                             designation = "Project Manager",
                             firstname = "Alice",
-                            joindate = new DateTime(2023, 9, 16, 0, 42, 9, 517, DateTimeKind.Local).AddTicks(7317),
+                            joindate = new DateTime(2023, 9, 22, 22, 5, 23, 767, DateTimeKind.Local).AddTicks(2983),
                             lastname = "Johnson",
                             password = "securepassword",
                             policystatus = "Active",
@@ -310,8 +310,8 @@ namespace App.DataAccessLibrary.Migrations
                         new
                         {
                             empno = 3,
-                            EmployeeAdded = new DateTime(2024, 4, 3, 0, 42, 9, 517, DateTimeKind.Local).AddTicks(7320),
-                            Employee_Pictureurl = "~/img/doctors/doctor_1.jpg",
+                            EmployeeAdded = new DateTime(2024, 4, 9, 22, 5, 23, 767, DateTimeKind.Local).AddTicks(2986),
+                            Employee_Pictureurl = "4799de3c-69c5-442c-813c-9d166c2d30dd_catpicture.jpg",
                             PolicyId = 3,
                             Role = "Employee",
                             Salary = 70000,
@@ -321,7 +321,7 @@ namespace App.DataAccessLibrary.Migrations
                             country = "QualityLand",
                             designation = "QA Engineer",
                             firstname = "Bob",
-                            joindate = new DateTime(2023, 11, 5, 0, 42, 9, 517, DateTimeKind.Local).AddTicks(7321),
+                            joindate = new DateTime(2023, 11, 11, 22, 5, 23, 767, DateTimeKind.Local).AddTicks(2987),
                             lastname = "Smith",
                             password = "testpassword",
                             policystatus = "Active",
@@ -331,8 +331,8 @@ namespace App.DataAccessLibrary.Migrations
                         new
                         {
                             empno = 4,
-                            EmployeeAdded = new DateTime(2024, 4, 3, 0, 42, 9, 517, DateTimeKind.Local).AddTicks(7323),
-                            Employee_Pictureurl = "~/img/doctors/doctor_1.jpg",
+                            EmployeeAdded = new DateTime(2024, 4, 9, 22, 5, 23, 767, DateTimeKind.Local).AddTicks(2989),
+                            Employee_Pictureurl = "4799de3c-69c5-442c-813c-9d166c2d30dd_catpicture.jpg",
                             PolicyId = 2,
                             Role = "Employee",
                             Salary = 85000,
@@ -342,7 +342,7 @@ namespace App.DataAccessLibrary.Migrations
                             country = "DeployLand",
                             designation = "DevOps Specialist",
                             firstname = "Carol",
-                            joindate = new DateTime(2023, 12, 5, 0, 42, 9, 517, DateTimeKind.Local).AddTicks(7324),
+                            joindate = new DateTime(2023, 12, 11, 22, 5, 23, 767, DateTimeKind.Local).AddTicks(2990),
                             lastname = "Williams",
                             password = "devopspass",
                             policystatus = "Active",
@@ -352,8 +352,8 @@ namespace App.DataAccessLibrary.Migrations
                         new
                         {
                             empno = 5,
-                            EmployeeAdded = new DateTime(2024, 4, 3, 0, 42, 9, 517, DateTimeKind.Local).AddTicks(7326),
-                            Employee_Pictureurl = "~/img/doctors/doctor_1.jpg",
+                            EmployeeAdded = new DateTime(2024, 4, 9, 22, 5, 23, 767, DateTimeKind.Local).AddTicks(2992),
+                            Employee_Pictureurl = "4799de3c-69c5-442c-813c-9d166c2d30dd_catpicture.jpg",
                             PolicyId = 1,
                             Role = "Employee",
                             Salary = 75000,
@@ -363,7 +363,7 @@ namespace App.DataAccessLibrary.Migrations
                             country = "CreativeLand",
                             designation = "UI/UX Designer",
                             firstname = "Dave",
-                            joindate = new DateTime(2023, 10, 6, 0, 42, 9, 517, DateTimeKind.Local).AddTicks(7327),
+                            joindate = new DateTime(2023, 10, 12, 22, 5, 23, 767, DateTimeKind.Local).AddTicks(2993),
                             lastname = "Brown",
                             password = "designpass",
                             policystatus = "Active",
@@ -457,10 +457,10 @@ namespace App.DataAccessLibrary.Migrations
                             Ins_Id = 1,
                             Address = "123 Insurance Lane",
                             CompantWebsiteUrl = "https://www.healthguard.com",
-                            Ins_CompanyLogourl = "https://cdn2.vectorstock.com/i/1000x1000/21/56/health-insurance-emblem-vector-4462156.jpg",
+                            Ins_CompanyLogourl = "4799de3c-69c5-442c-813c-9d166c2d30dd_catpicture.jpg",
                             Ins_Description = "Comprehensive health insurance for all your needs.",
                             Ins_Name = "HealthGuard",
-                            InsuranceCompanyAdded = new DateTime(2024, 4, 3, 0, 42, 9, 517, DateTimeKind.Local).AddTicks(7124),
+                            InsuranceCompanyAdded = new DateTime(2024, 4, 9, 22, 5, 23, 767, DateTimeKind.Local).AddTicks(2762),
                             Phone = "1234567890"
                         },
                         new
@@ -468,10 +468,10 @@ namespace App.DataAccessLibrary.Migrations
                             Ins_Id = 2,
                             Address = "123 Insurance Lane",
                             CompantWebsiteUrl = "https://www.healthguard.com",
-                            Ins_CompanyLogourl = "https://cdn2.vectorstock.com/i/1000x1000/21/56/health-insurance-emblem-vector-4462156.jpg",
+                            Ins_CompanyLogourl = "4799de3c-69c5-442c-813c-9d166c2d30dd_catpicture.jpg",
                             Ins_Description = "Comprehensive health i for all your needs.",
                             Ins_Name = "HealtyLife",
-                            InsuranceCompanyAdded = new DateTime(2024, 4, 3, 0, 42, 9, 517, DateTimeKind.Local).AddTicks(7135),
+                            InsuranceCompanyAdded = new DateTime(2024, 4, 9, 22, 5, 23, 767, DateTimeKind.Local).AddTicks(2776),
                             Phone = "1234567890"
                         },
                         new
@@ -479,10 +479,10 @@ namespace App.DataAccessLibrary.Migrations
                             Ins_Id = 3,
                             Address = "12334 Insurance Lane",
                             CompantWebsiteUrl = "https://www.healthguard.com",
-                            Ins_CompanyLogourl = "https://cdn2.vectorstock.com/i/1000x1000/21/56/health-insurance-emblem-vector-4462156.jpg",
+                            Ins_CompanyLogourl = "4799de3c-69c5-442c-813c-9d166c2d30dd_catpicture.jpg",
                             Ins_Description = "Life is Great do all Work.",
                             Ins_Name = "Pure Life",
-                            InsuranceCompanyAdded = new DateTime(2024, 4, 3, 0, 42, 9, 517, DateTimeKind.Local).AddTicks(7137),
+                            InsuranceCompanyAdded = new DateTime(2024, 4, 9, 22, 5, 23, 767, DateTimeKind.Local).AddTicks(2777),
                             Phone = "1234567890"
                         });
                 });

@@ -25,34 +25,49 @@ namespace Health_Insurance_MGMT.Controllers
         [Route("/dashboard")]
         public ActionResult Dashboard()
         {
-            int employeeCount = _unitofWork.EmpRegisterRepository.GetAll().Count();
+            if (HttpContext.Session.GetInt32("Adm_Id") == null)
+            {
+                return RedirectToAction("LoginAdmin","Home");
 
-            // Storing the count in TempData
-            TempData["EmployeeCount"] = employeeCount;
+            }
+            else
+            {
+                int employeeCount = _unitofWork.EmpRegisterRepository.GetAll().Count();
 
-            int policies =_unitofWork.PoliciesRepository.GetAll().Count();
-			TempData["PolicyCount"] = policies;
+                // Storing the count in TempData
+                TempData["EmployeeCount"] = employeeCount;
 
-            int companies = _unitofWork.InsuranceCompanyRepository.GetAll().Count();
-            TempData["CompanyCount"] = companies;
+                int policies = _unitofWork.PoliciesRepository.GetAll().Count();
+                TempData["PolicyCount"] = policies;
 
-            int contacts = _unitofWork.ContactRepository.GetAll().Count();
-            TempData["ContactCount"] = contacts;
+                int companies = _unitofWork.InsuranceCompanyRepository.GetAll().Count();
+                TempData["CompanyCount"] = companies;
 
-            int policyrequests = _unitofWork.PolicyRequestRepository.GetAll().Count();
-            TempData["PolicyReqCount"] = policyrequests;
+                int contacts = _unitofWork.ContactRepository.GetAll().Count();
+                TempData["ContactCount"] = contacts;
 
-            int totaladmins = _unitofWork.AdminLoginRepository.GetAll().Count();
-            TempData["AdminCount"] = totaladmins;
+                int policyrequests = _unitofWork.PolicyRequestRepository.GetAll().Count();
+                TempData["PolicyReqCount"] = policyrequests;
 
-            IEnumerable<PolicyRequestDetails> policiesreq = _unitofWork.PolicyRequestRepository.GetAll();
-            return View(policiesreq);
+                int totaladmins = _unitofWork.AdminLoginRepository.GetAll().Count();
+                TempData["AdminCount"] = totaladmins;
+
+                IEnumerable<PolicyRequestDetails> policiesreq = _unitofWork.PolicyRequestRepository.GetAll();
+                return View(policiesreq);
+
+            }
+           
         }
         //This Method will Only return view
 
 
         public IActionResult AddEmp()
         {
+            if (HttpContext.Session.GetInt32("Adm_Id") == null)
+            {
+                return RedirectToAction("LoginAdmin", "Home");
+
+            }
             var policies = _unitofWork.PoliciesRepository.GetAll()
         .Select(p => new SelectListItem
         {
@@ -73,6 +88,11 @@ namespace Health_Insurance_MGMT.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult AddEmp(EmpRegisterViewModel viewModel)
         {
+            if (HttpContext.Session.GetInt32("Adm_Id") == null)
+            {
+                return RedirectToAction("LoginAdmin", "Home");
+
+            }
             if (ModelState.IsValid)
             {
                 string uniqueFileName = ProcessUploadedFile(viewModel); // Handle the file upload
@@ -141,6 +161,11 @@ namespace Health_Insurance_MGMT.Controllers
 
         public IActionResult ViewEmp()
         {
+            if (HttpContext.Session.GetInt32("Adm_Id") == null)
+            {
+                return RedirectToAction("LoginAdmin", "Home");
+
+            }
             //Select * from table EmpRegister
             IEnumerable<EmpRegister> empRegisters = _unitofWork.EmpRegisterRepository.GetAll();
             return View(empRegisters);

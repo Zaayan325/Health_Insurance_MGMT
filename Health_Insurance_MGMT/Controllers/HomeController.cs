@@ -72,7 +72,11 @@ namespace App.Controllers
         public IActionResult LogoutUser()
         {
             // Clear the user's session
-            
+            if (HttpContext.Session.GetInt32("User_Id") == null)
+            {
+                return RedirectToAction("LoginUser");
+
+            }
             HttpContext.Session.Remove("User_Id");
 
             // Redirect to the homepage or login page
@@ -166,6 +170,11 @@ namespace App.Controllers
         [HttpPost]
         public IActionResult AdminLogout()
         {
+            if (HttpContext.Session.GetInt32("Adm_Id") == null)
+            {
+                return RedirectToAction("LoginAdmin", "Home");
+
+            }
             // Clear the user's session
 
             HttpContext.Session.Remove("Adm_Id");
@@ -202,6 +211,11 @@ namespace App.Controllers
         [HttpGet]
         public IActionResult LockScreen()
         {
+            if (HttpContext.Session.GetInt32("Adm_Id") == null)
+            {
+                return RedirectToAction("LoginAdmin", "Home");
+
+            }
             // Set a flag in session to indicate the session is locked
             HttpContext.Session.SetString("IsLocked", "true");
             ViewBag.AdminUsername = HttpContext.Session.GetString("AdminUsername");
@@ -212,6 +226,11 @@ namespace App.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult UnlockScreen(string Email, string password)
         {
+            if (HttpContext.Session.GetInt32("Adm_Id") == null)
+            {
+                return RedirectToAction("LoginAdmin", "Home");
+
+            }
             int? adminId = HttpContext.Session.GetInt32("Adm_Id");
             // You can check if the session was previously set and is now locked
             var isLocked = HttpContext.Session.GetString("IsLocked");
