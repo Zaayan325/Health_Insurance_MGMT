@@ -17,7 +17,7 @@ namespace App.DataAccessLibrary.Infrastructure.Repository
 
         public IPolicyRequestRepository PolicyRequestRepository { get; private set; }
 
-
+        public IHospitalRepository HospitalRepository { get; private set; }
         public IContactRepository ContactRepository { get; private set; }
         public IInsuranceCompanyRepository InsuranceCompanyRepository { get; private set; }
 
@@ -31,6 +31,7 @@ namespace App.DataAccessLibrary.Infrastructure.Repository
             ContactRepository = new ContactRepository(context);
             AdminLoginRepository = new AdminLoginRepository(context);
             PolicyRequestRepository = new PolicyRequestRepository(context);
+            HospitalRepository = new HospitalRepository(context);
         }
         public void save() // Make this method async
         {

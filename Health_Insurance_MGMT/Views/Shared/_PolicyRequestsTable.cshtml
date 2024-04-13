@@ -66,3 +66,13 @@
         });
     });
 </script> *@
+<script>
+    document.querySelector("#validatedCustomFile").addEventListener('change', function (event) {
+        // When a file is selected, get the file name
+        var fileName = event.target.files[0].name;
+
+        // Find the label that corresponds to the input and set its content
+        var label = event.target.nextElementSibling;
+        label.innerText = fileName;
+    });
+</script>

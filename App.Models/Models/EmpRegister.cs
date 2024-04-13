@@ -86,6 +86,10 @@ namespace App.Models.Models
         [AllowNull]
         public virtual ICollection<PolicyRequestDetails> PolicyRequestDetails { get; set; } // Collection navigation property
 
+        [AllowNull]
+        public virtual ICollection<Hospital> Hospital { get; set; }
+
+
         public DateTime EmployeeAdded { get; set; } = DateTime.Now;
 
     }

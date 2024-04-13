@@ -55,5 +55,9 @@ namespace App.Models.Models
         public virtual ICollection<EmpRegister> EmpRegister { get; set; } // Collection navigation property
         [AllowNull]
         public virtual ICollection<PolicyRequestDetails> PolicyRequestDetails { get; set; } // Collection navigation property
+
+        [AllowNull]
+        public virtual ICollection<Hospital> Hospital { get; set; } // Collection navigation property
+
     }
 }

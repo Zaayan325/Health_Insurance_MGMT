@@ -12,6 +12,7 @@ namespace App.DataAccessLibrary.Infrastructure.IRepository
         IEmpRegisterRepository EmpRegisterRepository { get; }
         IPoliciesRepository PoliciesRepository { get; }
        
+        IHospitalRepository HospitalRepository { get; }
         IPolicyRequestRepository PolicyRequestRepository { get; }
         IContactRepository ContactRepository { get; }
 

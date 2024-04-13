@@ -123,7 +123,7 @@ namespace App.DataAccessLibrary
          firstname = "John",
          lastname = "Doe",
          username = "johndoe",
-         password = "password", // Note: In a real application, store a hashed password
+         password = "kashan110", // Note: In a real application, store a hashed password
          address = "456 Developer Rd.",
          contactno = "0987654321",
          state = "TechState",
@@ -310,6 +310,18 @@ namespace App.DataAccessLibrary
                 .HasForeignKey(p => p.PolicyId)
                 .OnDelete(DeleteBehavior.NoAction); // Prevent cycles or multiple cascades by setting to NoAction.
 
+            modelBuilder.Entity<Hospital>()
+            .HasOne(h => h.EmpRegister) // Hospital has one Employee
+            .WithMany(e => e.Hospital) // Employee has many Hospitals
+            .HasForeignKey(h => h.empno) // The foreign key in the Hospital entity
+            .OnDelete(DeleteBehavior.Restrict); // Configure the delete behavior if necessary
+
+            // Define the relationship between Policies and Hospital
+            modelBuilder.Entity<Hospital>()
+                .HasOne(h => h.Policies) // Hospital has one Policy
+                .WithMany(p => p.Hospital) // Policy has many Hospitals
+                .HasForeignKey(h => h.PolicyId) // The foreign key in the Hospital entity
+                .OnDelete(DeleteBehavior.Restrict); // Configure the delete behavior if necessary
             base.OnModelCreating(modelBuilder);
         }
 
@@ -323,7 +335,6 @@ namespace App.DataAccessLibrary
 
         public DbSet<EmpRegister> EmpRegister { get; set; }
 
-        public DbSet<HospitalInfo> HospitalInfo { get; set; }
 
         
 
@@ -331,7 +342,7 @@ namespace App.DataAccessLibrary
 
       
         public DbSet<PolicyRequestDetails> PolicyRequestDetails { get; set; }
-
+        public DbSet<Hospital> Hospital { get; set; }
        
  //Contacts in public
 		public DbSet<Contact> Contact { get; set; }
