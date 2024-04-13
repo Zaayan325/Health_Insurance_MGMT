@@ -64,7 +64,7 @@
 
                                 
                             </li>
-                            <li><a href="#" class="nav-link">Check Policy</a></li>
+                            <li><a asp-action="MyPolicyRequests" asp-controller="PoliciesRequest" asp-route-id="@Context.Session.GetInt32("User_Id")" class="nav-link">Check Policy Status</a></li>
                             <li><a asp-action="CheckPoliciesByUser" asp-controller="Policies" class="nav-link">Check Policies </a></li>
                         </ul>
                     </li>

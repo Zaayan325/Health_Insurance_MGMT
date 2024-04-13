@@ -1,0 +1,37 @@
+﻿@model Policies
+
+@{
+    ViewData["Title"] = "Detailed | View";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="card">
+    <div class="card-header bg-primary ">
+        <h3 class=" text text-white  text-center display-5">
+            Policy Details
+        </h3>
+    </div>
+
+    <div class="container sm-view">
+
+        <a asp-action="ViewPolicy" asp-controller="Policies" class="btn btn-group-sm btn-outline-success">Go Back</a>
+    </div>
+    <div class="card-body">
+        <h5 class="card-title">@Model.PolicyName</h5>
+        <p class="card-text">
+            <strong>Policy Company :</strong> @Model.Ins_Id<br>
+            <strong>Policy Full Amount:</strong> $@Model.PolicyFullAmount<br>
+            <strong>PolicyDescription:</strong> @Model.PolicyDescription<br>
+            <strong>Policy Duaration:</strong> @Model.policymonths<br>
+            <strong>EMI :</strong> $@Model.equatedmonthlyinstalment<br>
+            <strong>MedicalId :</strong> @Model.MedicalId<br>
+
+            <a class="btn  btn-success" asp-controller="Policies" asp-action="DownloadPolicyTerms" asp-route-policyId="@Model.PolicyId">Download Terms</a>
+
+         
+
+
+        </p>
+    </div>
+    
+</div>

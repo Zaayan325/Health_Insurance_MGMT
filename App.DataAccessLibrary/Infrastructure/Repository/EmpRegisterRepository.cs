@@ -18,17 +18,33 @@ namespace App.DataAccessLibrary.Infrastructure.Repository
             _context = context;
         }
 
-        public async Task UpdateAsync(EmpRegister empRegister)
+        public void Update(EmpRegister empRegister)
         {
-            var EmpRegisterDb = await _context.EmpRegister.FirstOrDefaultAsync(er => er.empno == empRegister.empno);
+            var EmpRegisterDb = _context.EmpRegister.FirstOrDefault(er => er.empno == empRegister.empno);
             if (EmpRegisterDb != null)
             {
-                // This will update all properties, including EmployeePictureUrl, if it's changed
-                _context.Entry(EmpRegisterDb).CurrentValues.SetValues(empRegister);
+                EmpRegisterDb.designation = empRegister.designation;
+                EmpRegisterDb.joindate = empRegister.joindate;
+                EmpRegisterDb.Salary = empRegister.Salary;
+                EmpRegisterDb.firstname = empRegister.firstname;
+                EmpRegisterDb.lastname = empRegister.lastname;
+                EmpRegisterDb.username = empRegister.username;
+                EmpRegisterDb.password = empRegister.password;
+                EmpRegisterDb.address = empRegister.address;
+                EmpRegisterDb.contactno = empRegister.contactno;
+                EmpRegisterDb.country = empRegister.country;
+                EmpRegisterDb.state = empRegister.state;
+                EmpRegisterDb.policystatus = empRegister.policystatus;
+                EmpRegisterDb.Employee_Pictureurl = empRegister.Employee_Pictureurl;
+                EmpRegisterDb.PolicyId = empRegister.PolicyId;
 
-                await _context.SaveChangesAsync();
+
+                
+
+
             }
         }
+
 
         public async Task<EmpRegister> FindEmployeeAndPolicyAsync(int employeeId)
         {

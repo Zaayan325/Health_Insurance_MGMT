@@ -1,0 +1,49 @@
+﻿@{
+    ViewData["Title"] = "Check Policies";
+    Layout = "~/Views/Shared/_EmployeeDashboard.cshtml";
+}
+
+@model IEnumerable<PolicyRequestDetails>
+
+<div class="untree_co-section pb-0" id="services-section">
+    <div class="container">
+        <div class="row mb-4">
+
+
+            <div class="container-fluid mt-4">
+                <div class="row mb-2">
+                    <div class="col-12 col-md-6">
+                        <h2 class="text-success">Policies List</h2>
+                    </div>
+
+                </div>
+
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th>Policy Name</th>
+                                        <th>Status</th>
+                                        <th>Request Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var request in Model)
+                                    {
+                                        <tr>
+                                            <td>@request.PolicyId</td>
+                                            <td>@request.Status</td>
+                                            <td>@request.RequestDate.ToString("yyyy-MM-dd")</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

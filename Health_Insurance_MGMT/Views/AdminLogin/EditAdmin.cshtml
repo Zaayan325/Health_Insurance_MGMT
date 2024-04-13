@@ -1,0 +1,110 @@
+﻿@using App.Models.ViewModels
+@model AdminLoginViewModel
+@{
+    ViewData["Title"] = "Edit | Admin ";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<style>
+
+    .submitBTN {
+        padding: 1em 2em;
+        border: none;
+        border-radius: 5px;
+        font-weight: bold;
+        letter-spacing: 5px;
+        text-transform: uppercase;
+        cursor: pointer;
+        color: #2c9caf;
+        transition: all 1000ms;
+        font-size: 15px;
+        position: relative;
+        overflow: hidden;
+        outline: 2px solid #2c9caf;
+    }
+
+    button:hover {
+        color: #ffffff;
+        transform: scale(1.1);
+        outline: 2px solid #70bdca;
+        box-shadow: 4px 5px 17px -4px #268391;
+    }
+
+    button::before {
+        content: "";
+        position: absolute;
+        left: -50px;
+        top: 0;
+        width: 0;
+        height: 100%;
+        background-color: #2c9caf;
+        transform: skewX(45deg);
+        z-index: -1;
+        transition: width 1000ms;
+    }
+
+    button:hover::before {
+        width: 250%;
+    }
+
+</style>
+<form method="post" asp-action="EditAdmin" enctype="multipart/form-data">
+    @Html.AntiForgeryToken()
+
+    <input type="hidden" asp-for="Adm_ID" />
+
+    <div class="form-group">
+        <label asp-for="AdminName">Admin Name</label>
+        <input asp-for="AdminName" type="text" class="form-control" />
+        <span class="text text-sm" asp-validation-for="AdminName"></span>
+    </div>
+
+
+
+    <div class="form-group">
+        <label asp-for="Phone">Admin Phone</label>
+        <input asp-for="Phone" type="text" class="form-control" />
+        <span class="text text-sm" asp-validation-for="Phone"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Email">Admin Email</label>
+        <input asp-for="Email" type="text" class="form-control" />
+        <span class="text text-sm" asp-validation-for="Email"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="AdminPassword">Password</label>
+        <input asp-for="AdminPassword" type="text" class="form-control" />
+        <span class="text text-sm" asp-validation-for="AdminPassword"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="ConfirmPassword">Confirm-Password</label>
+        <input asp-for="ConfirmPassword" type="text" class="form-control" />
+        <span class="text text-sm" asp-validation-for="ConfirmPassword"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Address">Adress</label>
+        <input asp-for="Address" type="text" class="form-control" />
+        <span class="text text-sm" asp-validation-for="Address"></span>
+    </div>
+
+
+
+
+    <div class="custom-file">
+        <input type="file" asp-for="AdminPhoto" class="custom-file-input" id="validatedCustomFile" required="">
+        <label class="custom-file-label" for="validatedCustomFile">Choose Pic for Admin...</label>
+        <span class="text text-sm" asp-validation-for="AdminPhoto"></span>
+    </div>
+
+
+
+    <div class="container h-100 my-4">
+        <div class="row h-100 justify-content-center align-items-center">
+            <div class="col-12 text-center">
+                <!-- Centered button -->
+                <button class="submitBTN" type="submit">Edit Admin</button>
+            </div>
+        </div>
+    </div>
+</form>

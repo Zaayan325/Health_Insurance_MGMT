@@ -23,20 +23,43 @@ namespace Health_Insurance_MGMT.Controllers
         // GET: PoliciesController
         public IActionResult ViewPolicy()
         {
+            if (HttpContext.Session.GetInt32("Adm_Id") == null)
+            {
+                return RedirectToAction("LoginAdmin", "Home");
+
+            }
+
             IEnumerable<Policies> policies = _unitofWork.PoliciesRepository.GetAll();
             return View(policies);
         }
 
         // GET: PoliciesController/Details/5
-        public ActionResult Details(int id)
+      
+        public ActionResult DetailsPolicies(int id)
         {
-            return View();
-        }
+            if (HttpContext.Session.GetInt32("Adm_Id") == null)
+            {
+                return RedirectToAction("LoginAdmin", "Home");
 
+            }
+            var policies = _unitofWork.PoliciesRepository.GetT(pol => pol.PolicyId == id);
+            if (policies == null)
+            {
+                return NotFound();
+            }
+
+            // The view name here should exactly match the file name of the view
+            return View("DetailsPolicies", policies);
+        }
         // GET: PoliciesController/Create
         [HttpGet]
         public IActionResult CreatePolicy()
         {
+            if (HttpContext.Session.GetInt32("Adm_Id") == null)
+            {
+                return RedirectToAction("LoginAdmin", "Home");
+
+            }
             var insuranceCompanies = _unitofWork.InsuranceCompanyRepository.GetAll()
                 .Select(i => new SelectListItem
                 {
@@ -62,7 +85,12 @@ namespace Health_Insurance_MGMT.Controllers
 [ValidateAntiForgeryToken]
 public IActionResult CreatePolicy(PolicyCreationViewModel model)
 {
-    if (ModelState.IsValid)
+            if (HttpContext.Session.GetInt32("Adm_Id") == null)
+            {
+                return RedirectToAction("LoginAdmin", "Home");
+
+            }
+            if (ModelState.IsValid)
     {
         // Validate the SelectedIns_Id exists
         var insuranceCompanyExists = _unitofWork.InsuranceCompanyRepository
@@ -174,32 +202,120 @@ public IActionResult CreatePolicy(PolicyCreationViewModel model)
 
 
 
-        // GET: PoliciesController/Edit/5
-        public ActionResult Edit(int id)
+        [HttpGet]
+        public IActionResult EditPolicy(int id)
         {
-            return View();
+            if (HttpContext.Session.GetInt32("Adm_Id") == null)
+            {
+                return RedirectToAction("LoginAdmin", "Home");
+
+            }
+            var policy = _unitofWork.PoliciesRepository.GetT(p => p.PolicyId == id);
+            if (policy == null)
+            {
+                return NotFound();
+            }
+
+            var viewModel = new PolicyCreationViewModel
+            {
+                PolicyId = id,
+                PolicyName = policy.PolicyName,
+                PolicyDescription = policy.PolicyDescription,
+                PolicyFullAmount = policy.PolicyFullAmount,
+                EquatedMonthlyInstalment = policy.equatedmonthlyinstalment,
+                PolicyMonths = policy.policymonths,
+                SelectedIns_Id = policy.Ins_Id,
+                MedicalId = policy.MedicalId,
+                InsuranceCompanies = _unitofWork.InsuranceCompanyRepository.GetAll()
+                                     .Select(i => new SelectListItem { Value = i.Ins_Id.ToString(), Text = i.Ins_Name })
+                                     .ToList()
+            };
+
+            return View(viewModel);
         }
+
 
         // POST: PoliciesController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public IActionResult EditPolicy(PolicyCreationViewModel model)
         {
-            try
+            if (HttpContext.Session.GetInt32("Adm_Id") == null)
             {
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("LoginAdmin", "Home");
+
             }
-            catch
+            if (ModelState.IsValid)
             {
-                return View();
+                var policy = _unitofWork.PoliciesRepository.GetT(p => p.PolicyId == model.PolicyId);
+                if (policy == null)
+                {
+                    return NotFound();
+                }
+
+                string filePath = ProcessUploadedDocument(model); // Handle the document upload
+                if (!string.IsNullOrEmpty(filePath)) // Check if a new document was uploaded
+                {
+                    policy.PolicyTermasandConditionsurl = filePath; // Update the document URL/path in the domain model
+                }
+
+                // Map updated properties from ViewModel to Domain Model
+                policy.PolicyName = model.PolicyName;
+                policy.PolicyDescription = model.PolicyDescription;
+                policy.PolicyFullAmount = model.PolicyFullAmount;
+                policy.equatedmonthlyinstalment = model.EquatedMonthlyInstalment;
+                policy.policymonths = model.PolicyMonths;
+                policy.Ins_Id = model.SelectedIns_Id;
+                policy.MedicalId = model.MedicalId;
+
+                _unitofWork.PoliciesRepository.Update(policy); // Use synchronous update method
+                _unitofWork.save(); // Assuming there's a save method to commit changes synchronously
+
+                return RedirectToAction("Dashboard", "Admin");
             }
+
+            // Repopulate InsuranceCompanies if model validation fails
+            model.InsuranceCompanies = _unitofWork.InsuranceCompanyRepository.GetAll()
+                                    .Select(i => new SelectListItem
+                                    {
+                                        Value = i.Ins_Id.ToString(),
+                                        Text = i.Ins_Name
+                                    }).ToList();
+
+            return View(model);
         }
 
-		// GET: PoliciesController/Delete/5
-		
-		public IActionResult DeletePolicy(int? id)
+
+        private string ProcessUploadedDocument(PolicyCreationViewModel model)
         {
-			if (id == null || id == 0)
+            string uniqueFileName = null;
+
+            if (model.PolicyTermsAndConditions != null && model.PolicyTermsAndConditions.Length > 0)
+            {
+                string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "uploads", "PoliciesData");
+                uniqueFileName = Guid.NewGuid().ToString() + "_" + Path.GetFileName(model.PolicyTermsAndConditions.FileName);
+                string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    model.PolicyTermsAndConditions.CopyTo(fileStream);
+                }
+                return $"~/uploads/PoliciesData/{uniqueFileName}";
+            }
+
+            return uniqueFileName;
+        }
+
+
+        // GET: PoliciesController/Delete/5
+
+        public IActionResult DeletePolicy(int? id)
+        {
+            if (HttpContext.Session.GetInt32("Adm_Id") == null)
+            {
+                return RedirectToAction("LoginAdmin", "Home");
+
+            }
+            if (id == null || id == 0)
 			{
 				return NotFound();
 
@@ -221,7 +337,12 @@ public IActionResult CreatePolicy(PolicyCreationViewModel model)
 		[ValidateAntiForgeryToken]
 		public IActionResult DeletePolicyPost(int? id)
 		{
-			if (id == null || id == 0)
+            if (HttpContext.Session.GetInt32("Adm_Id") == null)
+            {
+                return RedirectToAction("LoginAdmin", "Home");
+
+            }
+            if (id == null || id == 0)
 			{
 				return NotFound();
 			}
@@ -243,6 +364,11 @@ public IActionResult CreatePolicy(PolicyCreationViewModel model)
         //User can see Policies Here
         public ActionResult CheckPoliciesByUser()
         {
+            if (HttpContext.Session.GetInt32("User_Id") == null)
+            {
+                return RedirectToAction("LoginUser", "Home");
+
+            }
             IEnumerable<Policies> policies = _unitofWork.PoliciesRepository.GetAll();
             return View(policies);
         }

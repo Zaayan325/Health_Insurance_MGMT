@@ -10,7 +10,9 @@ namespace App.Models.ViewModels
 {
 	public class PolicyCreationViewModel
 	{
-		[Required]
+        public int PolicyId { get; set; }
+
+        [Required]
 		[StringLength(50)]
 		public string PolicyName { get; set; }
 

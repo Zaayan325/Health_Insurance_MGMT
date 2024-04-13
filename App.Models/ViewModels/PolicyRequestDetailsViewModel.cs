@@ -12,7 +12,10 @@ namespace App.Models.ViewModels
     public class PolicyRequestDetailsViewModel
     {
         //Work For Emp_id
-        
+
+        public int RequestId { get; set; } // Add this line to PolicyRequestDetailsViewModel
+
+
         [ValidateNever]
         public int empno { get; set; } // This will be the selected value
 

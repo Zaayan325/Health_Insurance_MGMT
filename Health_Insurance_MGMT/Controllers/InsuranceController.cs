@@ -22,6 +22,11 @@ namespace Health_Insurance_MGMT.Controllers
         // GET: InsuranceController
         public ActionResult InsuranceView()
         {
+            if (HttpContext.Session.GetInt32("Adm_Id") == null)
+            {
+                return RedirectToAction("LoginAdmin", "Home");
+
+            }
             IEnumerable<InsuranceCompany> insuranceCompanies = _unitofWork.InsuranceCompanyRepository.GetAll();
             return View(insuranceCompanies);
         }
@@ -29,6 +34,11 @@ namespace Health_Insurance_MGMT.Controllers
         // GET: InsuranceController/Details/5
         public ActionResult DetailsInsurance(int id)
         {
+            if (HttpContext.Session.GetInt32("Adm_Id") == null)
+            {
+                return RedirectToAction("LoginAdmin", "Home");
+
+            }
             var insuranceCompany = _unitofWork.InsuranceCompanyRepository.GetT(emp => emp.Ins_Id == id);
             if (insuranceCompany == null)
             {
@@ -42,6 +52,11 @@ namespace Health_Insurance_MGMT.Controllers
         // GET: InsuranceController/Create
         public ActionResult CreateInsurance()
         {
+            if (HttpContext.Session.GetInt32("Adm_Id") == null)
+            {
+                return RedirectToAction("LoginAdmin", "Home");
+
+            }
             return View();
         }
 
@@ -50,7 +65,12 @@ namespace Health_Insurance_MGMT.Controllers
 		[ValidateAntiForgeryToken]
 		public IActionResult CreateInsurance(InsuranceCompanyViewModel model)
 		{
-			if (ModelState.IsValid)
+            if (HttpContext.Session.GetInt32("Adm_Id") == null)
+            {
+                return RedirectToAction("LoginAdmin", "Home");
+
+            }
+            if (ModelState.IsValid)
 			{
 				string uniqueFileName = null;
 				if (model.Ins_CompanyLogo != null && model.Ins_CompanyLogo.Length > 0)
@@ -101,6 +121,11 @@ namespace Health_Insurance_MGMT.Controllers
 		// GET: InsuranceController/Edit/5
 		public ActionResult EditInsurance(int id)
         {
+            if (HttpContext.Session.GetInt32("Adm_Id") == null)
+            {
+                return RedirectToAction("LoginAdmin", "Home");
+
+            }
             var insuranceCompany = _unitofWork.InsuranceCompanyRepository.GetT(i => i.Ins_Id == id);
             if (insuranceCompany == null)
             {
@@ -124,7 +149,12 @@ namespace Health_Insurance_MGMT.Controllers
 		[ValidateAntiForgeryToken]
 		public IActionResult EditInsurance(int id, InsuranceCompanyViewModel model)
 		{
-			if (!ModelState.IsValid)
+            if (HttpContext.Session.GetInt32("Adm_Id") == null)
+            {
+                return RedirectToAction("LoginAdmin", "Home");
+
+            }
+            if (!ModelState.IsValid)
 			{
 				return View(model);
 			}
@@ -165,6 +195,11 @@ namespace Health_Insurance_MGMT.Controllers
 		// GET: InsuranceController/Delete/5
 		public IActionResult DeleteInsurance(int? id)
         {
+            if (HttpContext.Session.GetInt32("Adm_Id") == null)
+            {
+                return RedirectToAction("LoginAdmin", "Home");
+
+            }
             if (id == null || id == 0)
             {
                 return NotFound();
@@ -188,6 +223,11 @@ namespace Health_Insurance_MGMT.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult DeleteInsurancePOST(int? id)
         {
+            if (HttpContext.Session.GetInt32("Adm_Id") == null)
+            {
+                return RedirectToAction("LoginAdmin", "Home");
+
+            }
             if (id == null || id == 0)
             {
                 return NotFound();

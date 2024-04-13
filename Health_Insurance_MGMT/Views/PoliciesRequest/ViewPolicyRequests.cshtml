@@ -1,0 +1,50 @@
+﻿@{
+    ViewData["Title"] = "ViewEmp";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@model IEnumerable<PolicyRequestDetails>
+
+<div class="row">
+    <div class="col-md-6">
+        <h1 class="text-success">Policies List</h1>
+    </div>
+    <div class="col-md-6">
+
+    </div>
+</div>
+
+<div class="card-body table-border-style">
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>RequestId</th>
+                    <th>Employee Name</th>
+                    <th>Policy Id</th>
+                    <th>Request Status</th>
+                    <th>Request Date</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.RequestId</td>
+                        <td>@item.empno</td>
+                        <td>@item.PolicyId</td>
+                        <td>@item.Status</td>
+                        <td>@item.RequestDate</td>
+                       
+                        <td>
+                            <a asp-action="ApproveOrDisapprove" asp-controller="PoliciesRequest" asp-route-id="@item.RequestId" class="btn btn-group-sm btn-outline-success">Approve or Disapprove</a>
+                            <a asp-action="DeleteRequestPolicy" asp-controller="PoliciesRequest" asp-route-id="@item.RequestId" class="btn btn-group-sm btn-outline-danger">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+

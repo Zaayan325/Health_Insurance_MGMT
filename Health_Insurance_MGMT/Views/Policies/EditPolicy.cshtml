@@ -1,0 +1,115 @@
+﻿@using App.Models.ViewModels
+@model PolicyCreationViewModel
+@{
+    ViewData["Title"] = "Edit Policy";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<style>
+    .submitBTN {
+        padding: 1em 2em;
+        border: none;
+        border-radius: 5px;
+        font-weight: bold;
+        letter-spacing: 5px;
+        text-transform: uppercase;
+        cursor: pointer;
+        color: #2c9caf;
+        transition: all 1000ms;
+        font-size: 15px;
+        position: relative;
+        overflow: hidden;
+        outline: 2px solid #2c9caf;
+    }
+
+    button:hover {
+        color: #ffffff;
+        transform: scale(1.1);
+        outline: 2px solid #70bdca;
+        box-shadow: 4px 5px 17px -4px #268391;
+    }
+
+    button::before {
+        content: "";
+        position: absolute;
+        left: -50px;
+        top: 0;
+        width: 0;
+        height: 100%;
+        background-color: #2c9caf;
+        transform: skewX(45deg);
+        z-index: -1;
+        transition: width 1000ms;
+    }
+
+    button:hover::before {
+        width: 250%;
+    }
+</style>
+
+<form asp-action="EditPolicy" method="post" enctype="multipart/form-data">
+    <input type="hidden" asp-for="PolicyId" />
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="form-group">
+        <label asp-for="PolicyName" class="control-label"></label>
+        <input asp-for="PolicyName" class="form-control" />
+        <span asp-validation-for="PolicyName" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="PolicyDescription" class="control-label"></label>
+        <input asp-for="PolicyDescription" class="form-control" />
+        <span asp-validation-for="PolicyDescription" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="MedicalId" class="control-label">Medical ID</label>
+        <input asp-for="MedicalId" class="form-control" />
+        <span asp-validation-for="MedicalId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="PolicyFullAmount" class="control-label"></label>
+        <input asp-for="PolicyFullAmount" class="form-control" />
+        <span asp-validation-for="PolicyFullAmount" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="EquatedMonthlyInstalment" class="control-label">
+            EMI
+            <small class="text-muted">Equated Monthly Instalment</small>
+        </label>
+        <input asp-for="EquatedMonthlyInstalment" class="form-control" />
+        <span asp-validation-for="EquatedMonthlyInstalment" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="PolicyMonths" class="control-label">
+            Policy Months
+        </label>
+        <input asp-for="PolicyMonths" class="form-control" />
+        <span asp-validation-for="PolicyMonths" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <h3>Select The Insurance Company</h3>
+        <label asp-for="SelectedIns_Id">Insurance Company</label>
+        <select asp-for="SelectedIns_Id" asp-items="Model.InsuranceCompanies" class="form-control"></select>
+    </div>
+
+    <h3>Add or Update Your Documents</h3>
+    <div class="custom-file">
+        <input type="file" asp-for="PolicyTermsAndConditions" class="custom-file-input" id="validatedCustomFile" required>
+        <label class="custom-file-label" for="validatedCustomFile">Policy Terms and Conditions Document</label>
+        <span class="text text-sm" asp-validation-for="PolicyTermsAndConditions"></span>
+    </div>
+
+    <div class="container h-100 my-4">
+        <div class="row h-100 justify-content-center align-items-center">
+            <div class="col-12 text-center">
+                <!-- Centered button -->
+                <button class="submitBTN" type="submit">Update Policy</button>
+            </div>
+        </div>
+    </div>
+</form>

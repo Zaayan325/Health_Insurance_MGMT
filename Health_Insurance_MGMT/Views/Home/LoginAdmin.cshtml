@@ -1,0 +1,52 @@
+﻿@model AdminLogin
+@{
+	ViewData["Title"] = "Login |Admin";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- [ auth-signin ] start -->
+<div class="auth-wrapper">
+	@{
+		if (ViewBag.ErrorMessage != null)
+		{
+
+			<div class="alert alert-danger alert-dismissible fade show" role="alert">
+				<strong>@ViewBag.ErrorMessage</strong>
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+		}
+	}
+	<div class="auth-content text-center">
+		<div class="card borderless">
+			<div class="row align-items-center ">
+				<div class="col-md-12">
+					<div class="card-body">
+						<form method="post">
+							@Html.AntiForgeryToken()
+							<h4 class="mb-3 f-w-400"> Admin Signin</h4>
+							<hr>
+							<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+							<div class="form-group mb-3">
+								<input required asp-for="Adm_ID" type="number" class="form-control" placeholder=" Admin Id">
+							</div>
+							<div class="form-group mb-3">
+								<input required asp-for="Email" type="text" class="form-control" placeholder=" Admin Email">
+							</div>
+							<div class="form-group mb-4">
+								<input required asp-for="AdminPassword" type="password" class="form-control"  placeholder="Enter Password">
+							</div>
+
+							<input value="Signin" type="submit" class="btn btn-block btn-primary mb-4" />
+							<hr>
+						</form>
+
+						<a asp-action="LoginUser" class="btn btn-outline-info btn-sm" asp-controller="Home">Want To Login as A Employee?</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+

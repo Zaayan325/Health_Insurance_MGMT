@@ -22,16 +22,123 @@ namespace Health_Insurance_MGMT.Controllers
         }
 
 
-        // GET: PoliciesRequestController/Details/5
-        public ActionResult Details(int id)
+        public IActionResult ViewPolicyRequests()
         {
-            return View();
+
+            if (HttpContext.Session.GetInt32("Adm_Id") == null)
+            {
+                return RedirectToAction("LoginAdmin", "Home");
+
+            }
+            IEnumerable<PolicyRequestDetails> policiesreq = _unitofWork.PolicyRequestRepository.GetAll();
+            return View(policiesreq);
+        }
+        public IActionResult ApproveOrDisapprove(int id)
+        {
+            if (HttpContext.Session.GetInt32("Adm_Id") == null)
+            {
+                return RedirectToAction("LoginAdmin", "Home");
+
+            }
+            var policyRequest = _unitofWork.PolicyRequestRepository.GetT(pr => pr.RequestId == id);
+            if (policyRequest == null)
+            {
+                return NotFound();
+            }
+
+            // Static status options
+            var statusOptions = new List<SelectListItem>
+    {
+        new SelectListItem("Requested", "Requested"),
+        new SelectListItem("Approved", "Approved"),
+        new SelectListItem("Dis-Approved", "Dis-Approved"),
+    };
+
+            // Dynamic policy options from the database
+            var policyOptions = _unitofWork.PoliciesRepository.GetAll()
+                .Select(p => new SelectListItem { Value = p.PolicyId.ToString(), Text = p.PolicyName })
+                .ToList();
+
+            // Create and populate the ViewModel
+            var viewModel = new PolicyRequestDetailsViewModel
+            {
+                RequestId = policyRequest.RequestId,
+                
+                SelectedPolicy_Id = policyRequest.PolicyId,
+                SelectedStatus = policyRequest.Status,
+                PolicyOptions = policyOptions,
+                StatusOptions = statusOptions
+            };
+
+            return View(viewModel);
         }
 
+
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult ApproveOrDisapprove(PolicyRequestDetailsViewModel viewModel)
+        {
+            if (HttpContext.Session.GetInt32("Adm_Id") == null)
+            {
+                return RedirectToAction("LoginAdmin", "Home");
+
+            }
+            if (ModelState.IsValid)
+            {
+                var policyRequest = _unitofWork.PolicyRequestRepository.GetT(pr => pr.RequestId == viewModel.RequestId);
+                if (policyRequest == null)
+                {
+                    return NotFound();
+                }
+
+                // No file upload processing is needed here as we're updating policy request details
+
+                // Update properties from ViewModel to Domain Model
+                // Although typically not changed in an approval process
+                policyRequest.PolicyId = viewModel.SelectedPolicy_Id;
+                policyRequest.Status = viewModel.SelectedStatus;
+
+                // Update the policy request in the database
+                _unitofWork.PolicyRequestRepository.Update(policyRequest);
+                _unitofWork.save(); // Make sure to call the save method to commit changes
+
+                return RedirectToAction("Dashboard", "Admin"); // Redirect to the desired page after successful update
+            }
+
+            // Repopulate PolicyOptions and StatusOptions if model validation fails
+            viewModel.PolicyOptions = _unitofWork.PoliciesRepository.GetAll()
+                                         .Select(p => new SelectListItem
+                                         {
+                                             Value = p.PolicyId.ToString(),
+                                             Text = p.PolicyName
+                                         }).ToList();
+
+            viewModel.StatusOptions = new List<SelectListItem>
+    {
+        new SelectListItem("Requested", "Requested"),
+        new SelectListItem("Approved", "Approved"),
+        new SelectListItem("Dis-Approved", "Dis-Approved"),
+    };
+
+            return View(viewModel);
+        }
+
+
+
+
+
+
         // GET: PoliciesRequestController/Create
-        
+
         public IActionResult CreateRequestByUser()
         {
+            if (HttpContext.Session.GetInt32("User_Id") == null)
+            {
+                return RedirectToAction("LoginUser", "Home");
+
+            }
             // Static status options
             var statusOptions = new List<SelectListItem>
     {
@@ -64,6 +171,11 @@ namespace Health_Insurance_MGMT.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult CreateRequestByUser(PolicyRequestDetailsViewModel model)
         {
+            if (HttpContext.Session.GetInt32("User_Id") == null)
+            {
+                return RedirectToAction("LoginUser","Home");
+
+            }
             if (ModelState.IsValid)
             {
                 // Map the ViewModel to your domain model
@@ -100,46 +212,80 @@ namespace Health_Insurance_MGMT.Controllers
         }
 
 
-        // GET: PoliciesRequestController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
+       //For checking that Policies of that whose Accepted and disapproved
 
-        // POST: PoliciesRequestController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
+        public IActionResult MyPolicyRequests(int id)
+{
+            if (HttpContext.Session.GetInt32("User_Id") == null)
             {
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("LoginUser", "Home");
+
             }
-            catch
-            {
-                return View();
-            }
-        }
+            // Replace this with the actual logic to get the current user's employee number
+            var currentUserEmpNo = id; // This is just an example; adjust according to your auth system
+
+    IEnumerable<PolicyRequestDetails> myRequests = _unitofWork.PolicyRequestRepository.GetAll()
+        .Where(pr => pr.empno == currentUserEmpNo); // Filter requests by the current user's empno
+
+    return View(myRequests);
+}
+
+
 
         // GET: PoliciesRequestController/Delete/5
-        public ActionResult Delete(int id)
+        public IActionResult DeleteRequestPolicy(int? id)
         {
-            return View();
+            if (HttpContext.Session.GetInt32("Adm_Id") == null)
+            {
+                return RedirectToAction("LoginAdmin", "Home");
+
+            }
+            if (id == null || id == 0)
+            {
+                return NotFound();
+
+
+            }
+            var policiesreq = _unitofWork.PolicyRequestRepository.GetT(x => x.RequestId == id);
+
+
+            if (policiesreq == null)
+            {
+                return NotFound();
+            }
+
+            return View(policiesreq);
         }
 
-        // POST: PoliciesRequestController/Delete/5
-        [HttpPost]
+
+
+        // POST: PoliciesController/Delete/5
+        [HttpPost, ActionName("DeleteRequestPolicy")]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public IActionResult DeleteRequestPolicyPost(int? id)
         {
-            try
+            if (HttpContext.Session.GetInt32("Adm_Id") == null)
             {
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("LoginAdmin", "Home");
+
             }
-            catch
+            if (id == null || id == 0)
             {
-                return View();
+                return NotFound();
             }
+
+            var policiesreq = _unitofWork.PolicyRequestRepository.GetT(x => x.RequestId == id);
+            if (policiesreq == null)
+            {
+                return NotFound();
+            }
+
+
+            _unitofWork.PolicyRequestRepository.Delete(policiesreq);
+            _unitofWork.save();
+
+
+            return RedirectToAction("ViewPolicyRequests");
         }
     }
 }

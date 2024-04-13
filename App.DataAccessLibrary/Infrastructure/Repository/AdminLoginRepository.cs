@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using App.DataAccessLibrary.Infrastructure.IRepository;
-using App.Models.Models;
 using NHibernate.Linq;
+using App.Models.Models;
 
 namespace App.DataAccessLibrary.Infrastructure.Repository
 {
@@ -40,5 +40,38 @@ namespace App.DataAccessLibrary.Infrastructure.Repository
             }
         }
 
-    }
+		// Implement existing methods...
+
+		//public AdminLogin GetAdminLoginData(int admId)
+		//{
+		//	var admin = _context.AdminLogin.FirstOrDefault(a => a.Adm_ID == admId);
+		//	return admin;
+		//}
+
+
+
+		//public bool ValidateAdmin(string emails, string AdminPassword, int Adm_Id);
+		//{
+		//	var user = _context.AdminLogin.FirstOrDefault(u => u.Email == Email && u.password == password && u.empno == empno);
+		//	return user != null;
+		//}
+
+		public bool ValidateAdmin(string Email ,string AdminPassword,int Adm_Id)
+        {
+            var admin = _context.AdminLogin.FirstOrDefault(u=>u.Email == Email && u.AdminPassword == AdminPassword && u.Adm_ID ==Adm_Id);
+            return admin != null;
+        }
+
+		public string GetAdminImageUrlById(int admId)
+		{
+			var admin = _context.AdminLogin.FirstOrDefault(a => a.Adm_ID == admId);
+			return admin?.AdminPhotourl; // Returns the image URL or null if the admin is not found
+		}
+		//public string GetAdminDesignation(int admId)
+		//{
+		//	var admin = _context.AdminLogin.FirstOrDefault(a => a.Adm_ID == admId);
+		//	return admin?.; // Returns the image URL or null if the admin is not found
+		//}
+
+	}
 }
