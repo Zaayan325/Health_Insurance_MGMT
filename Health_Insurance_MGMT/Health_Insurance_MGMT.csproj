@@ -29,6 +29,8 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\uploads\EmployeeData\" />
+    <Folder Include="wwwroot\uploads\Hospitaldata\documents\" />
+    <Folder Include="wwwroot\uploads\Hospitaldata\billpictures\" />
     <Folder Include="wwwroot\uploads\PoliciesData\" />
   </ItemGroup>
 

@@ -45,28 +45,40 @@ namespace App.Controllers
 		}
 
 
-		[HttpPost]
-		[ValidateAntiForgeryToken]
-		[Route("Login")]
-		public IActionResult LoginUser(string username, string password, int empno)
-		{
-			// Directly validate the plaintext email and password with the database
-			if (_unitofWork.EmpRegisterRepository.ValidateUser(username, password, empno))
-			{
-				// Set user email in session after successful validation
-				HttpContext.Session.SetInt32("User_Id", empno);
-                
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Route("Login")]
+        public IActionResult LoginUser(string username, string password, int empno)
+        {
+            if (_unitofWork.EmpRegisterRepository.ValidateUser(username, password, empno))
+            {
+                // Set user email in session after successful validation
+                HttpContext.Session.SetInt32("User_Id", empno);
+                var empoyeepolicyid = _unitofWork.EmpRegisterRepository.GetEmployeePolicyById(empno);
+
+                // Check if empoyeepolicyid is not null before setting it in session
+                if (empoyeepolicyid.HasValue) // Make sure empoyeepolicyid is a nullable int (int?)
+                {
+                    HttpContext.Session.SetInt32("EmployeePolicy", empoyeepolicyid.Value);
+                }
+                else
+                {
+                    // Handle the case where empoyeepolicyid is null
+                    // Example: set a default value or take other actions
+                    HttpContext.Session.SetInt32("EmployeePolicy", 0); // Assuming '0' could be a default or error indicator
+                }
+
                 // Redirect to a secured page
                 return RedirectToAction("Index");
-			}
+            }
+            else
+            {
+                // Display an error message if credentials are invalid
+                ViewBag.ErrorMessage = "Invalid credentials";
+                return View("LoginUser"); // Make sure the view name is correct
+            }
+        }
 
-			else
-			{
-				// Display an error message if credentials are invalid
-				ViewBag.ErrorMessage = "Invalid credentials";
-				return View("LoginUser"); // Make sure the view name is correct
-			}
-		}
 
         [HttpPost]
         public IActionResult LogoutUser()

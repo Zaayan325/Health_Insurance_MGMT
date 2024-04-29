@@ -14,5 +14,7 @@ namespace App.DataAccessLibrary.Infrastructure.IRepository
         bool ValidateUser(string username, string password,int empno);
 
         Task<EmpRegister> FindEmployeeAndPolicyAsync(int employeeId);
+
+        int? GetEmployeePolicyById(int empno);
     }
 }

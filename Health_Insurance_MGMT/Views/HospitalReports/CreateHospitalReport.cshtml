@@ -1,0 +1,130 @@
+﻿@{
+    ViewData["Title"] = "CreateHospitalReport";
+    Layout = "~/Views/Shared/_EmployeeDashboard.cshtml";
+    int empno = ViewBag.UserId ?? 0;
+    int policyId = ViewBag.PolicyId ?? 0;
+}
+@using App.Models.ViewModels;
+@model HospitalViewModel
+
+
+
+
+<style>
+
+    .submitBTN {
+        padding: 1em 2em;
+        border: none;
+        border-radius: 5px;
+        font-weight: bold;
+        letter-spacing: 5px;
+        text-transform: uppercase;
+        cursor: pointer;
+        color: #2c9caf;
+        transition: all 1000ms;
+        font-size: 15px;
+        position: relative;
+        overflow: hidden;
+        outline: 2px solid #2c9caf;
+    }
+
+    button:hover {
+        color: #ffffff;
+        transform: scale(1.1);
+        outline: 2px solid #70bdca;
+        box-shadow: 4px 5px 17px -4px #268391;
+    }
+
+    button::before {
+        content: "";
+        position: absolute;
+        left: -50px;
+        top: 0;
+        width: 0;
+        height: 100%;
+        background-color: #2c9caf;
+        transform: skewX(45deg);
+        z-index: -1;
+        transition: width 1000ms;
+    }
+
+    button:hover::before {
+        width: 250%;
+    }
+
+</style>
+
+<div class="untree_co-section pb-0" id="about-section">
+    <div class="container">
+        <div class="row justify-content-center mb-3">
+
+            <form asp-action="CreateHospitalReport" asp-controller="HospitalReports" enctype="multipart/form-data" method="post">
+
+                <input type="hidden" asp-for="empno" value="@empno" />
+                <input type="hidden" asp-for="PolicyId" value="@policyId" />
+
+                <div class="form-group">
+                    <label asp-for="HospitalName">Hospital Name</label>
+                    <input required asp-for="HospitalName" type="text" class="form-control" />
+                    <span class="text text-sm" asp-validation-for="HospitalName"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="HospitalAddress">Address</label>
+                    <input required asp-for="HospitalAddress" type="text" class="form-control" />
+                    <span class="text text-sm" asp-validation-for="HospitalAddress"></span>
+                </div>
+
+
+                <div class="form-group">
+                    <label asp-for="ExpenseIncurred">Expense Incurred</label>
+                    <input required asp-for="ExpenseIncurred" type="number" class="form-control" />
+                    <span class="text text-sm" asp-validation-for="ExpenseIncurred"></span>
+                </div>
+
+                @* <div class="form-group">
+                <label asp-for="PolicyId">Policy Id</label>
+                <input asp-for="PolicyId" disabled type="number" class="form-control" />
+                <span class="text text-danger text-sm" asp-validation-for="PolicyId"></span>
+                </div> *@
+
+
+
+                <div class="form-group">
+                    <label asp-for="HospitalContactNo">Hospital Phone</label>
+                    <input required asp-for="HospitalContactNo" type="text" class="form-control" />
+                    <span class="text text-danger text-sm" asp-validation-for="HospitalContactNo"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="StatusReport" class="control-label">Your Status</label>
+                    <select required asp-for="StatusReport" asp-items="Model.StatusReportOptions" class="form-control">
+                    </select>
+                </div>
+
+                <div class="custom-file">
+                    <input type="file" asp-for="BillPictureFile" class="custom-file-input" required id="validatedCustomFile">
+                    <label class="custom-file-label" for="validatedCustomFile">Choose Bill Photo...</label>
+                    <span class="text text-sm" asp-validation-for="BillPictureFile"></span>
+                </div>
+                <br />
+                <br />
+                
+                <div class="custom-file">
+                    <input type="file" asp-for="DocumentsFile" class="custom-file-input" required id="validatedCustomFile">
+                    <label class="custom-file-label" for="validatedCustomFile">Give Your Hospital's Documents..</label>
+                    <span class="text text-sm" asp-validation-for="DocumentsFile"></span>
+                </div>
+
+
+                <br />  <br />
+                <div class="col-12 text-center">
+                    <!-- Centered button -->
+                    <button class="submitBTN" type="submit">Create Hospital Report</button>
+                </div>
+
+
+            </form>
+        </div>
+    </div>
+</div>

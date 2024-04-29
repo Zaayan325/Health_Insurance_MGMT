@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace App.DataAccessLibrary.Migrations
 {
     [DbContext(typeof(HealthInsuranceMGMT))]
-    [Migration("20240409170524_AddAllToDatabase")]
+    [Migration("20240412200716_AddAllToDatabase")]
     partial class AddAllToDatabase
     {
         /// <inheritdoc />
@@ -78,7 +78,7 @@ namespace App.DataAccessLibrary.Migrations
                         {
                             Adm_ID = 1,
                             Address = "123 Admin St, Admin City",
-                            AdminAdded = new DateTime(2024, 4, 9, 22, 5, 23, 767, DateTimeKind.Local).AddTicks(3019),
+                            AdminAdded = new DateTime(2024, 4, 13, 1, 7, 16, 462, DateTimeKind.Local).AddTicks(7476),
                             AdminName = "Syed Kashan Abbas Naqvi",
                             AdminPassword = "kashan110",
                             AdminPhotourl = "4799de3c-69c5-442c-813c-9d166c2d30dd_catpicture.jpg",
@@ -91,7 +91,7 @@ namespace App.DataAccessLibrary.Migrations
                         {
                             Adm_ID = 2,
                             Address = "456 Admin Lane, Admin Town",
-                            AdminAdded = new DateTime(2024, 4, 9, 22, 5, 23, 767, DateTimeKind.Local).AddTicks(3022),
+                            AdminAdded = new DateTime(2024, 4, 13, 1, 7, 16, 462, DateTimeKind.Local).AddTicks(7479),
                             AdminName = "Asghar Abbas",
                             AdminPassword = "asghar110",
                             AdminPhotourl = "4799de3c-69c5-442c-813c-9d166c2d30dd_catpicture.jpg",
@@ -104,7 +104,7 @@ namespace App.DataAccessLibrary.Migrations
                         {
                             Adm_ID = 3,
                             Address = "456 Admin Lane, Admin Town",
-                            AdminAdded = new DateTime(2024, 4, 9, 22, 5, 23, 767, DateTimeKind.Local).AddTicks(3024),
+                            AdminAdded = new DateTime(2024, 4, 13, 1, 7, 16, 462, DateTimeKind.Local).AddTicks(7481),
                             AdminName = "Ali Shan",
                             AdminPassword = "alishan110",
                             AdminPhotourl = "4799de3c-69c5-442c-813c-9d166c2d30dd_catpicture.jpg",
@@ -117,7 +117,7 @@ namespace App.DataAccessLibrary.Migrations
                         {
                             Adm_ID = 4,
                             Address = "456 Admin Lane, Admin Town",
-                            AdminAdded = new DateTime(2024, 4, 9, 22, 5, 23, 767, DateTimeKind.Local).AddTicks(3088),
+                            AdminAdded = new DateTime(2024, 4, 13, 1, 7, 16, 462, DateTimeKind.Local).AddTicks(7483),
                             AdminName = "Zayaan Zubair",
                             AdminPassword = "zaayan110",
                             AdminPhotourl = "4799de3c-69c5-442c-813c-9d166c2d30dd_catpicture.jpg",
@@ -130,7 +130,7 @@ namespace App.DataAccessLibrary.Migrations
                         {
                             Adm_ID = 5,
                             Address = "456 Admin Lane, Admin Town",
-                            AdminAdded = new DateTime(2024, 4, 9, 22, 5, 23, 767, DateTimeKind.Local).AddTicks(3091),
+                            AdminAdded = new DateTime(2024, 4, 13, 1, 7, 16, 462, DateTimeKind.Local).AddTicks(7485),
                             AdminName = "Waleed Hoth",
                             AdminPassword = "waleed110",
                             AdminPhotourl = "4799de3c-69c5-442c-813c-9d166c2d30dd_catpicture.jpg",
@@ -268,7 +268,7 @@ namespace App.DataAccessLibrary.Migrations
                         new
                         {
                             empno = 1,
-                            EmployeeAdded = new DateTime(2024, 4, 9, 22, 5, 23, 767, DateTimeKind.Local).AddTicks(2972),
+                            EmployeeAdded = new DateTime(2024, 4, 13, 1, 7, 16, 462, DateTimeKind.Local).AddTicks(7432),
                             Employee_Pictureurl = "4799de3c-69c5-442c-813c-9d166c2d30dd_catpicture.jpg",
                             PolicyId = 1,
                             Role = "Employee",
@@ -279,9 +279,9 @@ namespace App.DataAccessLibrary.Migrations
                             country = "TechLand",
                             designation = "Software Engineer",
                             firstname = "John",
-                            joindate = new DateTime(2023, 12, 31, 22, 5, 23, 767, DateTimeKind.Local).AddTicks(2974),
+                            joindate = new DateTime(2024, 1, 4, 1, 7, 16, 462, DateTimeKind.Local).AddTicks(7434),
                             lastname = "Doe",
-                            password = "password",
+                            password = "kashan110",
                             policystatus = "Active",
                             state = "TechState",
                             username = "johndoe"
@@ -289,7 +289,7 @@ namespace App.DataAccessLibrary.Migrations
                         new
                         {
                             empno = 2,
-                            EmployeeAdded = new DateTime(2024, 4, 9, 22, 5, 23, 767, DateTimeKind.Local).AddTicks(2982),
+                            EmployeeAdded = new DateTime(2024, 4, 13, 1, 7, 16, 462, DateTimeKind.Local).AddTicks(7443),
                             Employee_Pictureurl = "4799de3c-69c5-442c-813c-9d166c2d30dd_catpicture.jpg",
                             PolicyId = 2,
                             Role = "Employee",
@@ -300,7 +300,7 @@ namespace App.DataAccessLibrary.Migrations
                             country = "LeadLand",
                             designation = "Project Manager",
                             firstname = "Alice",
-                            joindate = new DateTime(2023, 9, 22, 22, 5, 23, 767, DateTimeKind.Local).AddTicks(2983),
+                            joindate = new DateTime(2023, 9, 26, 1, 7, 16, 462, DateTimeKind.Local).AddTicks(7444),
                             lastname = "Johnson",
                             password = "securepassword",
                             policystatus = "Active",
@@ -310,7 +310,7 @@ namespace App.DataAccessLibrary.Migrations
                         new
                         {
                             empno = 3,
-                            EmployeeAdded = new DateTime(2024, 4, 9, 22, 5, 23, 767, DateTimeKind.Local).AddTicks(2986),
+                            EmployeeAdded = new DateTime(2024, 4, 13, 1, 7, 16, 462, DateTimeKind.Local).AddTicks(7447),
                             Employee_Pictureurl = "4799de3c-69c5-442c-813c-9d166c2d30dd_catpicture.jpg",
                             PolicyId = 3,
                             Role = "Employee",
@@ -321,7 +321,7 @@ namespace App.DataAccessLibrary.Migrations
                             country = "QualityLand",
                             designation = "QA Engineer",
                             firstname = "Bob",
-                            joindate = new DateTime(2023, 11, 11, 22, 5, 23, 767, DateTimeKind.Local).AddTicks(2987),
+                            joindate = new DateTime(2023, 11, 15, 1, 7, 16, 462, DateTimeKind.Local).AddTicks(7448),
                             lastname = "Smith",
                             password = "testpassword",
                             policystatus = "Active",
@@ -331,7 +331,7 @@ namespace App.DataAccessLibrary.Migrations
                         new
                         {
                             empno = 4,
-                            EmployeeAdded = new DateTime(2024, 4, 9, 22, 5, 23, 767, DateTimeKind.Local).AddTicks(2989),
+                            EmployeeAdded = new DateTime(2024, 4, 13, 1, 7, 16, 462, DateTimeKind.Local).AddTicks(7450),
                             Employee_Pictureurl = "4799de3c-69c5-442c-813c-9d166c2d30dd_catpicture.jpg",
                             PolicyId = 2,
                             Role = "Employee",
@@ -342,7 +342,7 @@ namespace App.DataAccessLibrary.Migrations
                             country = "DeployLand",
                             designation = "DevOps Specialist",
                             firstname = "Carol",
-                            joindate = new DateTime(2023, 12, 11, 22, 5, 23, 767, DateTimeKind.Local).AddTicks(2990),
+                            joindate = new DateTime(2023, 12, 15, 1, 7, 16, 462, DateTimeKind.Local).AddTicks(7451),
                             lastname = "Williams",
                             password = "devopspass",
                             policystatus = "Active",
@@ -352,7 +352,7 @@ namespace App.DataAccessLibrary.Migrations
                         new
                         {
                             empno = 5,
-                            EmployeeAdded = new DateTime(2024, 4, 9, 22, 5, 23, 767, DateTimeKind.Local).AddTicks(2992),
+                            EmployeeAdded = new DateTime(2024, 4, 13, 1, 7, 16, 462, DateTimeKind.Local).AddTicks(7453),
                             Employee_Pictureurl = "4799de3c-69c5-442c-813c-9d166c2d30dd_catpicture.jpg",
                             PolicyId = 1,
                             Role = "Employee",
@@ -363,7 +363,7 @@ namespace App.DataAccessLibrary.Migrations
                             country = "CreativeLand",
                             designation = "UI/UX Designer",
                             firstname = "Dave",
-                            joindate = new DateTime(2023, 10, 12, 22, 5, 23, 767, DateTimeKind.Local).AddTicks(2993),
+                            joindate = new DateTime(2023, 10, 16, 1, 7, 16, 462, DateTimeKind.Local).AddTicks(7453),
                             lastname = "Brown",
                             password = "designpass",
                             policystatus = "Active",
@@ -372,7 +372,7 @@ namespace App.DataAccessLibrary.Migrations
                         });
                 });
 
-            modelBuilder.Entity("App.Models.Models.HospitalInfo", b =>
+            modelBuilder.Entity("App.Models.Models.Hospital", b =>
                 {
                     b.Property<int>("HospitalId")
                         .ValueGeneratedOnAdd()
@@ -380,32 +380,55 @@ namespace App.DataAccessLibrary.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("HospitalId"));
 
-                    b.Property<DateTime>("HospitalInfoAdded")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("DocumentsUrl")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<double>("ExpenseIncurred")
+                        .HasColumnType("float");
+
+                    b.Property<string>("FullBillPictureUrl")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("HospitalAddress")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("HospitalContactNo")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("HospitalName")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
-                    b.Property<string>("Location")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                    b.Property<DateTime>("HospitalReportSended")
+                        .HasColumnType("datetime2");
 
-                    b.Property<string>("PhoneNO")
+                    b.Property<int?>("PolicyId")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("int");
 
-                    b.Property<string>("Url")
+                    b.Property<string>("StatusReport")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("empno")
+                        .HasColumnType("int");
 
                     b.HasKey("HospitalId");
 
-                    b.ToTable("HospitalInfo");
+                    b.HasIndex("PolicyId");
+
+                    b.HasIndex("empno");
+
+                    b.ToTable("Hospital");
                 });
 
             modelBuilder.Entity("App.Models.Models.InsuranceCompany", b =>
@@ -460,7 +483,7 @@ namespace App.DataAccessLibrary.Migrations
                             Ins_CompanyLogourl = "4799de3c-69c5-442c-813c-9d166c2d30dd_catpicture.jpg",
                             Ins_Description = "Comprehensive health insurance for all your needs.",
                             Ins_Name = "HealthGuard",
-                            InsuranceCompanyAdded = new DateTime(2024, 4, 9, 22, 5, 23, 767, DateTimeKind.Local).AddTicks(2762),
+                            InsuranceCompanyAdded = new DateTime(2024, 4, 13, 1, 7, 16, 462, DateTimeKind.Local).AddTicks(7254),
                             Phone = "1234567890"
                         },
                         new
@@ -471,7 +494,7 @@ namespace App.DataAccessLibrary.Migrations
                             Ins_CompanyLogourl = "4799de3c-69c5-442c-813c-9d166c2d30dd_catpicture.jpg",
                             Ins_Description = "Comprehensive health i for all your needs.",
                             Ins_Name = "HealtyLife",
-                            InsuranceCompanyAdded = new DateTime(2024, 4, 9, 22, 5, 23, 767, DateTimeKind.Local).AddTicks(2776),
+                            InsuranceCompanyAdded = new DateTime(2024, 4, 13, 1, 7, 16, 462, DateTimeKind.Local).AddTicks(7267),
                             Phone = "1234567890"
                         },
                         new
@@ -482,7 +505,7 @@ namespace App.DataAccessLibrary.Migrations
                             Ins_CompanyLogourl = "4799de3c-69c5-442c-813c-9d166c2d30dd_catpicture.jpg",
                             Ins_Description = "Life is Great do all Work.",
                             Ins_Name = "Pure Life",
-                            InsuranceCompanyAdded = new DateTime(2024, 4, 9, 22, 5, 23, 767, DateTimeKind.Local).AddTicks(2777),
+                            InsuranceCompanyAdded = new DateTime(2024, 4, 13, 1, 7, 16, 462, DateTimeKind.Local).AddTicks(7269),
                             Phone = "1234567890"
                         });
                 });
@@ -647,6 +670,25 @@ namespace App.DataAccessLibrary.Migrations
                     b.Navigation("Policies");
                 });
 
+            modelBuilder.Entity("App.Models.Models.Hospital", b =>
+                {
+                    b.HasOne("App.Models.Models.Policies", "Policies")
+                        .WithMany("Hospital")
+                        .HasForeignKey("PolicyId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("App.Models.Models.EmpRegister", "EmpRegister")
+                        .WithMany("Hospital")
+                        .HasForeignKey("empno")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("EmpRegister");
+
+                    b.Navigation("Policies");
+                });
+
             modelBuilder.Entity("App.Models.Models.Policies", b =>
                 {
                     b.HasOne("App.Models.Models.InsuranceCompany", "InsuranceCompany")
@@ -687,6 +729,8 @@ namespace App.DataAccessLibrary.Migrations
 
             modelBuilder.Entity("App.Models.Models.EmpRegister", b =>
                 {
+                    b.Navigation("Hospital");
+
                     b.Navigation("PolicyRequestDetails");
                 });
 
@@ -698,6 +742,8 @@ namespace App.DataAccessLibrary.Migrations
             modelBuilder.Entity("App.Models.Models.Policies", b =>
                 {
                     b.Navigation("EmpRegister");
+
+                    b.Navigation("Hospital");
 
                     b.Navigation("PolicyRequestDetails");
                 });

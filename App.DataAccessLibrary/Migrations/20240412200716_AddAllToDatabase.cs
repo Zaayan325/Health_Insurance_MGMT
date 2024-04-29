@@ -52,23 +52,6 @@ namespace App.DataAccessLibrary.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "HospitalInfo",
-                columns: table => new
-                {
-                    HospitalId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    HospitalName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    PhoneNO = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Location = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Url = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    HospitalInfoAdded = table.Column<DateTime>(type: "datetime2", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_HospitalInfo", x => x.HospitalId);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "InsuranceCompany",
                 columns: table => new
                 {
@@ -149,6 +132,40 @@ namespace App.DataAccessLibrary.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Hospital",
+                columns: table => new
+                {
+                    HospitalId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    HospitalName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    HospitalAddress = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    HospitalContactNo = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    empno = table.Column<int>(type: "int", nullable: false),
+                    PolicyId = table.Column<int>(type: "int", nullable: false),
+                    ExpenseIncurred = table.Column<double>(type: "float", nullable: false),
+                    FullBillPictureUrl = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    DocumentsUrl = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    StatusReport = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    HospitalReportSended = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Hospital", x => x.HospitalId);
+                    table.ForeignKey(
+                        name: "FK_Hospital_EmpRegister_empno",
+                        column: x => x.empno,
+                        principalTable: "EmpRegister",
+                        principalColumn: "empno",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Hospital_Policies_PolicyId",
+                        column: x => x.PolicyId,
+                        principalTable: "Policies",
+                        principalColumn: "PolicyId",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "PolicyRequestDetails",
                 columns: table => new
                 {
@@ -191,11 +208,11 @@ namespace App.DataAccessLibrary.Migrations
                 columns: new[] { "Adm_ID", "Address", "AdminAdded", "AdminName", "AdminPassword", "AdminPhotourl", "ConfirmPassword", "Email", "Phone", "Role" },
                 values: new object[,]
                 {
-                    { 1, "123 Admin St, Admin City", new DateTime(2024, 4, 9, 22, 5, 23, 767, DateTimeKind.Local).AddTicks(3019), "Syed Kashan Abbas Naqvi", "kashan110", "4799de3c-69c5-442c-813c-9d166c2d30dd_catpicture.jpg", "kashan110", "kashan2209e@aptechgdn.net", "1234567890", "Admin" },
-                    { 2, "456 Admin Lane, Admin Town", new DateTime(2024, 4, 9, 22, 5, 23, 767, DateTimeKind.Local).AddTicks(3022), "Asghar Abbas", "asghar110", "4799de3c-69c5-442c-813c-9d166c2d30dd_catpicture.jpg", "asghar110", "asghar2209e@aptechgdn.net", "0987654321", "Admin" },
-                    { 3, "456 Admin Lane, Admin Town", new DateTime(2024, 4, 9, 22, 5, 23, 767, DateTimeKind.Local).AddTicks(3024), "Ali Shan", "alishan110", "4799de3c-69c5-442c-813c-9d166c2d30dd_catpicture.jpg", "alishan110", "alishan2209e@aptechgdn.net", "0987654321", "Admin" },
-                    { 4, "456 Admin Lane, Admin Town", new DateTime(2024, 4, 9, 22, 5, 23, 767, DateTimeKind.Local).AddTicks(3088), "Zayaan Zubair", "zaayan110", "4799de3c-69c5-442c-813c-9d166c2d30dd_catpicture.jpg", "zaayan110", "zaayan220901e@aptechgdn.net", "0987654321", "Admin" },
-                    { 5, "456 Admin Lane, Admin Town", new DateTime(2024, 4, 9, 22, 5, 23, 767, DateTimeKind.Local).AddTicks(3091), "Waleed Hoth", "waleed110", "4799de3c-69c5-442c-813c-9d166c2d30dd_catpicture.jpg", "waleed110", "waleed2209e@aptechgdn.net", "0987654321", "Admin" }
+                    { 1, "123 Admin St, Admin City", new DateTime(2024, 4, 13, 1, 7, 16, 462, DateTimeKind.Local).AddTicks(7476), "Syed Kashan Abbas Naqvi", "kashan110", "4799de3c-69c5-442c-813c-9d166c2d30dd_catpicture.jpg", "kashan110", "kashan2209e@aptechgdn.net", "1234567890", "Admin" },
+                    { 2, "456 Admin Lane, Admin Town", new DateTime(2024, 4, 13, 1, 7, 16, 462, DateTimeKind.Local).AddTicks(7479), "Asghar Abbas", "asghar110", "4799de3c-69c5-442c-813c-9d166c2d30dd_catpicture.jpg", "asghar110", "asghar2209e@aptechgdn.net", "0987654321", "Admin" },
+                    { 3, "456 Admin Lane, Admin Town", new DateTime(2024, 4, 13, 1, 7, 16, 462, DateTimeKind.Local).AddTicks(7481), "Ali Shan", "alishan110", "4799de3c-69c5-442c-813c-9d166c2d30dd_catpicture.jpg", "alishan110", "alishan2209e@aptechgdn.net", "0987654321", "Admin" },
+                    { 4, "456 Admin Lane, Admin Town", new DateTime(2024, 4, 13, 1, 7, 16, 462, DateTimeKind.Local).AddTicks(7483), "Zayaan Zubair", "zaayan110", "4799de3c-69c5-442c-813c-9d166c2d30dd_catpicture.jpg", "zaayan110", "zaayan220901e@aptechgdn.net", "0987654321", "Admin" },
+                    { 5, "456 Admin Lane, Admin Town", new DateTime(2024, 4, 13, 1, 7, 16, 462, DateTimeKind.Local).AddTicks(7485), "Waleed Hoth", "waleed110", "4799de3c-69c5-442c-813c-9d166c2d30dd_catpicture.jpg", "waleed110", "waleed2209e@aptechgdn.net", "0987654321", "Admin" }
                 });
 
             migrationBuilder.InsertData(
@@ -203,9 +220,9 @@ namespace App.DataAccessLibrary.Migrations
                 columns: new[] { "Ins_Id", "Address", "CompantWebsiteUrl", "Ins_CompanyLogourl", "Ins_Description", "Ins_Name", "InsuranceCompanyAdded", "Phone" },
                 values: new object[,]
                 {
-                    { 1, "123 Insurance Lane", "https://www.healthguard.com", "4799de3c-69c5-442c-813c-9d166c2d30dd_catpicture.jpg", "Comprehensive health insurance for all your needs.", "HealthGuard", new DateTime(2024, 4, 9, 22, 5, 23, 767, DateTimeKind.Local).AddTicks(2762), "1234567890" },
-                    { 2, "123 Insurance Lane", "https://www.healthguard.com", "4799de3c-69c5-442c-813c-9d166c2d30dd_catpicture.jpg", "Comprehensive health i for all your needs.", "HealtyLife", new DateTime(2024, 4, 9, 22, 5, 23, 767, DateTimeKind.Local).AddTicks(2776), "1234567890" },
-                    { 3, "12334 Insurance Lane", "https://www.healthguard.com", "4799de3c-69c5-442c-813c-9d166c2d30dd_catpicture.jpg", "Life is Great do all Work.", "Pure Life", new DateTime(2024, 4, 9, 22, 5, 23, 767, DateTimeKind.Local).AddTicks(2777), "1234567890" }
+                    { 1, "123 Insurance Lane", "https://www.healthguard.com", "4799de3c-69c5-442c-813c-9d166c2d30dd_catpicture.jpg", "Comprehensive health insurance for all your needs.", "HealthGuard", new DateTime(2024, 4, 13, 1, 7, 16, 462, DateTimeKind.Local).AddTicks(7254), "1234567890" },
+                    { 2, "123 Insurance Lane", "https://www.healthguard.com", "4799de3c-69c5-442c-813c-9d166c2d30dd_catpicture.jpg", "Comprehensive health i for all your needs.", "HealtyLife", new DateTime(2024, 4, 13, 1, 7, 16, 462, DateTimeKind.Local).AddTicks(7267), "1234567890" },
+                    { 3, "12334 Insurance Lane", "https://www.healthguard.com", "4799de3c-69c5-442c-813c-9d166c2d30dd_catpicture.jpg", "Life is Great do all Work.", "Pure Life", new DateTime(2024, 4, 13, 1, 7, 16, 462, DateTimeKind.Local).AddTicks(7269), "1234567890" }
                 });
 
             migrationBuilder.InsertData(
@@ -225,16 +242,26 @@ namespace App.DataAccessLibrary.Migrations
                 columns: new[] { "empno", "EmployeeAdded", "Employee_Pictureurl", "PolicyId", "Role", "Salary", "address", "city", "contactno", "country", "designation", "firstname", "joindate", "lastname", "password", "policystatus", "state", "username" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2024, 4, 9, 22, 5, 23, 767, DateTimeKind.Local).AddTicks(2972), "4799de3c-69c5-442c-813c-9d166c2d30dd_catpicture.jpg", 1, "Employee", 80000, "456 Developer Rd.", "DevCity", "0987654321", "TechLand", "Software Engineer", "John", new DateTime(2023, 12, 31, 22, 5, 23, 767, DateTimeKind.Local).AddTicks(2974), "Doe", "password", "Active", "TechState", "johndoe" },
-                    { 2, new DateTime(2024, 4, 9, 22, 5, 23, 767, DateTimeKind.Local).AddTicks(2982), "4799de3c-69c5-442c-813c-9d166c2d30dd_catpicture.jpg", 2, "Employee", 95000, "789 Project Blvd.", "ManageCity", "1234567890", "LeadLand", "Project Manager", "Alice", new DateTime(2023, 9, 22, 22, 5, 23, 767, DateTimeKind.Local).AddTicks(2983), "Johnson", "securepassword", "Active", "ManageState", "alicejohnson" },
-                    { 3, new DateTime(2024, 4, 9, 22, 5, 23, 767, DateTimeKind.Local).AddTicks(2986), "4799de3c-69c5-442c-813c-9d166c2d30dd_catpicture.jpg", 3, "Employee", 70000, "101 QA Lane", "TestCity", "2345678901", "QualityLand", "QA Engineer", "Bob", new DateTime(2023, 11, 11, 22, 5, 23, 767, DateTimeKind.Local).AddTicks(2987), "Smith", "testpassword", "Active", "TestState", "bobsmith" },
-                    { 4, new DateTime(2024, 4, 9, 22, 5, 23, 767, DateTimeKind.Local).AddTicks(2989), "4799de3c-69c5-442c-813c-9d166c2d30dd_catpicture.jpg", 2, "Employee", 85000, "404 DevOps Way", "OpsCity", "3456789012", "DeployLand", "DevOps Specialist", "Carol", new DateTime(2023, 12, 11, 22, 5, 23, 767, DateTimeKind.Local).AddTicks(2990), "Williams", "devopspass", "Active", "OpsState", "carolw" },
-                    { 5, new DateTime(2024, 4, 9, 22, 5, 23, 767, DateTimeKind.Local).AddTicks(2992), "4799de3c-69c5-442c-813c-9d166c2d30dd_catpicture.jpg", 1, "Employee", 75000, "202 Design St.", "DesignCity", "4567890123", "CreativeLand", "UI/UX Designer", "Dave", new DateTime(2023, 10, 12, 22, 5, 23, 767, DateTimeKind.Local).AddTicks(2993), "Brown", "designpass", "Active", "DesignState", "davebrown" }
+                    { 1, new DateTime(2024, 4, 13, 1, 7, 16, 462, DateTimeKind.Local).AddTicks(7432), "4799de3c-69c5-442c-813c-9d166c2d30dd_catpicture.jpg", 1, "Employee", 80000, "456 Developer Rd.", "DevCity", "0987654321", "TechLand", "Software Engineer", "John", new DateTime(2024, 1, 4, 1, 7, 16, 462, DateTimeKind.Local).AddTicks(7434), "Doe", "kashan110", "Active", "TechState", "johndoe" },
+                    { 2, new DateTime(2024, 4, 13, 1, 7, 16, 462, DateTimeKind.Local).AddTicks(7443), "4799de3c-69c5-442c-813c-9d166c2d30dd_catpicture.jpg", 2, "Employee", 95000, "789 Project Blvd.", "ManageCity", "1234567890", "LeadLand", "Project Manager", "Alice", new DateTime(2023, 9, 26, 1, 7, 16, 462, DateTimeKind.Local).AddTicks(7444), "Johnson", "securepassword", "Active", "ManageState", "alicejohnson" },
+                    { 3, new DateTime(2024, 4, 13, 1, 7, 16, 462, DateTimeKind.Local).AddTicks(7447), "4799de3c-69c5-442c-813c-9d166c2d30dd_catpicture.jpg", 3, "Employee", 70000, "101 QA Lane", "TestCity", "2345678901", "QualityLand", "QA Engineer", "Bob", new DateTime(2023, 11, 15, 1, 7, 16, 462, DateTimeKind.Local).AddTicks(7448), "Smith", "testpassword", "Active", "TestState", "bobsmith" },
+                    { 4, new DateTime(2024, 4, 13, 1, 7, 16, 462, DateTimeKind.Local).AddTicks(7450), "4799de3c-69c5-442c-813c-9d166c2d30dd_catpicture.jpg", 2, "Employee", 85000, "404 DevOps Way", "OpsCity", "3456789012", "DeployLand", "DevOps Specialist", "Carol", new DateTime(2023, 12, 15, 1, 7, 16, 462, DateTimeKind.Local).AddTicks(7451), "Williams", "devopspass", "Active", "OpsState", "carolw" },
+                    { 5, new DateTime(2024, 4, 13, 1, 7, 16, 462, DateTimeKind.Local).AddTicks(7453), "4799de3c-69c5-442c-813c-9d166c2d30dd_catpicture.jpg", 1, "Employee", 75000, "202 Design St.", "DesignCity", "4567890123", "CreativeLand", "UI/UX Designer", "Dave", new DateTime(2023, 10, 16, 1, 7, 16, 462, DateTimeKind.Local).AddTicks(7453), "Brown", "designpass", "Active", "DesignState", "davebrown" }
                 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_EmpRegister_PolicyId",
                 table: "EmpRegister",
+                column: "PolicyId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Hospital_empno",
+                table: "Hospital",
+                column: "empno");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Hospital_PolicyId",
+                table: "Hospital",
                 column: "PolicyId");
 
             migrationBuilder.CreateIndex(
@@ -273,7 +300,7 @@ namespace App.DataAccessLibrary.Migrations
                 name: "Contact");
 
             migrationBuilder.DropTable(
-                name: "HospitalInfo");
+                name: "Hospital");
 
             migrationBuilder.DropTable(
                 name: "PolicyRequestDetails");

@@ -46,6 +46,12 @@ namespace App.DataAccessLibrary.Infrastructure.Repository
         }
 
 
+        public int? GetEmployeePolicyById(int empno)
+        {
+            var employee = _context.EmpRegister.FirstOrDefault(a => a.empno == empno);
+            return employee?.PolicyId; // Returns the image URL or null if the admin is not found
+        }
+
         public async Task<EmpRegister> FindEmployeeAndPolicyAsync(int employeeId)
         {
             // Using EF Core's Include method to include related Policy data
